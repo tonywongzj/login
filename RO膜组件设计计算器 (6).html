@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RO膜组件设计计算器 — 苏州曙之洁</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #020817; color: #f1f5f9; font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  select, input { color: #f1f5f9 !important; }
+  option { background: #1e293b; color: #f1f5f9; }
+  @media print {
+    body { background: #fff; color: #000; }
+    .no-print { display: none !important; }
+    .print-full { width: 100% !important; max-height: none !important; position: static !important; overflow: visible !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+/* ═══════════════════════════════════════════════════════════════
+   膜片数据库 — 来源：量产膜片通量.xlsx（2025年公司量产版本）
+   flux65     = 250ppm NaCl @65psi 标准测试条件通量 GPD/m²
+   flux65_500 = 500ppm 水效参数校正值 GPD/m²（更贴近实际使用工况）
+   宽度来源：膜组件设计膜片sheet / 样品sheet 实测值
+═══════════════════════════════════════════════════════════════ */
+const MEMBRANES = [
+  // 海德能
+  {id:"DHF",  name:"DHF（基准）",    brand:"海德能",   width:0.224, flux65:152, flux65_500:188, saltRej:0.980,
+   desc:"低通量基准膜",
+   testEff:0.97, decay1yr:0.91, decay3yr:0.83,
+   src:"量产膜片通量.xlsx | 250ppm:152 GPD/m² | 500ppm水效校正:188 GPD/m²"},
+  {id:"DSF",  name:"DSF（基准）",    brand:"海德能",   width:0.233, flux65:237, flux65_500:220, saltRej:0.970,
+   desc:"标准通量基准膜",
+   testEff:0.97, decay1yr:0.91, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:237 GPD/m² | 500ppm水效校正:220 GPD/m²"},
+  // 澳维
+  {id:"AW",   name:"AW",            brand:"澳维",     width:0.224, flux65:160, flux65_500:204, saltRej:0.985,
+   desc:"高脱盐经济型",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.83,
+   src:"量产膜片通量.xlsx | 250ppm:160 GPD/m² | 500ppm水效校正:204 GPD/m²"},
+  // 陶氏
+  {id:"XMF",  name:"XMF",           brand:"陶氏杜邦", width:0.224, flux65:240, flux65_500:220, saltRej:0.985,
+   desc:"标准通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:240 GPD/m² | 500ppm水效校正:220 GPD/m²"},
+  {id:"XMFP", name:"XMF-P",         brand:"陶氏杜邦", width:0.224, flux65:245, flux65_500:220, saltRej:0.975,
+   desc:"高通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:245 GPD/m² | 500ppm水效校正:220 GPD/m²"},
+  // 杭水 XLP
+  {id:"XLPF", name:"XLP-F",         brand:"杭水",     width:0.190, flux65:260, flux65_500:228, saltRej:0.985,
+   desc:"低压大通量",
+   testEff:0.97, decay1yr:0.89, decay3yr:0.81,
+   src:"量产膜片通量.xlsx | 250ppm:260 GPD/m² | 500ppm水效校正:228 GPD/m²"},
+  {id:"XLPHF",name:"XLP-HF（杭水）", brand:"杭水",     width:0.253, flux65:253, flux65_500:373, saltRej:0.980,
+   desc:"超大通量",
+   testEff:0.97, decay1yr:0.89, decay3yr:0.81,
+   src:"量产膜片通量.xlsx | 250ppm:253 GPD/m² | 500ppm水效校正:373 GPD/m²（差异大，建议实测验证）"},
+  {id:"XLPR", name:"XLP-R（杭水）",  brand:"杭水",     width:0.243, flux65:220, flux65_500:200, saltRej:0.990,
+   desc:"高脱盐低通量",
+   testEff:0.97, decay1yr:0.91, decay3yr:0.85,
+   src:"量产膜片通量.xlsx | 250ppm:220 GPD/m² | 500ppm水效校正:200 GPD/m²"},
+  // 陶氏 EXLE
+  {id:"EXLE", name:"EXLE",           brand:"陶氏杜邦", width:0.224, flux65:196, flux65_500:165, saltRej:0.987,
+   desc:"低压经济型",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:196 GPD/m² | 500ppm水效校正:165 GPD/m²"},
+  // 碧水源
+  {id:"YQ3",  name:"碧水源 YQ3",    brand:"碧水源",   width:0.264, flux65:350, flux65_500:300, saltRej:0.950,
+   desc:"大通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:350 GPD/m² | 500ppm水效校正:300 GPD/m²"},
+  // 恩泰 ULP 系列
+  {id:"ULPA", name:"恩泰 ULP-A",    brand:"恩泰",     width:0.263, flux65:162, flux65_500:143, saltRej:0.970,
+   desc:"低通量高脱盐",
+   testEff:0.97, decay1yr:0.92, decay3yr:0.85,
+   src:"量产膜片通量.xlsx | 250ppm:162 GPD/m² | 500ppm水效校正:143 GPD/m²"},
+  {id:"ULPB", name:"恩泰 ULP-B",    brand:"恩泰",     width:0.263, flux65:245, flux65_500:220, saltRej:0.975,
+   desc:"中等通量",
+   testEff:0.97, decay1yr:0.91, decay3yr:0.83,
+   src:"量产膜片通量.xlsx | 250ppm:245 GPD/m² | 500ppm水效校正:220 GPD/m²"},
+  {id:"ULPC", name:"恩泰 ULP-C",    brand:"恩泰",     width:0.263, flux65:301, flux65_500:277, saltRej:0.975,
+   desc:"大通量 ★主力型号",
+   testEff:0.97, decay1yr:0.91, decay3yr:0.83,
+   src:"量产膜片通量.xlsx | 250ppm:301 GPD/m² | 500ppm水效校正:277 GPD/m²"},
+  {id:"ULPF", name:"恩泰 ULP-F",    brand:"恩泰",     width:0.301, flux65:330, flux65_500:300, saltRej:0.970,
+   desc:"超宽超大通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.83,
+   src:"量产膜片通量.xlsx | 250ppm:330 GPD/m² | 500ppm水效校正:300 GPD/m²"},
+  // DMF 系列
+  {id:"DMF",  name:"DMF",            brand:"多品牌",   width:0.232, flux65:230, flux65_500:200, saltRej:0.965,
+   desc:"标准通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:230 GPD/m² | 500ppm水效校正:200 GPD/m²"},
+  {id:"DMFP", name:"DMF-P",          brand:"多品牌",   width:0.232, flux65:342, flux65_500:320, saltRej:0.965,
+   desc:"超大通量",
+   testEff:0.97, decay1yr:0.88, decay3yr:0.80,
+   src:"量产膜片通量.xlsx | 250ppm:342 GPD/m² | 500ppm水效校正:320 GPD/m²"},
+  {id:"DMFM", name:"DMF-M",          brand:"多品牌",   width:0.232, flux65:308, flux65_500:265, saltRej:0.960,
+   desc:"中大通量",
+   testEff:0.97, decay1yr:0.90, decay3yr:0.82,
+   src:"量产膜片通量.xlsx | 250ppm:308 GPD/m² | 500ppm水效校正:265 GPD/m²"},
+];
+
+// 压力系数（vs 65psi），从膜组件设计膜片sheet提取插值
+const PSI_COEFF = {55:0.87,60:0.93,65:1.00,70:1.08,75:1.15,80:1.23,85:1.32,90:1.40,95:1.51,100:1.60,105:1.75,110:1.90,115:2.05};
+
+// 外径设计经验表（膜组件设计外径sheet）
+const OD_TABLE = [
+  {pages:2,   mesh:28, guide:10, odMin:40, odMax:45},
+  {pages:2.5, mesh:17, guide:10, odMin:43, odMax:46},
+  {pages:3,   mesh:17, guide:10, odMin:40, odMax:46},
+  {pages:3.5, mesh:11, guide:7,  odMin:48, odMax:50},
+  {pages:4,   mesh:11, guide:7,  odMin:49, odMax:50},
+  {pages:4.5, mesh:11, guide:7,  odMin:50, odMax:52},
+  {pages:5,   mesh:11, guide:11, odMin:52, odMax:54},
+  {pages:5.5, mesh:11, guide:7,  odMin:54, odMax:56},
+  {pages:6,   mesh:13, guide:7,  odMin:59, odMax:63},
+  {pages:6.5, mesh:13, guide:7,  odMin:59, odMax:63},
+  {pages:7,   mesh:13, guide:10, odMin:63, odMax:65},
+  {pages:7.5, mesh:17, guide:10, odMin:68, odMax:69},
+  {pages:8,   mesh:17, guide:10, odMin:71, odMax:75},
+  {pages:8.5, mesh:17, guide:10, odMin:71, odMax:75},
+  {pages:9,   mesh:13, guide:10, odMin:72, odMax:75},
+  {pages:10,  mesh:11, guide:8.5,odMin:72, odMax:75},
+  {pages:11,  mesh:11, guide:7,  odMin:74, odMax:76},
+  {pages:12,  mesh:11, guide:7,  odMin:78, odMax:79},
+  {pages:13,  mesh:11, guide:7,  odMin:82, odMax:83},
+  {pages:14,  mesh:11, guide:7,  odMin:84, odMax:86},
+  {pages:15,  mesh:11, guide:7,  odMin:87, odMax:90},
+];
+
+// 元件型号尺寸库（mm）
+// nomA = 壳体外径A，nomC = 壳体长度C，nomE = 中心管外径E
+const ELEMENT_TYPES = [
+  {id:"1809", name:"1809 (1.8\"×9\")",   nomA:44.0,  nomC:228, nomE:11, activeLen:183},
+  {id:"1812", name:"1812 (1.8\"×12\")",  nomA:44.0,  nomC:305, nomE:11, activeLen:235},
+  {id:"2012", name:"2012 (2.0\"×12\")",  nomA:50.0,  nomC:305, nomE:11, activeLen:235},
+  {id:"2013", name:"2013 (2.0\"×13\")",  nomA:50.0,  nomC:330, nomE:11, activeLen:260},
+  {id:"2512", name:"2512 (2.5\"×12\")",  nomA:63.0,  nomC:305, nomE:13, activeLen:235},
+  {id:"2513", name:"2513 (2.5\"×13\")",  nomA:63.0,  nomC:330, nomE:13, activeLen:260},
+  {id:"2812", name:"2812 (2.8\"×12\")",  nomA:70.0,  nomC:305, nomE:13, activeLen:235},
+  {id:"2813", name:"2813 (2.8\"×13\")",  nomA:70.0,  nomC:330, nomE:13, activeLen:260},
+  {id:"3012", name:"3012 (3.0\"×12\")",  nomA:76.0,  nomC:305, nomE:17, activeLen:235},
+  {id:"3013", name:"3013 (3.0\"×13\")",  nomA:76.0,  nomC:330, nomE:17, activeLen:260},
+  {id:"4012", name:"4012 (4.0\"×12\")",  nomA:100.0, nomC:305, nomE:24, activeLen:235},
+  {id:"4013", name:"4013 (4.0\"×13\")",  nomA:100.0, nomC:330, nomE:24, activeLen:260},
+];
+
+/* ═══════════════ 工具函数 ═══════════════ */
+const lpmToGPD  = l   => l * 1440 / 3.785411784;
+const mpaToPs   = mpa => mpa * 145.037738;
+const roundHalf = n   => Math.round(n * 2) / 2;
+
+function interpPsiCoeff(psi) {
+  const keys = Object.keys(PSI_COEFF).map(Number).sort((a,b)=>a-b);
+  if (psi <= keys[0]) return PSI_COEFF[keys[0]];
+  if (psi >= keys[keys.length-1]) return PSI_COEFF[keys[keys.length-1]];
+  for (let i=0; i<keys.length-1; i++) {
+    if (psi >= keys[i] && psi <= keys[i+1]) {
+      const t = (psi-keys[i])/(keys[i+1]-keys[i]);
+      return PSI_COEFF[keys[i]] + t*(PSI_COEFF[keys[i+1]]-PSI_COEFF[keys[i]]);
+    }
+  }
+  return 1;
+}
+
+function findOdRow(pages) {
+  let closest = OD_TABLE[0];
+  let minDiff = Infinity;
+  for (const row of OD_TABLE) {
+    const d = Math.abs(row.pages - pages);
+    if (d < minDiff) { minDiff = d; closest = row; }
+  }
+  return closest;
+}
+
+function calcTheoOD(pages, widthMm, meshMil, guideMil, coreMm) {
+  const core    = coreMm || 17;
+  const meshMm  = meshMil  * 0.0254;
+  const guideMm = guideMil * 0.0254;
+  const tEff    = 2*(0.135 + meshMm/2 + guideMm/2 + 0.05);
+  const od2     = core*core + (4/Math.PI)*pages*widthMm*tEff;
+  return Math.sqrt(od2);
+}
+
+function generateBOM({pages, mem, elem, odMm, mesh, guide, includeEndCap}) {
+  const C       = elem.activeLen;             // C值：有效膜长 mm
+  const memWidth = C - 30;                    // 膜宽 = C - 15×2 mm
+  const memWidthM = memWidth / 1000;          // m
+  const odM   = odMm/1000;
+  const memQ  = (pages * memWidthM).toFixed(3);
+  const meshQ = (pages * memWidthM * 2.21).toFixed(3);
+  const guideQ= (pages * memWidthM * 2.43).toFixed(3);
+  const outerT= (Math.PI * odM * 2.5).toFixed(4);
+  const sealT = (Math.PI * odM * 5.3).toFixed(4);
+  const glueA = (pages * 3.93).toFixed(2);
+  const glueB = (pages * 4.37).toFixed(2);
+  const rows = [
+    {code:"",       desc:`${mem.name}（${mem.brand}）膜片，膜宽${memWidth}mm（C${C}-30）`, qty:memQ,   unit:"M",  scrap:"1%",  remark:`${memWidthM.toFixed(3)}m/页 × ${pages}页`},
+    {code:"",       desc:`浓水网格 ${mesh}mil × ${memWidth}mm宽`,                            qty:meshQ,  unit:"M",  scrap:"1%",  remark:`${(memWidthM*2.21*1000).toFixed(0)}mm/页 × ${pages}页`},
+    {code:"",       desc:`纯水导布 ${guide}mil × ${memWidth}mm宽`,                           qty:guideQ, unit:"M",  scrap:"1%",  remark:`${(memWidthM*2.43*1000).toFixed(0)}mm/页 × ${pages}页`},
+    {code:"503254", desc:"白色外胶带（254mm宽）兰奇帕",                                            qty:outerT, unit:"M",  scrap:"1%",  remark:"外径×π×2.5"},
+    {code:"410003", desc:"10寸中心管（蓝色）",                                                     qty:"1",    unit:"EA", scrap:"1%",  remark:""},
+    {code:"801005", desc:"RO产品标签，原料，HSD",                                                  qty:"1",    unit:"EA", scrap:"0",   remark:""},
+    {code:"602001", desc:"O型圈 12.37×2.62",                                                      qty:"2",    unit:"EA", scrap:"0",   remark:""},
+  ];
+  if (includeEndCap) {
+    rows.push({code:"900035", desc:`${elem.id}端盖（含密封圈）`, qty:"1", unit:"EA", scrap:"0", remark:"按需选配"});
+  }
+  rows.push(
+    {code:"701003", desc:"密封圈胶带（1\"宽，白色）",              qty:sealT,  unit:"M",  scrap:"0",  remark:""},
+    {code:"900017", desc:"富乐胶水 3519A",                          qty:glueA,  unit:"G",  scrap:"0",  remark:`${(pages*3.93).toFixed(2)}g / 台`},
+    {code:"900018", desc:"富乐胶水 3519B",                          qty:glueB,  unit:"G",  scrap:"0",  remark:`${(pages*4.37).toFixed(2)}g / 台`},
+    {code:"900001", desc:"双面胶",                                   qty:"0.5",  unit:"FT", scrap:"0",  remark:""},
+    {code:"900002", desc:"保护胶带",                                  qty:"0.5",  unit:"FT", scrap:"0",  remark:""},
+    {code:"803002", desc:`真空包装袋（${elem.id}用）`,               qty:"1",    unit:"EA", scrap:"0",  remark:""},
+    {code:"804003", desc:"滤芯纸箱",                                  qty:"0.05", unit:"EA", scrap:"0",  remark:"20件/箱"},
+    {code:"804005", desc:"纸箱内衬",                                  qty:"0.05", unit:"EA", scrap:"0",  remark:""},
+    {code:"802001", desc:"外箱标签，原料，4\"×6\"",                  qty:"0.05", unit:"EA", scrap:"0",  remark:""},
+    {code:"805001", desc:"栈板",                                       qty:"0.001667",unit:"EA",scrap:"0",remark:""},
+  );
+  return rows.map((r,i) => ({...r, no: i+1}));
+}
+
+/* ═══════════════ 主组件 ═══════════════ */
+function App() {
+  // 基本信息
+  const [customer,   setCustomer]  = useState("");
+  const [productDesc,setDesc]      = useState("");
+  const [customPN,   setPN]        = useState("");
+  const [rev,        setRev]       = useState("A");
+  const [engineer,   setEngineer]  = useState("");
+
+  // 性能参数
+  const [initFlow,  setInitFlow]  = useState("0.5");
+  const [endFlow,   setEndFlow]   = useState("0.35");
+  const [initPres,  setInitPres]  = useState("0.60");
+  const [endPres,   setEndPres]   = useState("0.80");
+  const [initRec,   setInitRec]   = useState("50");
+  const [endRec,    setEndRec]    = useState("50");
+  const [lifeRec,   setLifeRec]   = useState("50");
+  const [saltRej,   setSaltRej]   = useState("96");
+  const [waterEff,  setWaterEff]  = useState("");
+  const [totalPure, setTotalPure] = useState("");
+
+  // 设计参数
+  const [memId,    setMemId]    = useState("ULPC");
+  const [fluxMode, setFluxMode] = useState("250");  // "250"=标准测试 | "500"=水效校正
+  const [elemId,   setElemId]   = useState("2812");
+  const [designEff,setDesignEff]= useState("0.85");
+  const [manualPageCorr, setManualPageCorr] = useState(""); // 手动覆盖页数非线性系数
+  const [targetOD, setTargetOD] = useState("");
+  const [endCap,   setEndCap]   = useState(false);
+  const [customPages, setCustomPages] = useState("");  // 手动指定页数
+  // 元件自定义尺寸（覆盖标准值）
+  const [customA,  setCustomA]  = useState("");  // A: 壳体外径
+  const [customC,  setCustomC]  = useState("");  // C: 膜长度（壳体）
+  const [customE,  setCustomE]  = useState("");  // E: 中心管直径
+
+  // 核心计算
+  const R = useMemo(() => {
+    const mem  = MEMBRANES.find(m=>m.id===memId)  || MEMBRANES[0];
+    const elemBase = ELEMENT_TYPES.find(e=>e.id===elemId) || null;
+
+    // ACE 优先
+    const hasA = parseFloat(customA) > 0;
+    const hasC = parseFloat(customC) > 0;
+    const hasE = parseFloat(customE) > 0;
+
+    const effA = hasA ? parseFloat(customA) : (elemBase ? elemBase.nomA : 70);
+    const effC = hasC ? parseFloat(customC) : (elemBase ? elemBase.nomC : 305);
+    const effE = hasE ? parseFloat(customE) : (elemBase ? elemBase.nomE : 13);
+
+    // C值 = 有效膜长（用户直接输入，无需再推算），直接使用
+    // 标准型号的 activeLen 同理也是有效膜长
+    const effActiveLen = hasC ? parseFloat(customC) : (elemBase ? elemBase.activeLen : 235);
+
+    const srcA = hasA ? "custom" : (elemBase ? "standard" : "default");
+    const srcC = hasC ? "custom" : (elemBase ? "standard" : "default");
+    const srcE = hasE ? "custom" : (elemBase ? "standard" : "default");
+
+    const elem = {
+      id: elemBase ? elemBase.id : "custom",
+      name: elemBase ? elemBase.name : "自定义",
+      nomA: effA, nomC: effC, nomE: effE,
+      activeLen: effActiveLen,
+      srcA, srcC, srcE,
+    };
+
+    const iFlow = parseFloat(initFlow)||0;
+    const iPres = parseFloat(initPres)||0.6;
+    const iFlowGPD = lpmToGPD(iFlow);
+    const iPSI     = mpaToPs(iPres);
+    const coeff    = interpPsiCoeff(iPSI);
+    const eta      = parseFloat(designEff)||0.85;
+
+    // 根据工况模式选取基准通量
+    const baseFlux = fluxMode === "500" ? (mem.flux65_500 || mem.flux65) : mem.flux65;
+
+    // 第3步：膜宽 = C - 15×2（有效膜长扣除两端各15mm）
+    const memWidth  = effActiveLen - 30;
+    // 第7步：单页膜面积 = 0.94 × 膜宽
+    const pageArea  = 0.94 * memWidth / 1000;   // m²/页
+
+    // 先用η初算页数（未修正），再用页数查非线性系数迭代一次
+    const fluxAtP_raw = baseFlux * coeff * eta;
+    const rawPg_pre   = (iFlowGPD / fluxAtP_raw) / pageArea;
+    const autoPg_pre  = Math.max(1.5, roundHalf(rawPg_pre));
+    const estPages    = parseFloat(customPages)||0 ? parseFloat(customPages) : autoPg_pre;
+
+    // 页数非线性修正系数（来源：样品sheet实测数据统计，以4-5页为基准=1.00）
+    // 数据说明：批次差异较大，以下为统计趋势值，建议结合打样反推模块校准
+    const PAGE_CORR_TABLE = [
+      {maxPg:3,   corr:1.00},  // 2-3页：数据含低通量膜混淆，保守取1.00
+      {maxPg:5.5, corr:1.00},  // 4-5页：基准段
+      {maxPg:8.5, corr:0.96},  // 6-8页：实测-4%
+      {maxPg:11.5,corr:0.97},  // 9-11页：实测-3%（数据较散）
+      {maxPg:99,  corr:0.88},  // 12页+：实测-12%（样本少，参考用）
+    ];
+    const getPageCorr = (pg) => {
+      if (parseFloat(manualPageCorr) > 0) return parseFloat(manualPageCorr);
+      for (const row of PAGE_CORR_TABLE) { if (pg <= row.maxPg) return row.corr; }
+      return 0.88;
+    };
+    const pageCorrFactor = getPageCorr(estPages);
+    const fluxAtP   = baseFlux * coeff * eta * pageCorrFactor;
+    const reqArea   = iFlowGPD / fluxAtP;
+    const rawPg     = reqArea / pageArea;
+    const autoPg    = Math.max(1.5, roundHalf(rawPg));
+    const pages     = parseFloat(customPages)||0 ? parseFloat(customPages) : autoPg;
+    const odRow     = findOdRow(pages);
+    const theoOD    = calcTheoOD(pages, mem.width*1000, odRow.mesh, odRow.guide, effE);
+    const finalOD   = parseFloat(targetOD)||0 ? parseFloat(targetOD) : (theoOD + 2);
+    const bom       = generateBOM({pages, mem, elem, odMm:finalOD, mesh:odRow.mesh, guide:odRow.guide, includeEndCap:endCap});
+
+    // 寿命末期核算
+    const eFlowGPD = lpmToGPD(parseFloat(endFlow)||0);
+    const ePSI     = mpaToPs(parseFloat(endPres)||0.8);
+    const eCoeff   = interpPsiCoeff(ePSI);
+    const eFluxEst = pageArea * pages * baseFlux * eCoeff * eta * 0.75;
+    const eOk      = eFluxEst >= eFlowGPD;
+
+    return { mem, elem, effActiveLen, memWidth, baseFlux, iFlowGPD, iPSI, coeff, pageArea, fluxAtP,
+             reqArea, rawPg, pages, autoPg, odRow, theoOD, finalOD, bom, pageCorrFactor,
+             eFluxEst, eFlowGPD, eOk, eta, hasA, hasC, hasE };
+  }, [memId, fluxMode, elemId, customA, customC, customE, initFlow, endFlow, initPres, endPres, designEff,
+      manualPageCorr, targetOD, endCap, customPages]);
+
+  // 实测反推（打样校验）
+  const [revPages,  setRevPages]  = useState("");
+  const [revFlow,   setRevFlow]   = useState("");
+  const [revPres,   setRevPres]   = useState("");
+
+  const revCalc = useMemo(() => {
+    const pg  = parseFloat(revPages)||0;
+    const fl  = parseFloat(revFlow)||0;
+    const pr  = parseFloat(revPres)||0;
+    if (!pg || !fl || !pr) return null;
+    const mem = MEMBRANES.find(m=>m.id===memId)||MEMBRANES[0];
+    const effC = parseFloat(customC)||0 ? parseFloat(customC) : (ELEMENT_TYPES.find(e=>e.id===elemId)||ELEMENT_TYPES[6]).activeLen;
+    const mw   = effC - 30;
+    const pa   = 0.94 * mw / 1000;
+    const flGPD= parseFloat(revFlow)||0;
+    const psi  = parseFloat(revPres)||0;
+    const cf   = interpPsiCoeff(psi);
+    const totalArea = pg * pa;
+    const obsFluxAtP = flGPD / totalArea;
+    const obsFlux65  = obsFluxAtP / cf;
+    const obsEta     = obsFlux65 / (mem.flux65_500 && fluxMode==="500" ? mem.flux65_500 : mem.flux65);
+    const eqDesignPages = pg / obsEta;   // 换算成设计系数下等效页数
+    return { pg, flGPD, psi, cf, pa, totalArea, obsFluxAtP, obsFlux65, obsEta, eqDesignPages, mw };
+  }, [revPages, revFlow, revPres, memId, elemId, customC, fluxMode]);
+
+  const today = new Date().toLocaleDateString("zh-CN");
+
+  // ─── 打印BOM ────────────────────────────────────────────────
+  function printBOM() {
+    const bomHTML = R.bom.map(r => `
+      <tr>
+        <td style="text-align:center">${r.no}</td>
+        <td style="text-align:center">1</td>
+        <td style="font-family:monospace">${r.code}</td>
+        <td>${r.desc}</td>
+        <td style="text-align:right;font-family:monospace;font-weight:600">${r.qty}</td>
+        <td style="text-align:center">${r.unit}</td>
+        <td style="text-align:center">${r.scrap}</td>
+        <td style="color:#666">${r.remark}</td>
+      </tr>`).join("");
+
+    const win = window.open("","_blank","width=1100,height=800");
+    win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8">
+    <title>BOM — ${productDesc||R.elem.id}</title>
+    <style>
+      *{box-sizing:border-box} body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:12px;padding:24px;color:#1a1a1a}
+      h2{color:#1a3a5c;margin:0 0 6px} .sub{font-size:11px;color:#666;margin-bottom:12px}
+      .params{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#f0f6ff;border:1px solid #c5daf6;border-radius:8px;padding:10px;margin-bottom:12px}
+      .p-item{font-size:11px} .p-item b{color:#1a3a5c}
+      table{width:100%;border-collapse:collapse;font-size:12px}
+      th{background:#1a3a5c;color:#fff;padding:7px 8px;text-align:left;font-weight:600}
+      td{padding:6px 8px;border-bottom:1px solid #e5e7eb}
+      tr:nth-child(1){background:#eff6ff} tr:nth-child(2){background:#fffbeb} tr:nth-child(3){background:#f0fdf4}
+      tr:hover{background:#f8fafc} .steps{background:#f8f9fa;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-top:14px;font-size:11px;line-height:2} .steps b{color:#1a3a5c}
+      @media print{body{padding:12px}.steps{page-break-inside:avoid}}
+    </style></head><body>
+    <h2>苏州曙之洁环保科技有限公司 · Product BOM</h2>
+    <div class="sub">
+      产品料号：<b>${customPN||"—"}</b> &nbsp;|&nbsp;
+      描述：<b>${productDesc||"—"}</b> &nbsp;|&nbsp;
+      Rev. <b>${rev}</b> &nbsp;|&nbsp;
+      日期：${today} &nbsp;|&nbsp;
+      工程师：${engineer||"—"}
+    </div>
+    <div class="params">
+      <div class="p-item">元件型号<br><b>${R.elem.name}</b></div>
+      <div class="p-item">膜片品牌<br><b>${R.mem.name}（${R.mem.brand}）</b></div>
+      <div class="p-item">设计页数<br><b style="font-size:16px;color:#e55">${R.pages}</b> 页</div>
+      <div class="p-item">外径<br><b>${R.finalOD.toFixed(1)} mm</b></div>
+      <div class="p-item">网格厚度<br><b>${R.odRow.mesh} mil</b></div>
+      <div class="p-item">导布厚度<br><b>${R.odRow.guide} mil</b></div>
+      <div class="p-item">操作压力<br><b>${initPres} MPa (${R.iPSI.toFixed(0)} psi)</b></div>
+      <div class="p-item">初始流量<br><b>${initFlow} L/min (${R.iFlowGPD.toFixed(0)} GPD)</b></div>
+    </div>
+    <table>
+      <thead><tr><th width="32">序号</th><th width="32">层次</th><th width="70">物料编码</th><th>物料描述</th><th width="80">用量/台</th><th width="40">单位</th><th width="50">报废率</th><th width="140">备注</th></tr></thead>
+      <tbody>${bomHTML}</tbody>
+    </table>
+    <div class="steps">
+      <b>设计推导步骤：</b><br>
+      1. 客户初始产水 ${initFlow} L/min → ${R.iFlowGPD.toFixed(0)} GPD<br>
+      2. 操作压力 ${initPres} MPa = ${R.iPSI.toFixed(0)} psi，压力系数（vs 65psi）= ${R.coeff.toFixed(3)}<br>
+      3. 选用 ${R.mem.name}，65psi通量 ${R.mem.flux65} GPD/m²，含设计系数 ${R.eta} → 有效通量 ${R.fluxAtP.toFixed(0)} GPD/m²<br>
+      4. 单页膜面积 = 0.94 × 膜宽${R.memWidth}mm（C${R.effActiveLen}-30）= ${R.pageArea.toFixed(4)} m²<br>
+      5. 需要总面积 = ${R.iFlowGPD.toFixed(0)} ÷ ${R.fluxAtP.toFixed(0)} = ${R.reqArea.toFixed(4)} m²<br>
+      6. 原始页数 = ${R.reqArea.toFixed(4)} ÷ ${R.pageArea.toFixed(4)} = ${R.rawPg.toFixed(2)}，取整 → <b>${R.pages} 页</b><br>
+      7. 查外径经验表（${R.pages}页）→ 网格 <b>${R.odRow.mesh} mil</b>，导布 <b>${R.odRow.guide} mil</b>，外径参考范围 ${R.odRow.odMin}~${R.odRow.odMax} mm<br>
+      8. 理论外径 ≈ ${R.theoOD.toFixed(1)} mm + 胶带 ≈ <b>最终外径 ${R.finalOD.toFixed(1)} mm</b>
+    </div>
+    </body></html>`);
+    win.document.close();
+    setTimeout(()=>win.print(), 500);
+  }
+
+  // ─── UI 组件 ─────────────────────────────────────────────────
+  const Inp = ({val, set, type="text", ph="", unit=""}) => (
+    <div style={{position:"relative"}}>
+      <input type={type} value={val} placeholder={ph} onChange={e=>set(e.target.value)}
+        style={{width:"100%",background:"#1e293b",border:"1px solid #334155",borderRadius:"6px",
+          padding:unit?"6px 36px 6px 10px":"6px 10px",fontSize:"13px",color:"#f1f5f9",outline:"none"}}
+        onFocus={e=>e.target.style.borderColor="#60a5fa"}
+        onBlur={e=>e.target.style.borderColor="#334155"}/>
+      {unit && <span style={{position:"absolute",right:"10px",top:"50%",transform:"translateY(-50%)",
+        fontSize:"11px",color:"#64748b",pointerEvents:"none"}}>{unit}</span>}
+    </div>
+  );
+  const Sel = ({val, set, opts}) => (
+    <select value={val} onChange={e=>set(e.target.value)}
+      style={{width:"100%",background:"#1e293b",border:"1px solid #334155",borderRadius:"6px",
+        padding:"6px 10px",fontSize:"13px",color:"#f1f5f9",outline:"none"}}>
+      {opts.map(o=><option key={o.v} value={o.v}>{o.l}</option>)}
+    </select>
+  );
+  const Lbl = ({c}) => <div style={{fontSize:"11px",color:"#94a3b8",marginBottom:"3px",fontWeight:"600",letterSpacing:"0.05em",textTransform:"uppercase"}}>{c}</div>;
+  const SecTitle = ({icon,text}) => (
+    <div style={{display:"flex",alignItems:"center",gap:"8px",margin:"18px 0 10px",borderBottom:"1px solid #1e293b",paddingBottom:"6px"}}>
+      <span>{icon}</span>
+      <span style={{fontSize:"11px",fontWeight:"700",color:"#60a5fa",letterSpacing:"0.1em",textTransform:"uppercase"}}>{text}</span>
+    </div>
+  );
+  const KV = ({label,val,sub,hi}) => (
+    <div style={{background:hi?"rgba(30,64,175,0.25)":"#1e293b",border:`1px solid ${hi?"#3b82f6":"#334155"}`,
+      borderRadius:"10px",padding:"12px 14px"}}>
+      <div style={{fontSize:"11px",color:"#64748b",marginBottom:"3px"}}>{label}</div>
+      <div style={{fontSize:"18px",fontWeight:"700",fontFamily:"monospace",color:hi?"#93c5fd":"#f1f5f9"}}>{val}</div>
+      {sub&&<div style={{fontSize:"11px",color:"#475569",marginTop:"2px"}}>{sub}</div>}
+    </div>
+  );
+
+  const statusColor = R.eOk ? "#10b981" : "#f59e0b";
+
+  return (
+    <div style={{minHeight:"100vh",background:"#020817",color:"#f1f5f9",display:"flex",flexDirection:"column"}}>
+
+      {/* Header */}
+      <div style={{background:"linear-gradient(to right,#0f172a,#1e3a5f,#0f172a)",borderBottom:"1px solid #1e3a5f",
+        padding:"14px 24px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div>
+          <div style={{fontSize:"11px",color:"#60a5fa",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:"2px"}}>苏州曙之洁环保科技有限公司</div>
+          <div style={{fontSize:"18px",fontWeight:"700",color:"#fff",letterSpacing:"-0.02em"}}>
+            💧 RO 膜组件设计计算器 & BOM 生成工具
+          </div>
+        </div>
+        <div style={{textAlign:"right",fontSize:"11px",color:"#64748b"}}>
+          <div style={{color:"#94a3b8",marginBottom:"2px"}}>R-WENG009 系列</div>
+          <div>{today}</div>
+        </div>
+      </div>
+
+      <div style={{display:"flex",flex:1}}>
+
+        {/* ═══ 左侧输入面板 ═══ */}
+        <div className="no-print" style={{width:"320px",flexShrink:0,background:"#0f172a",borderRight:"1px solid #1e293b",
+          overflowY:"auto",padding:"16px",maxHeight:"calc(100vh - 68px)",position:"sticky",top:0}}>
+
+          <SecTitle icon="📋" text="基本信息"/>
+          <div style={{display:"grid",gap:"8px"}}>
+            <div><Lbl c="客户名称"/><Inp val={customer} set={setCustomer} ph="客户公司名"/></div>
+            <div><Lbl c="产品描述（如：汉斯顿 2812-300）"/><Inp val={productDesc} set={setDesc} ph="型号描述"/></div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 60px",gap:"8px"}}>
+              <div><Lbl c="产品料号 P/N"/><Inp val={customPN} set={setPN} ph="500300-04"/></div>
+              <div><Lbl c="Rev."/><Inp val={rev} set={setRev} ph="A"/></div>
+            </div>
+            <div><Lbl c="工程师"/><Inp val={engineer} set={setEngineer} ph="姓名"/></div>
+          </div>
+
+          <SecTitle icon="⚡" text="性能参数（样品需求单）"/>
+          <div style={{display:"grid",gap:"8px"}}>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              <div>
+                <Lbl c="初始流量"/>
+                <Inp val={initFlow} set={setInitFlow} type="number" ph="0.5" unit="L/min"/>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"2px"}}>≈ {lpmToGPD(parseFloat(initFlow)||0).toFixed(0)} GPD</div>
+              </div>
+              <div>
+                <Lbl c="终止流量"/>
+                <Inp val={endFlow} set={setEndFlow} type="number" ph="0.35" unit="L/min"/>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"2px"}}>≈ {lpmToGPD(parseFloat(endFlow)||0).toFixed(0)} GPD</div>
+              </div>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              <div>
+                <Lbl c="初始膜前压力"/>
+                <Inp val={initPres} set={setInitPres} type="number" ph="0.60" unit="MPa"/>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"2px"}}>≈ {mpaToPs(parseFloat(initPres)||0).toFixed(0)} psi</div>
+              </div>
+              <div>
+                <Lbl c="终止膜前压力"/>
+                <Inp val={endPres} set={setEndPres} type="number" ph="0.80" unit="MPa"/>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"2px"}}>≈ {mpaToPs(parseFloat(endPres)||0).toFixed(0)} psi</div>
+              </div>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"6px"}}>
+              <div><Lbl c="初始回收率"/><Inp val={initRec} set={setInitRec} type="number" ph="50" unit="%"/></div>
+              <div><Lbl c="终止回收率"/><Inp val={endRec} set={setEndRec} type="number" ph="50" unit="%"/></div>
+              <div><Lbl c="寿命回收率"/><Inp val={lifeRec} set={setLifeRec} type="number" ph="50" unit="%"/></div>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              <div><Lbl c="NaCl脱盐率"/><Inp val={saltRej} set={setSaltRej} type="number" ph="96" unit="%"/></div>
+              <div><Lbl c="水效30min产水"/><Inp val={waterEff} set={setWaterEff} type="number" ph="可选" unit="L"/></div>
+            </div>
+            <div><Lbl c="纯水总量（可选）"/><Inp val={totalPure} set={setTotalPure} type="number" ph="L"/></div>
+          </div>
+
+          <SecTitle icon="🔬" text="膜片选型"/>
+          <div style={{display:"grid",gap:"8px"}}>
+            <div>
+              <Lbl c="膜片品牌 / 型号"/>
+              <Sel val={memId} set={setMemId} opts={MEMBRANES.map(m=>({v:m.id,l:`${m.name}（${m.brand}）— ${m.desc}`}))}/>
+              {/* 工况模式切换 */}
+              <div style={{display:"flex",gap:"6px",marginTop:"8px"}}>
+                {[
+                  {v:"250", label:"250ppm 标准测试", tip:"供应商标准测试条件"},
+                  {v:"500", label:"500ppm 水效校正",  tip:"实际使用工况修正值"},
+                ].map(o=>(
+                  <button key={o.v} onClick={()=>setFluxMode(o.v)}
+                    style={{flex:1,padding:"6px 4px",border:`1px solid ${fluxMode===o.v?"#3b82f6":"#334155"}`,
+                      borderRadius:"6px",fontSize:"11px",fontWeight:"700",cursor:"pointer",lineHeight:"1.4",
+                      background:fluxMode===o.v?"#1e3a5f":"#1e293b",color:fluxMode===o.v?"#93c5fd":"#64748b"}}>
+                    {o.label}<br/>
+                    <span style={{fontSize:"9px",fontWeight:"400",color:fluxMode===o.v?"#60a5fa":"#475569"}}>{o.tip}</span>
+                  </button>
+                ))}
+              </div>
+              <div style={{fontSize:"10px",color:"#0b1120",marginTop:"6px",
+                background:"#0b1120",border:"1px solid #1e293b",borderRadius:"5px",padding:"6px 8px",lineHeight:"1.8"}}>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{color:"#64748b"}}>C（有效膜长）：</span>
+                  <span style={{color:"#4ade80",fontFamily:"monospace"}}>{R.effActiveLen} mm</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{color:"#64748b"}}>膜宽（C - 15×2）：</span>
+                  <span style={{color:"#f59e0b",fontFamily:"monospace",fontWeight:"700"}}>{R.memWidth} mm</span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{color:"#64748b"}}>250ppm@65psi：</span>
+                  <span style={{color:fluxMode==="250"?"#f59e0b":"#475569",fontFamily:"monospace",fontWeight:fluxMode==="250"?"700":"400"}}>
+                    {R.mem.flux65} GPD/m² {fluxMode==="250"&&"← 当前使用"}
+                  </span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{color:"#64748b"}}>500ppm水效校正：</span>
+                  <span style={{color:fluxMode==="500"?"#4ade80":"#475569",fontFamily:"monospace",fontWeight:fluxMode==="500"?"700":"400"}}>
+                    {R.mem.flux65_500||"—"} GPD/m² {fluxMode==="500"&&"← 当前使用"}
+                  </span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <span style={{color:"#64748b"}}>脱盐率：</span>
+                  <span style={{color:"#e2e8f0",fontFamily:"monospace"}}>{(R.mem.saltRej*100).toFixed(1)}%</span>
+                </div>
+                <div style={{borderTop:"1px solid #1e293b",marginTop:"3px",paddingTop:"3px",fontSize:"9px",color:"#334155"}}>
+                  📊 {R.mem.src}
+                </div>
+              </div>
+            </div>
+            <div>
+              <Lbl c="设计系数（含测试+寿命衰减）"/>
+              <Sel val={designEff} set={setDesignEff} opts={[
+                {v:"1.00",l:"1.00 — 原始膜片参数，不含任何衰减"},
+                {v:"0.95",l:"0.95 — 宽松（谨慎使用）"},
+                {v:"0.90",l:"0.90 — 略松余量"},
+                {v:"0.85",l:"0.85 — 推荐标准"},
+                {v:"0.80",l:"0.80 — 推荐保守"},
+                {v:"0.75",l:"0.75 — 较高余量"},
+                {v:"0.70",l:"0.70 — 激进余量（适合新膜评估）"},
+              ]}/>
+              <div style={{fontSize:"10px",color:"#475569",marginTop:"3px"}}>
+                flux65基准为实测值 · 系数仅计批次差异(0.97) × 现场衰减
+              </div>
+            </div>
+
+            {/* 页数非线性修正系数 */}
+            <div style={{background:"#0b1120",border:"1px solid #1e293b",borderRadius:"8px",padding:"10px"}}>
+              <div style={{fontSize:"11px",color:"#64748b",fontWeight:"700",marginBottom:"6px",letterSpacing:".06em"}}>
+                📉 页数非线性修正系数
+              </div>
+              <div style={{fontSize:"10px",color:"#475569",lineHeight:"1.7",marginBottom:"8px"}}>
+                实测数据：页数越多，单位面积产水量越低。来源：样品sheet统计（批次差异大，仅供参考）
+              </div>
+              {/* 自动查表 */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"4px",marginBottom:"8px"}}>
+                {[
+                  {label:"2-5页",corr:"1.00",color:"#4ade80"},
+                  {label:"6-8页",corr:"0.96",color:"#fbbf24"},
+                  {label:"9-11页",corr:"0.97",color:"#fbbf24"},
+                  {label:"12页+",corr:"0.88",color:"#f87171"},
+                ].map(({label,corr,color})=>(
+                  <div key={label} style={{background:"#1e293b",border:"1px solid #334155",borderRadius:"6px",padding:"5px 4px",textAlign:"center"}}>
+                    <div style={{fontSize:"9px",color:"#64748b"}}>{label}</div>
+                    <div style={{fontSize:"13px",fontFamily:"monospace",fontWeight:"700",color}}>{corr}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"4px"}}>
+                <span style={{fontSize:"10px",color:"#64748b",whiteSpace:"nowrap"}}>当前自动系数：</span>
+                <span style={{fontSize:"14px",fontFamily:"monospace",fontWeight:"700",color:"#93c5fd"}}>{R.pageCorrFactor?.toFixed(3)||"—"}</span>
+                <span style={{fontSize:"10px",color:"#475569"}}>(预估页数{R.autoPg}页)</span>
+              </div>
+              <div>
+                <div style={{fontSize:"10px",color:"#64748b",marginBottom:"3px"}}>手动覆盖（留空=自动查表）</div>
+                <div style={{position:"relative"}}>
+                  <input type="number" value={manualPageCorr} placeholder={`自动: ${R.pageCorrFactor?.toFixed(3)||""}`}
+                    onChange={e=>setManualPageCorr(e.target.value)}
+                    style={{width:"100%",background:"#1e293b",border:`1px ${manualPageCorr?"solid":"dashed"} ${manualPageCorr?"#f59e0b":"#334155"}`,
+                      borderRadius:"6px",padding:"6px 8px",fontSize:"13px",color:"#f1f5f9",outline:"none"}}/>
+                </div>
+                {manualPageCorr && <div style={{fontSize:"10px",color:"#f59e0b",marginTop:"2px"}}>⚠️ 手动覆盖: {manualPageCorr}</div>}
+                <div style={{fontSize:"9px",color:"#334155",marginTop:"4px",lineHeight:"1.5"}}>
+                  建议：通过左侧"打样实测→反推校验"模块获取实际系数后填入
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <SecTitle icon="📐" text="元件规格 & 尺寸"/>
+          <div style={{display:"grid",gap:"10px"}}>
+            {/* 型号选择（可选） */}
+            <div>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"3px"}}>
+                <Lbl c="元件标准型号"/>
+                <span style={{fontSize:"10px",background:"#1e293b",border:"1px solid #334155",color:"#64748b",
+                  borderRadius:"4px",padding:"1px 6px",fontWeight:"600"}}>可选 · ACE冲突时以ACE为准</span>
+              </div>
+              <Sel val={elemId} set={v=>{setElemId(v);}} opts={[
+                {v:"", l:"— 不选标准型号，仅使用下方A/C/E值 —"},
+                ...ELEMENT_TYPES.map(e=>({v:e.id, l:`${e.name} | A=${e.nomA}mm  C=${e.nomC}mm  E=${e.nomE}mm`}))
+              ]}/>
+              {elemId && (
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"3px"}}>
+                  标准值：A={ELEMENT_TYPES.find(e=>e.id===elemId)?.nomA}mm · C={ELEMENT_TYPES.find(e=>e.id===elemId)?.nomC}mm · E={ELEMENT_TYPES.find(e=>e.id===elemId)?.nomE}mm
+                  {(R.hasA||R.hasC||R.hasE) && <span style={{color:"#f59e0b"}}> · ⚠️ 部分已被ACE覆盖</span>}
+                </div>
+              )}
+            </div>
+
+            {/* 尺寸示意图 */}
+            <div style={{background:"#0b1120",border:"1px solid #1e3a5f",borderRadius:"8px",padding:"10px"}}>
+              <div style={{fontSize:"10px",color:"#60a5fa",fontWeight:"700",letterSpacing:".06em",marginBottom:"6px"}}>
+                📐 尺寸定义（可在下方精确覆盖标准值）
+              </div>
+              <svg viewBox="0 0 310 118" style={{width:"100%",height:"auto",display:"block"}}>
+                {/* 壳体矩形 */}
+                <rect x="58" y="36" width="194" height="36" rx="4" fill="#1e3a5f" stroke="#3b82f6" strokeWidth="1.5"/>
+                {/* 中心管截面（右侧显示E） */}
+                <circle cx="292" cy="54" r="6" fill="none" stroke="#c084fc" strokeWidth="1.5" strokeDasharray="3,2"/>
+                <circle cx="292" cy="54" r="1.5" fill="#c084fc"/>
+                {/* 左接头 */}
+                <rect x="28" y="48" width="32" height="12" rx="2" fill="#1e293b" stroke="#60a5fa" strokeWidth="1"/>
+                <rect x="18" y="51" width="12" height="6" rx="1" fill="#334155" stroke="#93c5fd" strokeWidth="1"/>
+                {/* 右接头 */}
+                <rect x="250" y="48" width="32" height="12" rx="2" fill="#1e293b" stroke="#60a5fa" strokeWidth="1"/>
+                <rect x="280" y="51" width="12" height="6" rx="1" fill="#334155" stroke="#93c5fd" strokeWidth="1"/>
+                {/* ── A 标注（壳体外径，纵向） ── */}
+                <line x1="50" y1="36" x2="50" y2="72" stroke="#f59e0b" strokeWidth="1.5"/>
+                <line x1="44" y1="36" x2="56" y2="36" stroke="#f59e0b" strokeWidth="1.5"/>
+                <line x1="44" y1="72" x2="56" y2="72" stroke="#f59e0b" strokeWidth="1.5"/>
+                <text x="34" y="57" fill="#f59e0b" fontSize="12" fontWeight="bold">A</text>
+                {/* ── C 标注（壳体长，横向顶部） ── */}
+                <line x1="58" y1="28" x2="58" y2="34" stroke="#4ade80" strokeWidth="1"/>
+                <line x1="252" y1="28" x2="252" y2="34" stroke="#4ade80" strokeWidth="1"/>
+                <line x1="58" y1="30" x2="252" y2="30" stroke="#4ade80" strokeWidth="1.5"/>
+                <polygon points="58,30 65,27 65,33" fill="#4ade80"/>
+                <polygon points="252,30 245,27 245,33" fill="#4ade80"/>
+                <text x="148" y="24" fill="#4ade80" fontSize="12" fontWeight="bold" textAnchor="middle">C</text>
+                {/* ── E 标注（中心管直径，右侧圆） ── */}
+                <line x1="292" y1="62" x2="292" y2="78" stroke="#c084fc" strokeWidth="1"/>
+                <line x1="286" y1="74" x2="298" y2="74" stroke="#c084fc" strokeWidth="1.5"/>
+                <polygon points="286,74 290,71 290,77" fill="#c084fc"/>
+                <polygon points="298,74 294,71 294,77" fill="#c084fc"/>
+                <text x="292" y="90" fill="#c084fc" fontSize="12" fontWeight="bold" textAnchor="middle">E</text>
+                {/* 图例文字 */}
+                <text x="6"   y="10" fill="#f59e0b" fontSize="8.5">A = 壳体外径</text>
+                <text x="100" y="10" fill="#4ade80" fontSize="8.5">C = 膜长度（壳体）</text>
+                <text x="210" y="10" fill="#c084fc" fontSize="8.5">E = 中心管直径</text>
+              </svg>
+              {/* 当前标准值展示 */}
+              <div style={{display:"flex",gap:"6px",marginTop:"6px",flexWrap:"wrap"}}>
+                {[
+                  {lbl:"A", val:`${R.elem.nomA} mm`, c:"#f59e0b", bg:"rgba(251,191,36,.1)", border:"rgba(251,191,36,.3)", tip:"壳体外径"},
+                  {lbl:"C", val:`${R.elem.nomC} mm`, c:"#4ade80", bg:"rgba(74,222,128,.1)", border:"rgba(74,222,128,.3)", tip:"膜体长度"},
+                  {lbl:"E", val:`${R.elem.nomE} mm`, c:"#c084fc", bg:"rgba(192,132,252,.1)", border:"rgba(192,132,252,.3)", tip:"中心管直径"},
+                  {lbl:"有效卷绕", val:`${R.elem.activeLen} mm`, c:"#60a5fa", bg:"rgba(96,165,250,.1)", border:"rgba(96,165,250,.3)", tip:"计算用长度"},
+                ].map(({lbl,val,c,bg,border,tip})=>(
+                  <div key={lbl} style={{flex:1,minWidth:"60px",background:bg,border:`1px solid ${border}`,borderRadius:"6px",padding:"5px 6px",textAlign:"center"}}>
+                    <div style={{fontSize:"9px",color:c,fontWeight:"700",letterSpacing:".05em"}}>{lbl}</div>
+                    <div style={{fontSize:"13px",color:c,fontFamily:"monospace",fontWeight:"700"}}>{val}</div>
+                    <div style={{fontSize:"9px",color:"#475569"}}>{tip}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* A / C / E 精确覆盖输入 */}
+            <div style={{background:"#0f172a",border:"1px dashed #334155",borderRadius:"8px",padding:"10px"}}>
+              <div style={{fontSize:"10px",color:"#64748b",fontWeight:"700",marginBottom:"8px",letterSpacing:".06em",textTransform:"uppercase"}}>
+                ✏️ 精确填入 A / C / E（填入值优先于标准型号）
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
+                {[
+                  {label:"A 壳体外径", val:customA, set:setCustomA, src:R.elem.srcA,
+                   stdVal:R.elem.nomA, color:"#f59e0b", hint:"成品外径"},
+                  {label:"C 膜长度",   val:customC, set:setCustomC, src:R.elem.srcC,
+                   stdVal:R.elem.nomC, color:"#4ade80", hint:`C = 有效膜长，直接使用`},
+                  {label:"E 中心管径", val:customE, set:setCustomE, src:R.elem.srcE,
+                   stdVal:R.elem.nomE, color:"#c084fc", hint:"影响外径计算"},
+                ].map(({label,val,set,src,stdVal,color,hint})=>(
+                  <div key={label}>
+                    <div style={{display:"flex",alignItems:"center",gap:"4px",marginBottom:"3px"}}>
+                      <span style={{fontSize:"11px",color:"#94a3b8",fontWeight:"600",textTransform:"uppercase",letterSpacing:".05em"}}>{label}</span>
+                      <span style={{fontSize:"9px",padding:"1px 5px",borderRadius:"3px",fontWeight:"700",
+                        background: src==="custom"?"rgba(251,191,36,.15)": src==="standard"?"rgba(96,165,250,.1)":"rgba(100,116,139,.1)",
+                        border: `1px solid ${src==="custom"?"rgba(251,191,36,.4)":src==="standard"?"rgba(96,165,250,.3)":"rgba(100,116,139,.2)"}`,
+                        color: src==="custom"?"#fbbf24": src==="standard"?"#60a5fa":"#64748b"}}>
+                        {src==="custom"?"ACE优先":src==="standard"?"标准型号":"默认值"}
+                      </span>
+                    </div>
+                    <div style={{position:"relative"}}>
+                      <input type="number" value={val} placeholder={`${stdVal}`}
+                        onChange={e=>set(e.target.value)}
+                        style={{width:"100%",background:"#1e293b",border:`1px ${val?"solid":"dashed"} ${val?color:"#334155"}`,
+                          borderRadius:"6px",padding:"6px 28px 6px 8px",fontSize:"13px",color:"#f1f5f9",outline:"none"}}
+                        onFocus={e=>e.target.style.borderColor=color}
+                        onBlur={e=>e.target.style.borderColor=val?color:"#334155"}/>
+                      <span style={{position:"absolute",right:"7px",top:"50%",transform:"translateY(-50%)",
+                        fontSize:"10px",color:"#475569",pointerEvents:"none"}}>mm</span>
+                    </div>
+                    <div style={{fontSize:"10px",color: val?color:"#475569",marginTop:"2px"}}>{hint}</div>
+                  </div>
+                ))}
+              </div>
+              {/* 生效值汇总 */}
+              <div style={{marginTop:"10px",display:"flex",gap:"6px",flexWrap:"wrap"}}>
+                {[
+                  {k:"A 实际外径",   v:`${R.elem.nomA} mm`, src:R.elem.srcA, c:"#f59e0b"},
+                  {k:"C 实际膜长",   v:`${R.elem.nomC} mm`, src:R.elem.srcC, c:"#4ade80"},
+                  {k:"E 实际管径",   v:`${R.elem.nomE} mm`, src:R.elem.srcE, c:"#c084fc"},
+                  {k:"有效卷绕长",   v:`${R.elem.activeLen} mm`, src:"calc",  c:"#60a5fa"},
+                ].map(({k,v,src,c})=>(
+                  <div key={k} style={{flex:1,minWidth:"64px",background:`${c}12`,border:`1px solid ${c}40`,
+                    borderRadius:"6px",padding:"5px 6px",textAlign:"center"}}>
+                    <div style={{fontSize:"9px",color:c,fontWeight:"700"}}>{k}</div>
+                    <div style={{fontSize:"13px",color:c,fontFamily:"monospace",fontWeight:"700"}}>{v}</div>
+                    <div style={{fontSize:"9px",color:"#475569",marginTop:"1px"}}>
+                      {src==="custom"?"✏️ ACE":src==="standard"?"📋 标准":src==="calc"?"🔧 推算":"⚙️ 默认"}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <Lbl c="手动指定页数（留空=自动计算）"/>
+              <Inp val={customPages} set={setCustomPages} type="number" ph={`自动: ${R.autoPg}`}/>
+            </div>
+            <div>
+              <Lbl c="目标外径 mm（留空=自动计算）"/>
+              <Inp val={targetOD} set={setTargetOD} type="number" ph={`自动: ${R.theoOD.toFixed(1)+2}`} unit="mm"/>
+            </div>
+            <label style={{display:"flex",alignItems:"center",gap:"8px",cursor:"pointer",userSelect:"none"}}>
+              <input type="checkbox" checked={endCap} onChange={e=>setEndCap(e.target.checked)}
+                style={{width:"16px",height:"16px",accentColor:"#3b82f6"}}/>
+              <span style={{fontSize:"13px",color:"#cbd5e1"}}>BOM 中包含端盖</span>
+            </label>
+          </div>
+
+          {/* ── 打样实测反推 ── */}
+          <SecTitle icon="🔬" text="打样实测 → 反推校验"/>
+          <div style={{background:"#0b1120",border:"1px solid #1e3a5f",borderRadius:"8px",padding:"10px",display:"grid",gap:"8px"}}>
+            <div style={{fontSize:"10px",color:"#60a5fa",lineHeight:"1.6"}}>
+              输入实际打样数据，反推膜片真实通量与有效η，解释设计值与实测的差距
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"6px"}}>
+              <div>
+                <Lbl c="实测页数"/>
+                <Inp val={revPages} set={setRevPages} type="number" ph="如 4.5"/>
+              </div>
+              <div>
+                <Lbl c="实测流量"/>
+                <Inp val={revFlow} set={setRevFlow} type="number" ph="GPD"/>
+              </div>
+              <div>
+                <Lbl c="测试压力"/>
+                <Inp val={revPres} set={setRevPres} type="number" ph="PSI"/>
+              </div>
+            </div>
+            {revCalc && (<>
+              <div style={{borderTop:"1px solid #1e293b",paddingTop:"8px",display:"grid",gap:"4px",fontSize:"11px"}}>
+                {[
+                  ["实测总面积",     `${revCalc.totalArea.toFixed(4)} m²`],
+                  ["实测有效通量",   `${revCalc.obsFluxAtP.toFixed(1)} GPD/m²`],
+                  ["反推65psi通量",  `${revCalc.obsFlux65.toFixed(1)} GPD/m²`],
+                  ["数据库基准通量", `${R.baseFlux} GPD/m²`],
+                ].map(([k,v])=>(
+                  <div key={k} style={{display:"flex",justifyContent:"space-between"}}>
+                    <span style={{color:"#64748b"}}>{k}</span>
+                    <span style={{color:"#e2e8f0",fontFamily:"monospace",fontWeight:"600"}}>{v}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{
+                background: revCalc.obsEta > parseFloat(designEff||0.85)-0.05 ? "rgba(6,78,59,.25)" : "rgba(120,53,15,.25)",
+                border: `1px solid ${revCalc.obsEta > parseFloat(designEff||0.85)-0.05 ? "#059669" : "#d97706"}`,
+                borderRadius:"6px",padding:"8px 10px"}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"4px"}}>
+                  <span style={{fontSize:"11px",color:"#94a3b8"}}>实测有效 η</span>
+                  <span style={{fontSize:"18px",fontWeight:"700",fontFamily:"monospace",
+                    color: revCalc.obsEta >= parseFloat(designEff||0.85) ? "#34d399" : "#fbbf24"}}>
+                    {revCalc.obsEta.toFixed(3)}
+                  </span>
+                </div>
+                <div style={{display:"flex",justifyContent:"space-between",fontSize:"11px"}}>
+                  <span style={{color:"#64748b"}}>当前设计η</span>
+                  <span style={{color:"#94a3b8"}}>{designEff}</span>
+                </div>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"6px",lineHeight:"1.6",borderTop:"1px solid #1e293b",paddingTop:"5px"}}>
+                  {revCalc.obsEta >= parseFloat(designEff||0.85)
+                    ? `✅ 实测η(${revCalc.obsEta.toFixed(3)}) ≥ 设计η(${designEff})，设计保守量充足`
+                    : `⚠️ 实测η(${revCalc.obsEta.toFixed(3)}) < 设计η(${designEff})，建议调低设计系数至 ${(revCalc.obsEta*0.97).toFixed(2)}`
+                  }
+                  <br/>
+                  等效：{revCalc.pg}页新膜 ≈ {revCalc.eqDesignPages.toFixed(1)}页寿命末期设计
+                </div>
+              </div>
+            </>)}
+          </div>
+
+          <div style={{marginTop:"20px",paddingBottom:"16px"}}>
+            <button onClick={printBOM}
+              style={{width:"100%",background:"#2563eb",color:"#fff",fontWeight:"600",fontSize:"14px",
+                border:"none",borderRadius:"10px",padding:"12px",cursor:"pointer",display:"flex",
+                alignItems:"center",justifyContent:"center",gap:"8px",transition:"background .2s"}}
+              onMouseEnter={e=>e.target.style.background="#1d4ed8"}
+              onMouseLeave={e=>e.target.style.background="#2563eb"}>
+              🖨️ 打印 / 导出 BOM
+            </button>
+          </div>
+        </div>
+
+        {/* ═══ 右侧结果面板 ═══ */}
+        <div style={{flex:1,overflowY:"auto",padding:"24px"}}>
+
+          {/* 通量基准状态条 */}
+          <div style={{background:"linear-gradient(to right,rgba(30,58,138,.3),rgba(30,64,175,.15))",
+            border:"1px solid #1e3a5f",borderRadius:"10px",padding:"10px 16px",marginBottom:"16px",
+            display:"flex",alignItems:"center",gap:"16px",flexWrap:"wrap"}}>
+            <div style={{fontSize:"11px",color:"#60a5fa",fontWeight:"700",whiteSpace:"nowrap"}}>
+              🔬 {R.mem.name}（{R.mem.brand}）
+            </div>
+            <div style={{display:"flex",gap:"14px",fontSize:"12px",color:"#94a3b8",flexWrap:"wrap",alignItems:"center"}}>
+              <span>工况 <b style={{color:"#c084fc"}}>{fluxMode==="250"?"250ppm 标准测试":"500ppm 水效校正"}</b></span>
+              <span style={{color:"#334155"}}>·</span>
+              <span>基准通量 <b style={{color:"#f59e0b",fontSize:"14px"}}>{R.baseFlux} GPD/m²</b></span>
+              <span style={{color:"#334155"}}>·</span>
+              <span>设计系数 η = <b style={{color:"#93c5fd"}}>{R.eta.toFixed(2)}</b></span>
+              <span style={{color:"#334155"}}>·</span>
+              <span>有效通量 <b style={{color:"#4ade80",fontSize:"13px"}}>{R.fluxAtP.toFixed(0)} GPD/m²</b></span>
+              <span style={{color:"#334155"}}>·</span>
+              <span>页数修正 <b style={{color:R.pageCorrFactor<0.98?"#fbbf24":"#94a3b8"}}>{R.pageCorrFactor?.toFixed(3)}</b></span>
+            </div>
+          </div>
+
+          {/* 结果卡片 */}
+          <div style={{marginBottom:"20px"}}>
+            <div style={{fontSize:"11px",fontWeight:"700",color:"#64748b",textTransform:"uppercase",
+              letterSpacing:"0.1em",marginBottom:"10px"}}>📊 设计计算结果</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"10px",marginBottom:"10px"}}>
+              <KV label="设计页数" val={`${R.pages} 页`}
+                sub={`原始 ${R.rawPg.toFixed(2)} 页 → 取整`} hi={true}/>
+              <KV label="总膜面积"
+                val={`${(R.pageArea*R.pages).toFixed(3)} m²`}
+                sub={`单页 ${R.pageArea.toFixed(4)} m²`}/>
+              <KV label="设计外径（含胶带）"
+                val={`${R.finalOD.toFixed(1)} mm`}
+                sub={`芯径 ${R.theoOD.toFixed(1)}mm · 参考 ${R.odRow.odMin}~${R.odRow.odMax}mm`}/>
+              <KV label="初始产水量"
+                val={`${R.iFlowGPD.toFixed(0)} GPD`}
+                sub={`${initFlow} L/min @ ${R.iPSI.toFixed(0)} psi`}/>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"10px"}}>
+              <KV label="推荐网格厚度" val={`${R.odRow.mesh} mil`} sub={`= ${(R.odRow.mesh*0.0254).toFixed(3)} mm`}/>
+              <KV label="推荐导布厚度" val={`${R.odRow.guide} mil`} sub={`= ${(R.odRow.guide*0.0254).toFixed(3)} mm`}/>
+              <KV label="压力系数 (vs 65psi)" val={R.coeff.toFixed(3)} sub={`@ ${R.iPSI.toFixed(0)} psi`}/>
+              <div style={{background:"#0f172a",border:`1px solid ${R.eOk?"#059669":"#d97706"}`,borderRadius:"10px",padding:"12px 14px"}}>
+                <div style={{fontSize:"11px",color:"#64748b",marginBottom:"3px"}}>寿命末期核算</div>
+                <div style={{fontSize:"16px",fontWeight:"700",color:statusColor}}>{R.eOk?"✅ 满足":"⚠️ 偏低"}</div>
+                <div style={{fontSize:"10px",color:"#475569",marginTop:"2px"}}>
+                  估算末期 {(R.eFluxEst/1440*3.785).toFixed(2)} L/min<br/>需求 {endFlow} L/min
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 说明摘要 */}
+          <div style={{background:"rgba(15,23,42,0.6)",border:"1px solid #1e293b",borderRadius:"12px",
+            padding:"14px 18px",marginBottom:"20px"}}>
+            <div style={{fontSize:"11px",fontWeight:"700",color:"#64748b",textTransform:"uppercase",
+              letterSpacing:"0.1em",marginBottom:"10px"}}>📌 设计参数汇总</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"4px 40px",fontSize:"12px",color:"#94a3b8",lineHeight:"2"}}>
+              <div>膜片品牌型号：<span style={{color:"#e2e8f0",fontWeight:"600"}}>{R.mem.name}（{R.mem.brand}）</span></div>
+              <div>元件型号：<span style={{color:"#e2e8f0",fontWeight:"600"}}>{R.elem.name}</span></div>
+              <div>C（有效膜长）：<span style={{color:"#4ade80"}}>{R.effActiveLen} mm</span></div>
+              <div>膜宽（C - 15×2）：<b style={{color:"#f59e0b"}}>{R.memWidth} mm</b></div>
+              <div>有效卷绕长度：<span style={{color:"#e2e8f0"}}>{R.elem.activeLen} mm</span></div>
+              <div>65psi 基准通量：<span style={{color:"#e2e8f0"}}>{R.mem.flux65} GPD/m²</span></div>
+              <div>操作压力通量：<span style={{color:"#e2e8f0"}}>{(R.mem.flux65*R.coeff).toFixed(0)} GPD/m²</span></div>
+              <div>脱盐率参考：<span style={{color:"#e2e8f0"}}>{(R.mem.saltRej*100).toFixed(1)}%（NaCl 250ppm）</span></div>
+              <div>外径参考范围：<span style={{color:"#e2e8f0"}}>{R.odRow.odMin}~{R.odRow.odMax} mm（{R.pages}页）</span></div>
+            </div>
+          </div>
+
+          {/* BOM 表格 */}
+          <div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginBottom:"10px"}}>
+              <div>
+                <div style={{fontSize:"13px",fontWeight:"700",color:"#e2e8f0",letterSpacing:"0.02em"}}>📦 生产 BOM 清单</div>
+                <div style={{fontSize:"11px",color:"#64748b",marginTop:"2px"}}>
+                  P/N: <span style={{color:"#60a5fa"}}>{customPN||"—"}</span>
+                  &nbsp;·&nbsp;{productDesc||"产品待填"}
+                  &nbsp;·&nbsp;Rev.{rev}
+                  &nbsp;·&nbsp;页数 <span style={{color:"#60a5fa",fontWeight:"700"}}>{R.pages}</span>
+                  &nbsp;·&nbsp;外径 <span style={{color:"#60a5fa",fontWeight:"700"}}>{R.finalOD.toFixed(1)}mm</span>
+                </div>
+              </div>
+              <button className="no-print" onClick={printBOM}
+                style={{background:"#1e293b",color:"#94a3b8",border:"1px solid #334155",borderRadius:"8px",
+                  padding:"6px 14px",cursor:"pointer",fontSize:"12px"}}>
+                🖨️ 打印 BOM
+              </button>
+            </div>
+
+            <div style={{borderRadius:"12px",overflow:"hidden",border:"1px solid #1e293b"}}>
+              <table style={{width:"100%",borderCollapse:"collapse",fontSize:"13px"}}>
+                <thead>
+                  <tr style={{background:"linear-gradient(to right,#1e293b,#1e3a5f)"}}>
+                    {["序号","层次","物料编码","物料描述","用量/台","单位","报废率","备注"].map(h=>(
+                      <th key={h} style={{padding:"10px 12px",textAlign:h==="物料描述"||h==="备注"?"left":"center",
+                        fontSize:"11px",fontWeight:"700",color:"#94a3b8",borderBottom:"1px solid #334155",
+                        whiteSpace:"nowrap"}}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {R.bom.map((row,i)=>{
+                    const bg = i===0?"rgba(30,64,175,0.2)":i===1?"rgba(146,64,14,0.2)":i===2?"rgba(6,78,59,0.15)":"transparent";
+                    return (
+                      <tr key={i} style={{background:bg,borderBottom:"1px solid rgba(30,41,59,0.8)"}}>
+                        <td style={{padding:"8px 12px",textAlign:"center",color:"#64748b",fontFamily:"monospace"}}>{row.no}</td>
+                        <td style={{padding:"8px 12px",textAlign:"center",color:"#64748b"}}>1</td>
+                        <td style={{padding:"8px 12px",color:"#64748b",fontFamily:"monospace",fontSize:"12px"}}>{row.code}</td>
+                        <td style={{padding:"8px 12px",color:"#e2e8f0"}}>{row.desc}</td>
+                        <td style={{padding:"8px 12px",textAlign:"right",fontFamily:"monospace",fontWeight:"700",color:"#f1f5f9"}}>{row.qty}</td>
+                        <td style={{padding:"8px 12px",textAlign:"center",color:"#94a3b8",fontSize:"12px"}}>{row.unit}</td>
+                        <td style={{padding:"8px 12px",textAlign:"center",color:"#64748b",fontSize:"12px"}}>{row.scrap}</td>
+                        <td style={{padding:"8px 12px",color:"#64748b",fontSize:"12px"}}>{row.remark}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 用量摘要卡片 */}
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginTop:"14px"}}>
+              {[
+                {title:"膜材料用量",color:"#3b82f6",bg:"rgba(30,64,175,0.15)",border:"rgba(59,130,246,0.3)",items:[
+                  ["膜片",`${(R.pages*R.memWidth/1000).toFixed(3)} m`],
+                  ["浓水网格",`${(R.pages*R.memWidth/1000*2.21).toFixed(3)} m`],
+                  ["纯水导布",`${(R.pages*R.memWidth/1000*2.43).toFixed(3)} m`],
+                ]},
+                {title:"胶带 & 密封",color:"#f59e0b",bg:"rgba(146,64,14,0.15)",border:"rgba(217,119,6,0.3)",items:[
+                  ["外胶带",`${(Math.PI*R.finalOD/1000*2.5).toFixed(4)} m`],
+                  ["密封圈胶带",`${(Math.PI*R.finalOD/1000*5.3).toFixed(4)} m`],
+                  ["周长参考",`${(Math.PI*R.finalOD).toFixed(1)} mm`],
+                ]},
+                {title:"胶水用量",color:"#10b981",bg:"rgba(6,78,59,0.15)",border:"rgba(16,185,129,0.3)",items:[
+                  ["富乐 3519A",`${(R.pages*3.93).toFixed(2)} g`],
+                  ["富乐 3519B",`${(R.pages*4.37).toFixed(2)} g`],
+                  ["A:B 比例","47 : 53"],
+                ]},
+              ].map(card=>(
+                <div key={card.title} style={{background:card.bg,border:`1px solid ${card.border}`,borderRadius:"12px",padding:"14px"}}>
+                  <div style={{fontSize:"11px",color:card.color,fontWeight:"700",marginBottom:"8px"}}>{card.title}</div>
+                  {card.items.map(([k,v])=>(
+                    <div key={k} style={{display:"flex",justifyContent:"space-between",fontSize:"12px",
+                      color:"#94a3b8",marginBottom:"4px"}}>
+                      <span>{k}</span>
+                      <span style={{fontFamily:"monospace",fontWeight:"700",color:"#e2e8f0"}}>{v}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* 推导步骤 */}
+            <div style={{background:"rgba(15,23,42,0.4)",border:"1px solid #1e293b",borderRadius:"12px",
+              padding:"16px",marginTop:"14px"}}>
+              <div style={{fontSize:"11px",fontWeight:"700",color:"#64748b",textTransform:"uppercase",
+                letterSpacing:"0.1em",marginBottom:"10px"}}>🔧 设计步骤推导（可打印）</div>
+              <ol style={{margin:0,padding:"0 0 0 18px",fontSize:"12px",color:"#64748b",lineHeight:"2.2"}}>
+                {[
+                  `客户初始产水量：${initFlow} L/min，换算 → ${R.iFlowGPD.toFixed(1)} GPD`,
+                  `初始膜前压力：${initPres} MPa = ${R.iPSI.toFixed(1)} psi，查压力系数表（vs 65psi）= ${R.coeff.toFixed(3)}`,
+                  `选用膜片 ${R.mem.name}（${R.mem.brand}）；膜宽 = C - 15×2 = ${R.effActiveLen} - 30 = ${R.memWidth} mm`,
+                  `基准通量（${fluxMode==="500"?"500ppm水效校正":"250ppm标准测试"}）= ${R.baseFlux} GPD/m²  ←  量产膜片通量.xlsx`,
+                  `操作压力下通量 = ${R.baseFlux} × ${R.coeff.toFixed(3)} = ${(R.baseFlux*R.coeff).toFixed(0)} GPD/m²`,
+                  `乘以设计系数 η=${R.eta.toFixed(2)} × 页数非线性修正${R.pageCorrFactor?.toFixed(3)} → 有效通量 = ${R.fluxAtP.toFixed(0)} GPD/m²`,
+                  `单页膜面积 = 0.94 × 膜宽${R.memWidth}mm（第3步）= ${R.pageArea.toFixed(4)} m²`,
+                  `所需总面积 = ${R.iFlowGPD.toFixed(0)} ÷ ${R.fluxAtP.toFixed(0)} = ${R.reqArea.toFixed(4)} m²`,
+                  `原始页数 = ${R.reqArea.toFixed(4)} ÷ ${R.pageArea.toFixed(4)} = ${R.rawPg.toFixed(2)}，取0.5步长整数 → ${R.pages} 页`,
+                  `查外径经验表（${R.pages}页）→ 推荐网格 ${R.odRow.mesh} mil，导布 ${R.odRow.guide} mil，外径参考 ${R.odRow.odMin}~${R.odRow.odMax} mm`,
+                  `理论外径 ≈ ${R.theoOD.toFixed(1)} mm + 胶带层 ≈ 最终外径 ${R.finalOD.toFixed(1)} mm`,
+                ].map((step,i)=>(
+                  <li key={i} style={{color: i===8||i===9?"#93c5fd": i===2?"#f59e0b":"#64748b"}}>
+                    {i===8||i===9?<b style={{color:"#93c5fd"}}>{step}</b>:
+                     i===2?<b style={{color:"#f59e0b"}}>{step}</b>:step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
