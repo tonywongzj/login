@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1到100倍 选股器</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; background: #f5f7fa; color: #333; }
+  .header { background: linear-gradient(135deg, #1a3c6b, #2563eb); color: #fff; padding: 20px 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header p { font-size: 13px; opacity: .8; margin-top: 4px; }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px 16px; }
+  .sources { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .source-card { flex: 1; min-width: 160px; background: #fff; border: 2px solid #e5e7eb; border-radius: 12px; padding: 14px; cursor: pointer; transition: all .2s; }
+  .source-card.active { border-color: #2563eb; background: #eff6ff; }
+  .source-card.required { border-color: #10b981; background: #ecfdf5; cursor: default; }
+  .source-card .badge { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+  .source-card.required .badge { background: #10b981; color: #fff; }
+  .source-card.active .badge { background: #2563eb; color: #fff; }
+  .source-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .source-card p { font-size: 12px; color: #6b7280; line-height: 1.4; }
+  .industry-panel { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+  .industry-panel h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: #374151; }
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .tag { padding: 5px 12px; border-radius: 20px; border: 1px solid #d1d5db; background: #f9fafb; font-size: 13px; cursor: pointer; transition: all .15s; user-select: none; }
+  .tag.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+  .tag-input-row { display: flex; gap: 8px; margin-top: 4px; }
+  .tag-input-row input { flex: 1; border: 1px solid #d1d5db; border-radius: 8px; padding: 6px 12px; font-size: 13px; }
+  .tag-input-row button { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer; }
+  .tag-input-row button:hover { background: #1d4ed8; }
+  .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .card h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .form-group label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+  .form-group input { width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 8px 10px; font-size: 14px; }
+  .form-group input:focus { outline: none; border-color: #2563eb; }
+  .period-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .period-row .form-group { flex: 1; min-width: 160px; }
+  .btn { display: block; width: 100%; padding: 13px; background: #2563eb; color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; }
+  .btn:hover { background: #1d4ed8; }
+  .btn:disabled { background: #93c5fd; cursor: not-allowed; }
+  .status { text-align: center; padding: 16px; font-size: 14px; color: #6b7280; }
+  .error-box { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 10px; padding: 14px; color: #dc2626; font-size: 13px; margin-top: 16px; white-space: pre-wrap; }
+  .stage-counts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .stage-chip { background: #eff6ff; color: #1d4ed8; border-radius: 20px; padding: 4px 12px; font-size: 12px; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f8fafc; text-align: right; padding: 10px 12px; color: #374151; font-weight: 600; border-bottom: 2px solid #e5e7eb; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  td { padding: 9px 12px; border-bottom: 1px solid #f3f4f6; text-align: right; }
+  tr:hover td { background: #f8fafc; }
+  .score-cell { font-weight: 700; color: #2563eb; }
+  .empty-msg { text-align: center; padding: 40px; color: #9ca3af; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📈 1到100倍 选股器</h1>
+  <p>基于 Christopher Mayer《100 Baggers》量化筛选</p>
+</div>
+<div class="container">
+  <div class="sources">
+    <div class="source-card required">
+      <h3>网易财经 <span class="badge">必选</span></h3>
+      <p>实时行情、PE、市值<br>ROE、负债率、增速</p>
+    </div>
+    <div class="source-card" id="card-ths" onclick="toggleSource('ths')">
+      <h3>财务筛选 <span class="badge" id="badge-ths">开启</span></h3>
+      <p>ROE ≥ 阈值<br>资产负债率 ≤ 阈值</p>
+    </div>
+    <div class="source-card active" id="card-ttjj" onclick="toggleSource('ttjj')">
+      <h3>天天基金 <span class="badge" id="badge-ttjj">开启</span></h3>
+      <p>基金重仓持股数<br>机构认可度加分</p>
+    </div>
+  </div>
+  <div class="industry-panel">
+    <h3>🏭 行业筛选（不选则全市场）</h3>
+    <div class="tag-grid" id="industry-tags">
+      <span class="tag" data-kw="半导体">半导体</span>
+      <span class="tag" data-kw="芯片">芯片</span>
+      <span class="tag" data-kw="集成电路">集成电路</span>
+      <span class="tag" data-kw="人工智能">人工智能</span>
+      <span class="tag" data-kw="大模型">大模型</span>
+      <span class="tag" data-kw="算力">算力</span>
+      <span class="tag" data-kw="新能源">新能源</span>
+      <span class="tag" data-kw="锂电池">锂电池</span>
+      <span class="tag" data-kw="光伏">光伏</span>
+      <span class="tag" data-kw="储能">储能</span>
+      <span class="tag" data-kw="氢能">氢能</span>
+      <span class="tag" data-kw="医药">医药</span>
+      <span class="tag" data-kw="创新药">创新药</span>
+      <span class="tag" data-kw="医疗器械">医疗器械</span>
+      <span class="tag" data-kw="CXO">CXO</span>
+      <span class="tag" data-kw="机器人">机器人</span>
+      <span class="tag" data-kw="工业自动化">工业自动化</span>
+      <span class="tag" data-kw="军工">军工</span>
+      <span class="tag" data-kw="航空航天">航空航天</span>
+      <span class="tag" data-kw="消费">消费</span>
+      <span class="tag" data-kw="食品饮料">食品饮料</span>
+      <span class="tag" data-kw="白酒">白酒</span>
+      <span class="tag" data-kw="软件">软件</span>
+      <span class="tag" data-kw="云计算">云计算</span>
+    </div>
+    <div class="tag-input-row">
+      <input id="custom-kw" type="text" placeholder="自定义关键词，如：稀土">
+      <button onclick="addCustomTag()">添加</button>
+      <button onclick="clearTags()" style="background:#6b7280">清空</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>筛选参数</h2>
+    <div class="period-row">
+      <div class="form-group">
+        <label>财报期（YYYY-MM-DD）</label>
+        <input type="text" id="report_period" value="2023-12-31">
+      </div>
+      <div class="form-group">
+        <label>基金持仓期</label>
+        <input type="text" id="fund_period" value="2023-12-31">
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group"><label>最小市值（亿）</label><input type="number" id="min_cap" value="5"></div>
+      <div class="form-group"><label>最大市值（亿）</label><input type="number" id="max_cap" value="200"></div>
+      <div class="form-group"><label>最大市盈率 PE</label><input type="number" id="max_pe" value="40"></div>
+      <div class="form-group"><label>最低营收增速（%）</label><input type="number" id="min_rev" value="20"></div>
+      <div class="form-group"><label>最低净利增速（%）</label><input type="number" id="min_prof" value="20"></div>
+      <div class="form-group"><label>最低 ROE（%）</label><input type="number" id="min_roe" value="15"></div>
+      <div class="form-group"><label>最大负债率（%）</label><input type="number" id="max_debt" value="60"></div>
+      <div class="form-group"><label>深度检查股数</label><input type="number" id="max_deep" value="100"></div>
+    </div>
+  </div>
+  <button class="btn" id="btn" onclick="doScreen()">🔍 开始筛选</button>
+  <div id="result-area" style="margin-top:20px"></div>
+</div>
+<script>
+const state = { ths: true, ttjj: true };
+function toggleSource(key) {
+  state[key] = !state[key];
+  const card = document.getElementById('card-' + key);
+  const badge = document.getElementById('badge-' + key);
+  if (state[key]) { card.classList.add('active'); badge.textContent = '开启'; }
+  else { card.classList.remove('active'); badge.textContent = '关闭'; }
+}
+document.querySelectorAll('#industry-tags .tag').forEach(t => {
+  t.addEventListener('click', () => t.classList.toggle('active'));
+});
+function addCustomTag() {
+  const input = document.getElementById('custom-kw');
+  const kw = input.value.trim();
+  if (!kw) return;
+  const tag = document.createElement('span');
+  tag.className = 'tag active';
+  tag.dataset.kw = kw;
+  tag.textContent = kw;
+  tag.addEventListener('click', () => tag.classList.toggle('active'));
+  document.getElementById('industry-tags').appendChild(tag);
+  input.value = '';
+}
+function clearTags() {
+  document.querySelectorAll('#industry-tags .tag').forEach(t => t.classList.remove('active'));
+}
+function getIndustryKeywords() {
+  return [...document.querySelectorAll('#industry-tags .tag.active')].map(t => t.dataset.kw);
+}
+function v(id) { return document.getElementById(id).value; }
+async function doScreen() {
+  const btn = document.getElementById('btn');
+  btn.disabled = true; btn.textContent = '筛选中…';
+  document.getElementById('result-area').innerHTML = '<div class="status">正在从网易财经拉取全量 A 股数据，请耐心等待（约 30–60 秒）…</div>';
+  const body = {
+    report_period: v('report_period'), fund_period: v('fund_period'),
+    min_market_cap_yi: +v('min_cap'), max_market_cap_yi: +v('max_cap'),
+    max_pe: +v('max_pe'), min_revenue_growth: +v('min_rev'),
+    min_profit_growth: +v('min_prof'), min_roe: +v('min_roe'),
+    max_debt_ratio: +v('max_debt'), max_deep_check: +v('max_deep'),
+    use_ths: state.ths, use_ttjj: state.ttjj,
+    industry_keywords: getIndustryKeywords(),
+  };
+  try {
+    const res = await fetch('/api/screen', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (data.error) {
+      document.getElementById('result-area').innerHTML =
+        `<div class="error-box">出错：${data.error}\n\n提示：先访问 <a href="/api/test" target="_blank">/api/test</a> 查看哪个数据源可用</div>`;
+    } else {
+      renderResult(data);
+    }
+  } catch(e) {
+    document.getElementById('result-area').innerHTML = `<div class="error-box">网络请求失败：${e}</div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = '🔍 开始筛选';
+  }
+}
+function renderResult(data) {
+  const counts = data.stage_counts || {};
+  const rows = data.rows || [];
+  let chips = Object.entries(counts).map(([k,v]) =>
+    `<span class="stage-chip">${k}：${v}</span>`).join('');
+  if (!rows.length) {
+    document.getElementById('result-area').innerHTML =
+      `<div class="card"><div class="stage-counts">${chips}</div><div class="empty-msg">无符合条件的股票，请放宽筛选条件</div></div>`;
+    return;
+  }
+  const cols = [
+    {k:'code',l:'代码'},{k:'name',l:'名称'},{k:'price',l:'价格'},
+    {k:'market_cap_yi',l:'市值(亿)'},{k:'pe',l:'PE'},{k:'pb',l:'PB'},
+    {k:'revenue_growth',l:'营收增速%'},{k:'profit_growth',l:'净利增速%'},
+    {k:'roe',l:'ROE%'},{k:'debt_ratio',l:'负债率%'},
+    {k:'fund_hold_count',l:'基金家数'},{k:'fund_hold_ratio',l:'基金持比%'},
+    {k:'score',l:'综合评分'},
+  ].filter(c => rows[0].hasOwnProperty(c.k));
+  const th = cols.map(c => `<th>${c.l}</th>`).join('');
+  const tbody = rows.map(r => {
+    const tds = cols.map(c => {
+      let val = r[c.k];
+      if (val === null || val === undefined) return '<td>-</td>';
+      if (typeof val === 'number') val = val.toFixed(2);
+      const cls = c.k === 'score' ? ' class="score-cell"' : '';
+      return `<td${cls}>${val}</td>`;
+    }).join('');
+    return `<tr>${tds}</tr>`;
+  }).join('');
+  document.getElementById('result-area').innerHTML = `
+    <div class="card">
+      <div class="stage-counts">${chips}</div>
+      <div class="table-wrap">
+        <table><thead><tr>${th}</tr></thead><tbody>${tbody}</tbody></table>
+      </div>
+    </div>`;
+}
+</script>
+</body>
+</html>
