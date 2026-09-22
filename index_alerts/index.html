@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>指数买卖点监控</title>
+<style>
+  body {
+    margin: 0;
+    padding: 32px 24px 64px;
+    background: #f7f7f5;
+    color: #1a1a1a;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 40px 0 12px; }
+  .updated { color: #8a8884; font-size: 13px; margin: 0 0 20px; }
+  button#refreshBtn {
+    background: #2a6ee0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  button#refreshBtn:disabled { opacity: 0.6; cursor: default; }
+  table { border-collapse: collapse; width: 100%; background: #fff; border-radius: 10px; overflow: hidden; font-size: 14px; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #eceae6; white-space: nowrap; }
+  th { background: #f0efec; color: #4a4a48; font-size: 13px; font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .fail { color: #d33; font-weight: 600; }
+  .ok { color: #1a1a1a; font-weight: 600; }
+  .hit { color: #1a8a4a; font-weight: 700; }
+  .group-row td {
+    background: #eaf0fb;
+    font-weight: 700;
+    color: #2a5a9e;
+    font-size: 13px;
+  }
+  .note { color: #8a8884; font-size: 12px; margin-top: 6px; }
+  .warn-box {
+    background: #fff6e5;
+    border: 1px solid #f0d99a;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #6b5620;
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  .summary-box {
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 28px;
+  }
+  .summary-box.has-hits { background: #eafaf0; border: 1px solid #a8e6c1; color: #14532d; }
+  .summary-box.no-hits { background: #fff; border: 1px solid #eceae6; color: #8a8884; }
+  .summary-box.summary-error { background: #fdeaea; border: 1px solid #f3b8b8; color: #8a2020; }
+  .summary-box ul { margin: 6px 0 0; padding-left: 20px; }
+  .summary-box .buy-tag { color: #1a8a4a; font-weight: 700; }
+  .summary-box .sell-tag { color: #c0392b; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>指数买卖点监控</h1>
+  <p class="updated" id="updatedAt">最后更新：-</p>
+  <button id="refreshBtn" onclick="refreshAll()">刷新</button>
+
+  <div class="warn-box">
+    ⚠️ 中国神华 / 中国石油 / 中国海洋石油(HK0883) 是新加入的标的，用股息率或股价任一触发买点。恒生科技指数(124.HSTECH)、黄金comex(101.GC00Y，缩放÷10)、中国移动(改用港股116.00941)均已核实修好。仍需你重点核实：其余港股/美股（腾讯、新奥能源、美团、拼多多、微软、meta、苹果、google、nvidia、tsm台积电、阿里巴巴、泡泡玛特、中国海洋石油）的 secid 是重新猜的，看这些行现价是否合理，不对的话用 <code>python3 check_indices.py --find 股票名字</code> 查正确代码告诉我；股息率字段(f133)数字是否合理也请留意。
+  </div>
+
+  <h2 style="margin-top:0">触发提醒结论</h2>
+  <div id="summarySection"></div>
+
+  <table id="indicesTable">
+    <thead>
+      <tr><th>指数</th><th>现价</th><th>买点</th><th>卖点</th><th>状态</th></tr>
+    </thead>
+    <tbody id="indicesBody"></tbody>
+  </table>
+
+  <h2>个股买卖点监控</h2>
+  <table id="stocksTable">
+    <thead>
+      <tr><th>个股</th><th>现价</th><th>买点</th><th>卖点</th><th>每天PE check</th><th>每天PB check</th><th>每天股息率check</th><th>状态</th></tr>
+    </thead>
+    <tbody id="stocksBody"></tbody>
+  </table>
+</div>
+
+<script>
+// secid 格式: {marketCode}.{code}
+//   1.xxxxxx = 上海A股   0.xxxxxx = 深圳A股/创业板   100.XXX = 美股指数
+//   105.XXX  = 纳斯达克(未验证)   106.XXX = 纽交所(未验证)   116.xxxxx = 港股(未验证)
+
+const INDICES = [
+  { name: "标普指数",     secid: "100.SPX",    buyPrice: [4500, 4700], sellPrice: ">=7500" },
+  { name: "恒生科技指数", secid: "124.HSTECH", buyPrice: "<=4800",     sellPrice: ">=5800" },
+  { name: "纳斯达克指数", secid: "100.NDX",    buyPrice: null,         sellPrice: ">=25746" },
+  { name: "恒生指数",     secid: "100.HSI",    buyPrice: "<=20000",    sellPrice: [27000, 28000] },
+  { name: "创业板指",     secid: "0.399006",   buyPrice: null,         sellPrice: [4000, 4050] },
+  { name: "上证指数",     secid: "1.000001",   buyPrice: [3100, 3500], sellPrice: ">=4100" },
+  { name: "黄金comex",    secid: "101.GC00Y",  buyPrice: "<=3800",     sellPrice: ">=9077" },
+];
+
+const GROUPS = ["价格判断", "价格+PE判断", "价格+股息率判断", "PE判断", "PB判断"];
+
+const STOCKS = [
+  // 价格判断
+  { name: "格力电器", secid: "0.000651",  group: "价格判断", buyPrice: "<=36",     sellPrice: ">=48" },
+  { name: "中国平安", secid: "1.601318",  group: "价格判断", buyPrice: "<=47",     sellPrice: ">=55" },
+  { name: "贵州茅台", secid: "1.600519",  group: "价格判断", buyPrice: "<=1200",   sellPrice: ">=1380" },
+  { name: "万科A",    secid: "0.000002",  group: "价格判断", buyPrice: null,       sellPrice: null, note: "原表格未给买卖点，仅展示现价" },
+  { name: "拼多多",   secid: "105.PDD",   group: "价格判断", buyPrice: "<=98.5",   sellPrice: null, note: "美股secid未验证" },
+  { name: "腾讯",     secid: "116.00700", group: "价格判断", buyPrice: "<=420",    sellPrice: null, note: "港股secid未验证" },
+  { name: "新奥能源", secid: "116.02688", group: "价格判断", buyPrice: "<=67.15",  sellPrice: null, note: "港股secid未验证" },
+  { name: "美团",     secid: "116.03690", group: "价格判断", buyPrice: "<=80",     sellPrice: null, note: "港股secid未验证" },
+  { name: "中国移动", secid: "116.00941", group: "价格判断", buyPrice: "<=74.55",  sellPrice: null, note: "港股secid未验证" },
+  { name: "微软",     secid: "105.MSFT",  group: "价格判断", buyPrice: "<=370",    sellPrice: null, note: "美股secid未验证" },
+  { name: "meta",     secid: "105.META",  group: "价格判断", buyPrice: "<=512.52", sellPrice: null, note: "美股secid未验证" },
+  { name: "苹果",     secid: "105.AAPL",  group: "价格判断", buyPrice: "<=182.12", sellPrice: null, note: "美股secid未验证" },
+  { name: "google",   secid: "105.GOOGL", group: "价格判断", buyPrice: "<=143.47", sellPrice: null, note: "美股secid未验证" },
+  { name: "nvidia",   secid: "105.NVDA",  group: "价格判断", buyPrice: "<=90",     sellPrice: null, note: "美股secid未验证" },
+  { name: "tsm台积电",secid: "106.TSM",   group: "价格判断", buyPrice: "<=134.12", sellPrice: null, note: "美股secid未验证" },
+  { name: "阿里巴巴", secid: "106.BABA",  group: "价格判断", buyPrice: "<=100",    sellPrice: null, note: "美股secid未验证" },
+  { name: "泡泡玛特", secid: "116.09992", group: "价格判断", buyPrice: "<=140",    sellPrice: null, note: "港股secid未验证" },
+
+  // 价格+PE判断
+  { name: "恒瑞医药", secid: "1.600276", group: "价格+PE判断", buyPrice: "<=52",    buyPe: 25 },
+  { name: "甘李药业", secid: "1.603087", group: "价格+PE判断", buyPrice: [40, 50],  buyPe: 20 },
+  { name: "汇川技术", secid: "0.300124", group: "价格+PE判断", buyPrice: "<=40",    buyPe: 20 },
+  { name: "豪威集团", secid: "1.603501", group: "价格+PE判断", buyPrice: "<=70",    buyPe: 25 },
+  { name: "安克创新", secid: "0.300866", group: "价格+PE判断", buyPrice: [80, 90],  buyPe: 15 },
+  { name: "片仔癀",   secid: "1.600436", group: "价格+PE判断", buyPrice: "<=65.13", buyPe: 20 },
+
+  // 价格+股息率判断（新增）
+  { name: "中国神华",             secid: "1.601088",  group: "价格+股息率判断", buyPrice: "<=36",  buyDividend: 6,   note: "股价或股息率任一触发即为买点" },
+  { name: "中国石油",             secid: "1.601857",  group: "价格+股息率判断", buyPrice: "<=8.6", buyDividend: 6,   note: "股价或股息率任一触发即为买点" },
+  { name: "中国海洋石油(HK0883)", secid: "116.00883", group: "价格+股息率判断", buyPrice: "<=20",  buyDividend: 7.5, note: "港股secid未验证；股价或股息率任一触发即为买点" },
+
+  // PE判断
+  { name: "长江电力", secid: "1.600900", group: "PE判断", buyPe: 15 },
+  { name: "安集科技", secid: "1.688019", group: "PE判断", buyPe: 25 },
+
+  // PB判断
+  { name: "中信银行", secid: "1.601998", group: "PB判断", buyPb: 0.5 },
+  { name: "兴业银行", secid: "1.601166", group: "PB判断", buyPb: 0.5 },
+];
+
+function jsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cb = "jsonp_cb_" + Math.random().toString(36).slice(2);
+    const script = document.createElement("script");
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error("timeout"));
+    }, 8000);
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cb];
+      script.remove();
+    }
+    window[cb] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("network"));
+    };
+    script.src = url + (url.includes("?") ? "&" : "?") + "cb=" + cb;
+    document.body.appendChild(script);
+  });
+}
+
+// qt/stock/get（单只行情接口）目前会被东方财富直接拒绝连接（Empty reply），
+// 已确认改用 qt/ulist.np/get（批量/自选股接口）代替，指数和个股都走这一个接口。
+// 价格字段f2的缩放倍数因市场而异：A股/上证系（secid前缀0、1）放大100倍，
+// 港股(116)、美股(105/106)实测放大1000倍（腾讯4388->438.8、美团803->80.3
+// 都对得上买点量级）；COMEX期货(101)实测只放大10倍（黄金43759->4375.9才
+// 对得上3800/9077这组买卖点）；PE f115、PB f23 统一放大100倍；股息率f133
+// 已经是正常百分比数字，不需要再除。其余指数(100.xxx)暂时按100倍处理，还
+// 没有实测数据核实。
+function priceScaleFor(secid) {
+  const prefix = secid.split(".")[0];
+  if (prefix === "105" || prefix === "106" || prefix === "116") return 1000;
+  if (prefix === "101") return 10;
+  return 100;
+}
+
+async function fetchQuoteMap(secids) {
+  const url = `https://push2.eastmoney.com/api/qt/ulist.np/get?secids=${secids.join(",")}&fields=f2,f12,f23,f115,f133`;
+  const data = await jsonp(url);
+  const scaleByCode = {};
+  secids.forEach(secid => { scaleByCode[secid.split(".")[1]] = priceScaleFor(secid); });
+  const map = {};
+  if (data && data.data && data.data.diff) {
+    data.data.diff.forEach(item => {
+      const code = item.f12;
+      const priceScale = scaleByCode[code] || 100;
+      map[code] = {
+        price: item.f2 !== undefined && item.f2 !== "-" ? item.f2 / priceScale : null,
+        pe: item.f115 !== undefined && item.f115 !== "-" ? item.f115 / 100 : null,
+        pb: item.f23 !== undefined && item.f23 !== "-" ? item.f23 / 100 : null,
+        dividend: item.f133 !== undefined && item.f133 !== "-" ? item.f133 : null,
+      };
+    });
+  }
+  return map;
+}
+
+function checkPriceHit(price, buy, sell) {
+  const checkOne = (target, isBuy) => {
+    if (target === null || target === undefined) return false;
+    if (Array.isArray(target)) return price >= target[0] && price <= target[1];
+    if (typeof target === "string") {
+      if (target.startsWith("<=")) return price <= parseFloat(target.slice(2));
+      if (target.startsWith(">=")) return price >= parseFloat(target.slice(2));
+    }
+    return false;
+  };
+  if (checkOne(buy, true)) return "buy";
+  if (checkOne(sell, false)) return "sell";
+  return null;
+}
+
+function fmtTarget(target) {
+  if (target === null || target === undefined) return "-";
+  if (Array.isArray(target)) return `${target[0]}-${target[1]}`;
+  return String(target);
+}
+
+async function refreshAll() {
+  const btn = document.getElementById("refreshBtn");
+  btn.disabled = true;
+  btn.textContent = "刷新中...";
+
+  const allSecids = [...INDICES.map(i => i.secid), ...STOCKS.map(s => s.secid)];
+  let quoteMap = {};
+  let fetchError = null;
+  try {
+    quoteMap = await fetchQuoteMap(allSecids);
+  } catch (e) {
+    fetchError = e;
+  }
+  const codeOf = (secid) => secid.split(".")[1];
+  const hits = []; // { name, kind: "buy"|"sell", price, reason }
+
+  const indicesBody = document.getElementById("indicesBody");
+  indicesBody.innerHTML = "";
+  for (const idx of INDICES) {
+    const tr = document.createElement("tr");
+    let priceCell = `<span class="fail">抓取失败</span>`;
+    let statusCell = `<span class="fail">网络请求失败</span>`;
+    const q = quoteMap[codeOf(idx.secid)];
+    if (fetchError) {
+      statusCell = fetchError.message === "timeout" ? `<span class="fail">请求超时</span>` : `<span class="fail">网络请求失败</span>`;
+    } else if (q && q.price !== null) {
+      const hit = checkPriceHit(q.price, idx.buyPrice, idx.sellPrice);
+      priceCell = `<span class="ok">${q.price}</span>`;
+      statusCell = hit === "buy" ? `<span class="hit">触发买点</span>` : hit === "sell" ? `<span class="hit">触发卖点</span>` : "正常";
+      if (hit) hits.push({ name: idx.name, kind: hit, price: q.price, reason: "价格" });
+    } else {
+      statusCell = `<span class="fail">抓取失败</span>`;
+    }
+    tr.innerHTML = `<td>${idx.name}${idx.note ? `<div class="note">${idx.note}</div>` : ""}</td><td>${priceCell}</td><td>${fmtTarget(idx.buyPrice)}</td><td>${fmtTarget(idx.sellPrice)}</td><td>${statusCell}</td>`;
+    indicesBody.appendChild(tr);
+  }
+
+  const stocksBody = document.getElementById("stocksBody");
+  stocksBody.innerHTML = "";
+
+  for (const group of GROUPS) {
+    const groupStocks = STOCKS.filter(s => s.group === group);
+    if (groupStocks.length === 0) continue;
+    const groupRow = document.createElement("tr");
+    groupRow.className = "group-row";
+    groupRow.innerHTML = `<td colspan="8">个股 - ${group}</td>`;
+    stocksBody.appendChild(groupRow);
+
+    for (const s of groupStocks) {
+      const tr = document.createElement("tr");
+      const val = quoteMap[codeOf(s.secid)] || {};
+      // PE/PB/股息率对每支股票都展示实时数据，不管它的买卖点判断标准用不用这个指标
+      const peCell = val.pe !== null && val.pe !== undefined ? val.pe : "-";
+      const pbCell = val.pb !== null && val.pb !== undefined ? val.pb : "-";
+      const divCell = val.dividend !== null && val.dividend !== undefined ? val.dividend + "%" : "-";
+      let priceCell = `<span class="fail">抓取失败</span>`;
+      let statusCell = `<span class="fail">网络请求失败</span>`;
+      if (fetchError) {
+        statusCell = fetchError.message === "timeout" ? `<span class="fail">请求超时</span>` : `<span class="fail">网络请求失败</span>`;
+      } else if (val.price !== null && val.price !== undefined) {
+        const price = val.price;
+        priceCell = `<span class="ok">${price}</span>`;
+        let hit = checkPriceHit(price, s.buyPrice, s.sellPrice);
+        let reason = hit ? "价格" : null;
+        if (!hit && s.buyPe !== undefined && val.pe !== null && val.pe !== undefined && val.pe <= s.buyPe) { hit = "buy"; reason = `PE(${val.pe}<=${s.buyPe})`; }
+        if (!hit && s.buyPb !== undefined && val.pb !== null && val.pb !== undefined && val.pb <= s.buyPb) { hit = "buy"; reason = `PB(${val.pb}<=${s.buyPb})`; }
+        if (!hit && s.buyDividend !== undefined && val.dividend !== null && val.dividend !== undefined && val.dividend >= s.buyDividend) { hit = "buy"; reason = `股息率(${val.dividend}%>=${s.buyDividend}%)`; }
+        statusCell = hit === "buy" ? `<span class="hit">触发买点</span>` : hit === "sell" ? `<span class="hit">触发卖点</span>` : "正常";
+        if (hit) hits.push({ name: s.name, kind: hit, price, reason: reason || "价格" });
+      } else {
+        statusCell = `<span class="fail">抓取失败</span>`;
+      }
+      const buyLabel = s.buyPe !== undefined ? `${fmtTarget(s.buyPrice)} / PE<=${s.buyPe}`
+        : s.buyPb !== undefined ? `PB<=${s.buyPb}`
+        : s.buyDividend !== undefined ? `${fmtTarget(s.buyPrice)} / 股息率>=${s.buyDividend}%`
+        : fmtTarget(s.buyPrice);
+      tr.innerHTML = `<td>${s.name}${s.note ? `<div class="note">${s.note}</div>` : ""}</td><td>${priceCell}</td><td>${buyLabel}</td><td>${fmtTarget(s.sellPrice)}</td><td>${peCell}</td><td>${pbCell}</td><td>${divCell}</td><td>${statusCell}</td>`;
+      stocksBody.appendChild(tr);
+    }
+  }
+
+  renderSummary(hits, fetchError);
+
+  document.getElementById("updatedAt").textContent = "最后更新：" + new Date().toLocaleString("zh-CN");
+  btn.disabled = false;
+  btn.textContent = "刷新";
+}
+
+function renderSummary(hits, fetchError) {
+  const el = document.getElementById("summarySection");
+  if (fetchError) {
+    el.innerHTML = `<div class="summary-box summary-error">数据抓取失败，暂时无法给出结论（${fetchError.message === "timeout" ? "请求超时" : "网络请求失败"}）。</div>`;
+    return;
+  }
+  if (hits.length === 0) {
+    el.innerHTML = `<div class="summary-box no-hits">本次刷新暂无标的触发买卖点，全部维持观望。</div>`;
+    return;
+  }
+  const buys = hits.filter(h => h.kind === "buy");
+  const sells = hits.filter(h => h.kind === "sell");
+  let html = `<div class="summary-box has-hits">`;
+  if (buys.length > 0) {
+    html += `<div><span class="buy-tag">🟢 触发买点（${buys.length}）</span></div><ul>`;
+    buys.forEach(h => { html += `<li><b>${h.name}</b> 现价 ${h.price}，触发条件：${h.reason}</li>`; });
+    html += `</ul>`;
+  }
+  if (sells.length > 0) {
+    html += `<div style="margin-top:${buys.length ? "10px" : "0"}"><span class="sell-tag">🔴 触发卖点（${sells.length}）</span></div><ul>`;
+    sells.forEach(h => { html += `<li><b>${h.name}</b> 现价 ${h.price}，触发条件：${h.reason}</li>`; });
+    html += `</ul>`;
+  }
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+refreshAll();
+</script>
+</body>
+</html>
