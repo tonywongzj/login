@@ -12,20 +12,23 @@ import os
 import time
 from dataclasses import dataclass, field
 
-# 清除所有代理环境变量，让 requests 和 akshare 直连中国财经接口，不走 Clash/VPN
+# 强制所有 HTTP 请求直连，绕过 macOS 系统代理（Clash/VPN）
+# NO_PROXY=* 对 requests 和 akshare 内部 session 均生效
 for _k in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy", "ALL_PROXY", "all_proxy"):
     os.environ.pop(_k, None)
+os.environ["NO_PROXY"] = "*"
+os.environ["no_proxy"] = "*"
 
 import pandas as pd
 import requests
 
 _S = requests.Session()
+_S.trust_env = False  # 不读取系统代理/env vars
 _S.headers.update({
     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",
     "Accept": "application/json, text/plain, */*",
     "Referer": "http://quotes.money.163.com/",
 })
-_S.proxies.update({"http": None, "https": None})
 
 _163_BASE = "http://quotes.money.163.com/hs/service/diyrank.do"
 
