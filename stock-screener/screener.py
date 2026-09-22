@@ -1,1 +1,346 @@
-"""\n选股逻辑：基于《1到100倍》(Christopher Mayer《100 Baggers》) 核心理念。\n\n数据来源：\n  - 网易财经 diyrank API：行情 + PE + 市值 + ROE + 负债率（一个接口全搞定）\n  - 网易财经 financial API：营收/净利润同比增速\n  - akshare：天天基金重仓数据（可选）\n"""\nfrom __future__ import annotations\n\nimport time\nfrom dataclasses import dataclass, field\n\nimport pandas as pd\nimport requests\n\n_S = requests.Session()\n_S.headers.update({\n    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",\n    "Accept": "application/json, text/plain, */*",\n    "Referer": "http://quotes.money.163.com/",\n})\n# 绕过系统代理，直连中国财经接口\n_S.proxies.update({"http": None, "https": None})\n\n_163_BASE = "http://quotes.money.163.com/hs/service/diyrank.do"\n\n\ndef _get163(params: dict) -> dict:\n    for attempt in range(3):\n        try:\n            r = _S.get(_163_BASE, params=params, timeout=15)\n            r.raise_for_status()\n            return r.json()\n        except Exception as e:\n            if attempt == 2:\n                raise\n            time.sleep(2 ** attempt)\n\n\ndef _to_float(s) -> pd.Series:\n    return pd.to_numeric(s, errors="coerce")\n\n\n@dataclass\nclass ScreenCriteria:\n    max_market_cap_yi: float = 200.0\n    min_market_cap_yi: float = 5.0\n    max_pe: float = 40.0\n    min_revenue_growth: float = 20.0\n    min_profit_growth: float = 20.0\n    min_roe: float = 15.0\n    max_debt_ratio: float = 60.0\n\n\n@dataclass\nclass ScreenResult:\n    table: pd.DataFrame\n    stage_counts: dict = field(default_factory=dict)\n\n\n_163_FIELDS = "SYMBOL,NAME,PRICE,PE,PBR,MKTCAP"\n\n\ndef _fetch_163_page(page: int, count: int = 50) -> list[dict]:\n    params = {\n        "page": page,\n        "query": "STYPE:EQA",\n        "fields": _163_FIELDS,\n        "count": count,\n        "type": "query",\n    }\n    data = _get163(params)\n    return data.get("list", [])\n\n\ndef _stage1_akshare() -> pd.DataFrame:\n    """akshare 东方财富接口获取全量A股行情，网易财经失败时备用"""\n    import akshare as ak\n    df = ak.stock_zh_a_spot_em()\n    col_map = {}\n    for c in df.columns:\n        cl = c.strip()\n        if cl in ("代码", "股票代码"):\n            col_map[c] = "code"\n        elif cl == "名称":\n            col_map[c] = "name"\n        elif cl == "最新价":\n            col_map[c] = "price"\n        elif "市盈率" in cl:\n            col_map[c] = "pe"\n        elif "市净率" in cl:\n            col_map[c] = "pb"\n        elif "总市值" in cl:\n            col_map[c] = "mktcap_raw"\n    df = df.rename(columns=col_map)\n    if "code" not in df.columns:\n        df["code"] = df.iloc[:, 0].astype(str)\n    df["code"] = df["code"].astype(str).str.zfill(6)\n    if "mktcap_raw" in df.columns:\n        df["market_cap_yi"] = _to_float(df["mktcap_raw"]) / 1e8\n    else:\n        df["market_cap_yi"] = None\n    df["pe"] = _to_float(df.get("pe"))\n    df["pb"] = _to_float(df.get("pb"))\n    df["price"] = _to_float(df.get("price"))\n    df["industry"] = ""\n    return df[["code", "name", "price", "pe", "pb", "market_cap_yi", "industry"]].copy()\n\n\ndef stage1_all_stocks() -> pd.DataFrame:\n    """\n    网易财经 diyrank 接口，一次拉取全部 A 股；失败时自动回退到 akshare 东方财富。\n    """\n    records = []\n    page = 0\n    _163_ok = True\n    try:\n        while True:\n            items = _fetch_163_page(page)\n            if not items:\n                break\n            records.extend(items)\n            if len(items) < 100:\n                break\n            page += 1\n            time.sleep(0.15)\n    except Exception:\n        _163_ok = False\n\n    if not _163_ok or not records:\n        try:\n            return _stage1_akshare()\n        except Exception as e:\n            raise RuntimeError(\n                f"网易财经和东方财富均无数据，请检查网络设置。东方财富错误：{e}"\n            )\n\n    rows = []\n    for item in records:\n        sym = str(item.get("SYMBOL", ""))\n        code = sym[-6:].zfill(6)\n        mktcap = item.get("MKTCAP")\n        try:\n            mktcap_yi = float(mktcap) / 10000 if mktcap else None\n        except Exception:\n            mktcap_yi = None\n        rows.append({\n            "code": code,\n            "name": item.get("NAME", ""),\n            "price": item.get("PRICE"),\n            "pe": item.get("PE"),\n            "pb": item.get("PBR"),\n            "market_cap_yi": mktcap_yi,\n            "industry": "",\n        })\n\n    df = pd.DataFrame(rows)\n    for col in ["pe", "pb", "price", "market_cap_yi"]:\n        df[col] = _to_float(df[col])\n    return df\n\n\ndef stage2_growth(period: str) -> pd.DataFrame:\n    date_str = period.replace("-", "")\n    try:\n        import akshare as ak\n        df = ak.stock_yjbb_em(date=date_str)\n    except Exception:\n        return pd.DataFrame(columns=["code", "revenue_growth", "profit_growth"])\n\n    col_map = {}\n    for c in df.columns:\n        cl = c.strip()\n        if cl in ("股票代码", "代码"):\n            col_map[c] = "code"\n        elif "营业总收入" in cl and "同比" in cl:\n            col_map[c] = "revenue_growth"\n        elif "净利润" in cl and "同比" in cl:\n            col_map[c] = "profit_growth"\n    df = df.rename(columns=col_map)\n    if "code" not in df.columns:\n        df["code"] = df.iloc[:, 0].astype(str)\n    df["code"] = df["code"].astype(str).str.zfill(6)\n    df["revenue_growth"] = _to_float(df.get("revenue_growth"))\n    df["profit_growth"] = _to_float(df.get("profit_growth"))\n    return df[["code", "revenue_growth", "profit_growth"]].drop_duplicates("code")\n\n\ndef stage_fund_hold(period: str) -> pd.DataFrame:\n    try:\n        import akshare as ak\n        df = ak.stock_report_fund_hold(symbol="重仓股", date=period.replace("-", ""))\n        col_map = {}\n        for c in df.columns:\n            if "股票代码" in c:\n                col_map[c] = "code"\n            elif "基金家数" in c or "持有基金" in c:\n                col_map[c] = "fund_hold_count"\n            elif "占总股本" in c or "持股比例" in c:\n                col_map[c] = "fund_hold_ratio"\n        df = df.rename(columns=col_map)\n        if "code" not in df.columns:\n            df["code"] = df.iloc[:, 0].astype(str)\n        df["code"] = df["code"].astype(str).str.zfill(6)\n        df["fund_hold_count"] = _to_float(df.get("fund_hold_count"))\n        df["fund_hold_ratio"] = _to_float(df.get("fund_hold_ratio"))\n        return df[["code", "fund_hold_count", "fund_hold_ratio"]].drop_duplicates("code")\n    except Exception:\n        return pd.DataFrame(columns=["code", "fund_hold_count", "fund_hold_ratio"])\n\n\ndef stage3_fina_ak(candidates: pd.DataFrame, period: str) -> pd.DataFrame:\n    date_str = period.replace("-", "")\n    try:\n        import akshare as ak\n        df = ak.stock_yjbb_em(date=date_str)\n    except Exception:\n        return pd.DataFrame(columns=["code", "roe", "debt_ratio"])\n\n    col_map = {}\n    for c in df.columns:\n        cl = c.strip()\n        if cl in ("股票代码", "代码"):\n            col_map[c] = "code"\n        elif "净资产收益率" in cl or cl == "ROE":\n            col_map[c] = "roe"\n        elif "资产负债率" in cl:\n            col_map[c] = "debt_ratio"\n    df = df.rename(columns=col_map)\n    if "code" not in df.columns:\n        df["code"] = df.iloc[:, 0].astype(str)\n    df["code"] = df["code"].astype(str).str.zfill(6)\n\n    result_cols = ["code"]\n    if "roe" in df.columns:\n        df["roe"] = _to_float(df["roe"])\n        result_cols.append("roe")\n    if "debt_ratio" in df.columns:\n        df["debt_ratio"] = _to_float(df["debt_ratio"])\n        result_cols.append("debt_ratio")\n\n    codes = set(candidates["code"].astype(str))\n    df = df[df["code"].isin(codes)]\n    return df[result_cols].drop_duplicates("code") if len(result_cols) > 1 else pd.DataFrame(columns=["code", "roe", "debt_ratio"])\n\n\ndef composite_score(row: pd.Series) -> float:\n    s = 0.0\n    s += min(row.get("roe") or 0, 50) * 1.0\n    s += min(row.get("revenue_growth") or 0, 100) * 0.5\n    s += min(row.get("profit_growth") or 0, 100) * 0.5\n    s += max(0.0, 60 - (row.get("debt_ratio") or 60)) * 0.5\n    s += min(row.get("fund_hold_count") or 0, 50) * 0.3\n    s += max(0.0, 200 - (row.get("market_cap_yi") or 200)) * 0.1\n    s += max(0.0, 40 - (row.get("pe") or 40)) * 0.2\n    return round(s, 2)\n\n\ndef run_screen(\n    report_period: str,\n    fund_period: str,\n    criteria: ScreenCriteria | None = None,\n    max_deep_check: int = 100,\n    use_ths: bool = True,\n    use_ttjj: bool = True,\n    industry_keywords: list[str] | None = None,\n) -> ScreenResult:\n    criteria = criteria or ScreenCriteria()\n    counts: dict[str, int] = {}\n\n    df = stage1_all_stocks()\n\n    s1 = df[\n        (df["market_cap_yi"] >= criteria.min_market_cap_yi)\n        & (df["market_cap_yi"] <= criteria.max_market_cap_yi)\n        & (df["pe"] > 0) & (df["pe"] <= criteria.max_pe)\n    ].copy()\n\n    if industry_keywords:\n        pattern = "|".join(industry_keywords)\n        mask = s1["industry"].str.contains(pattern, na=False, case=False)\n        s1 = s1[mask]\n        counts["1a_行业筛选"] = len(s1)\n\n    counts["1_市值PE初筛"] = len(s1)\n    if s1.empty:\n        return ScreenResult(table=pd.DataFrame(), stage_counts=counts)\n\n    growth = stage2_growth(report_period)\n    if not growth.empty:\n        s1 = s1.merge(growth, on="code", how="left")\n        s2 = s1[\n            (s1["revenue_growth"] >= criteria.min_revenue_growth)\n            & (s1["profit_growth"] >= criteria.min_profit_growth)\n        ].copy()\n    else:\n        s2 = s1.copy()\n        s2["revenue_growth"] = None\n        s2["profit_growth"] = None\n    counts["2_营收净利增速筛"] = len(s2)\n    if s2.empty:\n        return ScreenResult(table=pd.DataFrame(), stage_counts=counts)\n\n    if use_ths:\n        fina = stage3_fina_ak(s2, report_period)\n        if not fina.empty:\n            s2 = s2.merge(fina, on="code", how="left")\n            s3 = s2[\n                (s2["roe"] >= criteria.min_roe)\n                & (s2["debt_ratio"] <= criteria.max_debt_ratio)\n            ].copy()\n        else:\n            s3 = s2.copy()\n            s3["roe"] = None\n            s3["debt_ratio"] = None\n        counts["3_ROE负债率筛"] = len(s3)\n        if s3.empty:\n            return ScreenResult(table=pd.DataFrame(), stage_counts=counts)\n    else:\n        s3 = s2.copy()\n        s3["roe"] = None\n        s3["debt_ratio"] = None\n        counts["3_ROE负债率筛(已跳过)"] = len(s3)\n\n    if use_ttjj:\n        fund = stage_fund_hold(fund_period)\n        final = s3.merge(fund, on="code", how="left")\n    else:\n        final = s3.copy()\n\n    final["fund_hold_count"] = final.get("fund_hold_count", pd.Series(0, index=final.index)).fillna(0)\n    final["fund_hold_ratio"] = final.get("fund_hold_ratio", pd.Series(0, index=final.index)).fillna(0)\n\n    final["score"] = final.apply(composite_score, axis=1)\n    final = final.sort_values("score", ascending=False).head(max_deep_check).reset_index(drop=True)\n    counts["4_最终结果"] = len(final)\n\n    cols = ["code", "name", "price", "market_cap_yi", "pe", "pb",\n            "revenue_growth", "profit_growth", "roe", "debt_ratio",\n            "fund_hold_count", "fund_hold_ratio", "score", "industry"]\n    return ScreenResult(table=final[[c for c in cols if c in final.columns]], stage_counts=counts)\n
+"""
+选股逻辑：基于《1到100倍》(Christopher Mayer《100 Baggers》) 核心理念。
+
+数据来源：
+  - 网易财经 diyrank API：行情 + PE + 市值 + ROE + 负债率（一个接口全搞定）
+  - 网易财经 financial API：营收/净利润同比增速
+  - akshare：天天基金重仓数据（可选）
+"""
+from __future__ import annotations
+
+import os
+import time
+from dataclasses import dataclass, field
+
+# 清除所有代理环境变量，让 requests 和 akshare 直连中国财经接口，不走 Clash/VPN
+for _k in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy", "ALL_PROXY", "all_proxy"):
+    os.environ.pop(_k, None)
+
+import pandas as pd
+import requests
+
+_S = requests.Session()
+_S.headers.update({
+    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "http://quotes.money.163.com/",
+})
+_S.proxies.update({"http": None, "https": None})
+
+_163_BASE = "http://quotes.money.163.com/hs/service/diyrank.do"
+
+
+def _get163(params: dict) -> dict:
+    for attempt in range(3):
+        try:
+            r = _S.get(_163_BASE, params=params, timeout=15)
+            r.raise_for_status()
+            return r.json()
+        except Exception as e:
+            if attempt == 2:
+                raise
+            time.sleep(2 ** attempt)
+
+
+def _to_float(s) -> pd.Series:
+    return pd.to_numeric(s, errors="coerce")
+
+
+@dataclass
+class ScreenCriteria:
+    max_market_cap_yi: float = 200.0
+    min_market_cap_yi: float = 5.0
+    max_pe: float = 40.0
+    min_revenue_growth: float = 20.0
+    min_profit_growth: float = 20.0
+    min_roe: float = 15.0
+    max_debt_ratio: float = 60.0
+
+
+@dataclass
+class ScreenResult:
+    table: pd.DataFrame
+    stage_counts: dict = field(default_factory=dict)
+
+
+_163_FIELDS = "SYMBOL,NAME,PRICE,PE,PBR,MKTCAP"
+
+
+def _fetch_163_page(page: int, count: int = 50) -> list[dict]:
+    params = {
+        "page": page,
+        "query": "STYPE:EQA",
+        "fields": _163_FIELDS,
+        "count": count,
+        "type": "query",
+    }
+    data = _get163(params)
+    return data.get("list", [])
+
+
+def _stage1_akshare() -> pd.DataFrame:
+    """akshare 东方财富接口获取全量A股行情，网易财经失败时备用"""
+    import akshare as ak
+    df = ak.stock_zh_a_spot_em()
+    col_map = {}
+    for c in df.columns:
+        cl = c.strip()
+        if cl in ("代码", "股票代码"):
+            col_map[c] = "code"
+        elif cl == "名称":
+            col_map[c] = "name"
+        elif cl == "最新价":
+            col_map[c] = "price"
+        elif "市盈率" in cl:
+            col_map[c] = "pe"
+        elif "市净率" in cl:
+            col_map[c] = "pb"
+        elif "总市值" in cl:
+            col_map[c] = "mktcap_raw"
+    df = df.rename(columns=col_map)
+    if "code" not in df.columns:
+        df["code"] = df.iloc[:, 0].astype(str)
+    df["code"] = df["code"].astype(str).str.zfill(6)
+    if "mktcap_raw" in df.columns:
+        df["market_cap_yi"] = _to_float(df["mktcap_raw"]) / 1e8
+    else:
+        df["market_cap_yi"] = None
+    df["pe"] = _to_float(df.get("pe"))
+    df["pb"] = _to_float(df.get("pb"))
+    df["price"] = _to_float(df.get("price"))
+    df["industry"] = ""
+    return df[["code", "name", "price", "pe", "pb", "market_cap_yi", "industry"]].copy()
+
+
+def stage1_all_stocks() -> pd.DataFrame:
+    """
+    网易财经 diyrank 接口，一次拉取全部 A 股；失败时自动回退到 akshare 东方财富。
+    """
+    records = []
+    page = 0
+    _163_ok = True
+    try:
+        while True:
+            items = _fetch_163_page(page)
+            if not items:
+                break
+            records.extend(items)
+            if len(items) < 100:
+                break
+            page += 1
+            time.sleep(0.15)
+    except Exception:
+        _163_ok = False
+
+    if not _163_ok or not records:
+        try:
+            return _stage1_akshare()
+        except Exception as e:
+            raise RuntimeError(
+                f"网易财经和东方财富均无数据，请检查网络设置。东方财富错误：{e}"
+            )
+
+    rows = []
+    for item in records:
+        sym = str(item.get("SYMBOL", ""))
+        code = sym[-6:].zfill(6)
+        mktcap = item.get("MKTCAP")
+        try:
+            mktcap_yi = float(mktcap) / 10000 if mktcap else None
+        except Exception:
+            mktcap_yi = None
+        rows.append({
+            "code": code,
+            "name": item.get("NAME", ""),
+            "price": item.get("PRICE"),
+            "pe": item.get("PE"),
+            "pb": item.get("PBR"),
+            "market_cap_yi": mktcap_yi,
+            "industry": "",
+        })
+
+    df = pd.DataFrame(rows)
+    for col in ["pe", "pb", "price", "market_cap_yi"]:
+        df[col] = _to_float(df[col])
+    return df
+
+
+def stage2_growth(period: str) -> pd.DataFrame:
+    date_str = period.replace("-", "")
+    try:
+        import akshare as ak
+        df = ak.stock_yjbb_em(date=date_str)
+    except Exception:
+        return pd.DataFrame(columns=["code", "revenue_growth", "profit_growth"])
+
+    col_map = {}
+    for c in df.columns:
+        cl = c.strip()
+        if cl in ("股票代码", "代码"):
+            col_map[c] = "code"
+        elif "营业总收入" in cl and "同比" in cl:
+            col_map[c] = "revenue_growth"
+        elif "净利润" in cl and "同比" in cl:
+            col_map[c] = "profit_growth"
+    df = df.rename(columns=col_map)
+    if "code" not in df.columns:
+        df["code"] = df.iloc[:, 0].astype(str)
+    df["code"] = df["code"].astype(str).str.zfill(6)
+    df["revenue_growth"] = _to_float(df.get("revenue_growth"))
+    df["profit_growth"] = _to_float(df.get("profit_growth"))
+    return df[["code", "revenue_growth", "profit_growth"]].drop_duplicates("code")
+
+
+def stage_fund_hold(period: str) -> pd.DataFrame:
+    try:
+        import akshare as ak
+        df = ak.stock_report_fund_hold(symbol="重仓股", date=period.replace("-", ""))
+        col_map = {}
+        for c in df.columns:
+            if "股票代码" in c:
+                col_map[c] = "code"
+            elif "基金家数" in c or "持有基金" in c:
+                col_map[c] = "fund_hold_count"
+            elif "占总股本" in c or "持股比例" in c:
+                col_map[c] = "fund_hold_ratio"
+        df = df.rename(columns=col_map)
+        if "code" not in df.columns:
+            df["code"] = df.iloc[:, 0].astype(str)
+        df["code"] = df["code"].astype(str).str.zfill(6)
+        df["fund_hold_count"] = _to_float(df.get("fund_hold_count"))
+        df["fund_hold_ratio"] = _to_float(df.get("fund_hold_ratio"))
+        return df[["code", "fund_hold_count", "fund_hold_ratio"]].drop_duplicates("code")
+    except Exception:
+        return pd.DataFrame(columns=["code", "fund_hold_count", "fund_hold_ratio"])
+
+
+def stage3_fina_ak(candidates: pd.DataFrame, period: str) -> pd.DataFrame:
+    date_str = period.replace("-", "")
+    try:
+        import akshare as ak
+        df = ak.stock_yjbb_em(date=date_str)
+    except Exception:
+        return pd.DataFrame(columns=["code", "roe", "debt_ratio"])
+
+    col_map = {}
+    for c in df.columns:
+        cl = c.strip()
+        if cl in ("股票代码", "代码"):
+            col_map[c] = "code"
+        elif "净资产收益率" in cl or cl == "ROE":
+            col_map[c] = "roe"
+        elif "资产负债率" in cl:
+            col_map[c] = "debt_ratio"
+    df = df.rename(columns=col_map)
+    if "code" not in df.columns:
+        df["code"] = df.iloc[:, 0].astype(str)
+    df["code"] = df["code"].astype(str).str.zfill(6)
+
+    result_cols = ["code"]
+    if "roe" in df.columns:
+        df["roe"] = _to_float(df["roe"])
+        result_cols.append("roe")
+    if "debt_ratio" in df.columns:
+        df["debt_ratio"] = _to_float(df["debt_ratio"])
+        result_cols.append("debt_ratio")
+
+    codes = set(candidates["code"].astype(str))
+    df = df[df["code"].isin(codes)]
+    return df[result_cols].drop_duplicates("code") if len(result_cols) > 1 else pd.DataFrame(columns=["code", "roe", "debt_ratio"])
+
+
+def composite_score(row: pd.Series) -> float:
+    s = 0.0
+    s += min(row.get("roe") or 0, 50) * 1.0
+    s += min(row.get("revenue_growth") or 0, 100) * 0.5
+    s += min(row.get("profit_growth") or 0, 100) * 0.5
+    s += max(0.0, 60 - (row.get("debt_ratio") or 60)) * 0.5
+    s += min(row.get("fund_hold_count") or 0, 50) * 0.3
+    s += max(0.0, 200 - (row.get("market_cap_yi") or 200)) * 0.1
+    s += max(0.0, 40 - (row.get("pe") or 40)) * 0.2
+    return round(s, 2)
+
+
+def run_screen(
+    report_period: str,
+    fund_period: str,
+    criteria: ScreenCriteria | None = None,
+    max_deep_check: int = 100,
+    use_ths: bool = True,
+    use_ttjj: bool = True,
+    industry_keywords: list[str] | None = None,
+) -> ScreenResult:
+    criteria = criteria or ScreenCriteria()
+    counts: dict[str, int] = {}
+
+    df = stage1_all_stocks()
+
+    s1 = df[
+        (df["market_cap_yi"] >= criteria.min_market_cap_yi)
+        & (df["market_cap_yi"] <= criteria.max_market_cap_yi)
+        & (df["pe"] > 0) & (df["pe"] <= criteria.max_pe)
+    ].copy()
+
+    if industry_keywords:
+        pattern = "|".join(industry_keywords)
+        mask = s1["industry"].str.contains(pattern, na=False, case=False)
+        s1 = s1[mask]
+        counts["1a_行业筛选"] = len(s1)
+
+    counts["1_市值PE初筛"] = len(s1)
+    if s1.empty:
+        return ScreenResult(table=pd.DataFrame(), stage_counts=counts)
+
+    growth = stage2_growth(report_period)
+    if not growth.empty:
+        s1 = s1.merge(growth, on="code", how="left")
+        s2 = s1[
+            (s1["revenue_growth"] >= criteria.min_revenue_growth)
+            & (s1["profit_growth"] >= criteria.min_profit_growth)
+        ].copy()
+    else:
+        s2 = s1.copy()
+        s2["revenue_growth"] = None
+        s2["profit_growth"] = None
+    counts["2_营收净利增速筛"] = len(s2)
+    if s2.empty:
+        return ScreenResult(table=pd.DataFrame(), stage_counts=counts)
+
+    if use_ths:
+        fina = stage3_fina_ak(s2, report_period)
+        if not fina.empty:
+            s2 = s2.merge(fina, on="code", how="left")
+            s3 = s2[
+                (s2["roe"] >= criteria.min_roe)
+                & (s2["debt_ratio"] <= criteria.max_debt_ratio)
+            ].copy()
+        else:
+            s3 = s2.copy()
+            s3["roe"] = None
+            s3["debt_ratio"] = None
+        counts["3_ROE负债率筛"] = len(s3)
+        if s3.empty:
+            return ScreenResult(table=pd.DataFrame(), stage_counts=counts)
+    else:
+        s3 = s2.copy()
+        s3["roe"] = None
+        s3["debt_ratio"] = None
+        counts["3_ROE负债率筛(已跳过)"] = len(s3)
+
+    if use_ttjj:
+        fund = stage_fund_hold(fund_period)
+        final = s3.merge(fund, on="code", how="left")
+    else:
+        final = s3.copy()
+
+    final["fund_hold_count"] = final.get("fund_hold_count", pd.Series(0, index=final.index)).fillna(0)
+    final["fund_hold_ratio"] = final.get("fund_hold_ratio", pd.Series(0, index=final.index)).fillna(0)
+
+    final["score"] = final.apply(composite_score, axis=1)
+    final = final.sort_values("score", ascending=False).head(max_deep_check).reset_index(drop=True)
+    counts["4_最终结果"] = len(final)
+
+    cols = ["code", "name", "price", "market_cap_yi", "pe", "pb",
+            "revenue_growth", "profit_growth", "roe", "debt_ratio",
+            "fund_hold_count", "fund_hold_ratio", "score", "industry"]
+    return ScreenResult(table=final[[c for c in cols if c in final.columns]], stage_counts=counts)
