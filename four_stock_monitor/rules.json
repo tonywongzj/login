@@ -18,7 +18,7 @@
     { "premium": 0.3, "action": "减到半仓" },
     { "premium": 0.5, "action": "清仓" }
   ],
-  "alerts": { "nearBuyPct": 0.03, "nearSellPct": 0.03, "pushDailyDigest": "signals_only", "newsLookbackHours": 30 },
+  "alerts": { "nearBuyPct": 0.03, "nearSellPct": 0.03, "pushDailyDigest": "signals_only", "ladderReminder": true, "newsLookbackHours": 30 },
   "l3": { "minExcessReturn": 0.08 },
   "stocks": [
     {

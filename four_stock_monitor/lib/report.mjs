@@ -93,6 +93,31 @@ export function newsDetail(it) {
   return `**${it.stock}｜${it.title}**\n${conds}\n[原文](${it.link})`;
 }
 
+// 建仓节点速览：每个标的的现价、各买入档距离、第一减仓线。开盘和收盘推送都附上
+export function renderLadderBrief(r) {
+  const fmt = (x) => (x == null ? '—' : x.toLocaleString('en-US', { maximumFractionDigits: 2 }));
+  const blocks = r.stocks.map((s) => {
+    const head = s.price == null
+      ? `**${s.name}** 行情获取失败`
+      : `**${s.name}** ${fmt(s.price)}${s.quote?.stale ? '（休市，上一交易日）' : ''}｜折价 ${pct(s.discount)}｜${s.zone}`;
+    const tiers = s.buyLadder.map((t) => {
+      let st;
+      if (t.filled) st = '已成交';
+      else if (s.price == null) st = '';
+      else if (s.price <= t.price) st = t.condition && !t.conditionMet ? '价格已到，待条件' : (s.logicBroken ? '已到，L1 破坏禁买' : '**已触发**');
+      else st = `还差 −${pct(1 - t.price / s.price)}`;
+      return `${t.id} ${t.price} × ${t.shares.toLocaleString()} 股${st ? `（${st}）` : ''}`;
+    });
+    const sl = s.sellLines[0];
+    const sell = `减仓线 ${sl.price}${sl.distance == null ? '' : sl.distance <= 0 ? '（已到）' : `（+${pct(sl.distance)}）`}`;
+    const risk = s.riskLine ? `｜风控线 ${s.riskLine.price}` : '';
+    const pos = s.position.shares > 0 ? [`持仓 ${s.position.shares.toLocaleString()} 股 @${s.position.avgCost}`] : [];
+    // 用列表行：Server 酱等按 Markdown 渲染，普通单换行会被并成一行
+    return [head, '', ...[...tiers.map((t) => `买 ${t}`), sell + risk, ...pos].map((x) => `- ${x}`)].join('\n');
+  });
+  return `**建仓节点**（现金 ¥${wan(r.cashCny)}万）\n\n${blocks.join('\n\n')}`;
+}
+
 // 推送正文用 Markdown，段落之间空一行（Server 酱等单换行会被合并成一行）
 export function renderPush(r, signals) {
   return sortSignals(signals)

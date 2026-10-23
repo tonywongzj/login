@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { evaluateAll, evalL1, zoneOf, discountOf } from '../lib/engine.mjs';
 import { parseRss, tagItems, matchKeywords } from '../lib/news.mjs';
-import { renderMarkdown, renderPush } from '../lib/report.mjs';
+import { renderMarkdown, renderPush, renderLadderBrief } from '../lib/report.mjs';
 
 const RULES = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const clone = () => structuredClone(RULES);
@@ -159,4 +159,17 @@ test('推送正文列出新闻标题、对应 L1 条件原文、命中词和链�
   assert.match(body, /PM-2 总收入连续 2 季同比负增长（命中：营收 下降）/);
   assert.match(body, /\[原文\]\(https:\/\/x\/1\)/);
   assert.match(body, /T1\n\n【预警】/);
+});
+
+test('建仓节点速览：列出每档价格、股数和距离', () => {
+  const r = evaluateAll(RULES, quotes(BASE), '2026-10-23');
+  const b = renderLadderBrief(r);
+  assert.match(b, /\*\*腾讯控股\*\* 379\.8｜折价 41\.6%｜买入区/);
+  assert.match(b, /T1 390 × 4,300 股（\*\*已触发\*\*）/);
+  assert.match(b, /T2 360 × 5,300 股（还差 −5\.2%）/);
+  assert.match(b, /M1 1180 × 800 股（还差 −11\.7%）/);
+  assert.match(b, /H1b 11\.8 × 16,000 股（价格已到，待条件）/);
+  assert.match(b, /减仓线 748（\+96\.9%）/);
+  assert.match(b, /风控线 9\.82/);
+  assert.match(b, /持仓 20,000 股 @12\.88/);
 });

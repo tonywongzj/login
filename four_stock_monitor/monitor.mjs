@@ -2,6 +2,7 @@
 // 四标投资纪律监控
 //   node monitor.mjs                    收盘日报：抓价 → 折价率/区间 → 买卖档 → L1 → 新闻核查 → 报告 + 提醒
 //   node monitor.mjs --mode intraday    盘中巡检：只看价格信号，只推送「新出现」的信号
+//   node monitor.mjs --mode open        开盘提醒：建仓节点与价格（无论有无信号都推一次）
 //   node monitor.mjs --offline          不联网，用 rules.json 里的 lastPrice 复核
 //   node monitor.mjs --price tencent=360 --price hesai=10.5   手动覆盖价格（压力测试）
 //   其它：--no-news --no-notify --no-write --force --date YYYY-MM-DD
@@ -14,7 +15,7 @@ import { evaluateAll } from './lib/engine.mjs';
 import { fetchQuotes } from './lib/quotes.mjs';
 import { fetchNews } from './lib/news.mjs';
 import { notify } from './lib/notify.mjs';
-import { renderMarkdown, renderHtml, renderPush, headline } from './lib/report.mjs';
+import { renderMarkdown, renderHtml, renderPush, renderLadderBrief, headline } from './lib/report.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const RULES = join(ROOT, 'rules.json');
@@ -58,7 +59,10 @@ async function main() {
   if (!rules) throw new Error(`无法读取 ${RULES}`);
   const state = await readJson(STATE, { fired: {}, lastRun: null });
   const today = args.date ?? shanghaiDate();
+  if (!['daily', 'intraday', 'open'].includes(args.mode)) throw new Error(`未知 --mode ${args.mode}（daily / intraday / open）`);
   const intraday = args.mode === 'intraday';
+  const open = args.mode === 'open';
+  const quick = intraday || open; // 不抓新闻、不写日报
 
   // 1. 行情
   let quotes = {};
@@ -85,7 +89,7 @@ async function main() {
 
   // 3. 新闻（仅日报）
   const news = {};
-  if (!intraday && !args['no-news'] && !args.offline) {
+  if (!quick && !args['no-news'] && !args.offline) {
     for (const s of rules.stocks) news[s.id] = await fetchNews(s, { lookbackHours: rules.alerts.newsLookbackHours });
     // 新闻汇总成一条提醒（每天一次），附每条新闻的标题、对应的 L1 条件、命中词和原文链接
     const details = rules.stocks.flatMap((s) => news[s.id].flagged.map((it) => ({ stock: s.name, ...it })));
@@ -105,7 +109,7 @@ async function main() {
   for (const [k, v] of Object.entries(state.fired)) {
     const stockId = k.split(':')[0];
     // 行情失败的标的保留其旧记录，避免恢复后重复推送；新闻只在日报评估，盘中保留
-    if (activeKeys.has(k) || failed.has(stockId) || (intraday && stockId === 'news')) fired[k] = v;
+    if (activeKeys.has(k) || failed.has(stockId) || (quick && stockId === 'news')) fired[k] = v;
   }
   for (const s of active) fired[s.key] ??= today;
 
@@ -114,7 +118,7 @@ async function main() {
   if (!args['no-write']) {
     await mkdir(join(ROOT, 'state'), { recursive: true });
     await writeFile(STATE, JSON.stringify({ fired, lastRun: new Date().toISOString(), lastMode: args.mode }, null, 2) + '\n');
-    if (!intraday) {
+    if (!quick) {
       await mkdir(DAILY, { recursive: true });
       await writeFile(join(DAILY, `${today}.md`), md);
       await writeFile(join(DAILY, 'latest.json'), JSON.stringify({ ...result, news }, null, 2) + '\n');
@@ -127,13 +131,16 @@ async function main() {
   if (args['no-notify']) return;
   if (intraday) {
     if (fresh.length) await notify(`四标盘中提醒 ${today}：${fresh.length} 条新信号`, renderPush(result, fresh));
-  } else {
-    const always = rules.alerts.pushDailyDigest === 'always';
-    if (active.length || always) {
-      const body = active.length ? renderPush(result, active) : '无信号。价格未触及任何买卖档，L1 清单无条目被踩到。';
-      await notify(headline(result), body);
-    }
+    return;
   }
+  // 开盘 / 收盘：无论有无信号都推一次建仓节点（rules.alerts.ladderReminder 可关）
+  const remind = rules.alerts.ladderReminder !== false;
+  const always = remind || rules.alerts.pushDailyDigest === 'always';
+  if (!active.length && !always) return;
+  const sig = active.length ? renderPush(result, active) : '无触发信号。价格未触及任何买卖档，L1 清单无条目被踩到。';
+  const body = remind ? `${sig}\n\n---\n\n${renderLadderBrief(result)}` : sig;
+  const title = open ? `四标开盘 ${today}：${active.length ? headline(result).split('：')[1] : '无信号'}` : headline(result);
+  await notify(title, body);
 }
 
 main().catch((e) => {
