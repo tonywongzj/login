@@ -87,11 +87,12 @@ async function main() {
   const news = {};
   if (!intraday && !args['no-news'] && !args.offline) {
     for (const s of rules.stocks) news[s.id] = await fetchNews(s, { lookbackHours: rules.alerts.newsLookbackHours });
-    const flagged = Object.entries(news).flatMap(([id, n]) => n.flagged.map((it) => ({ id, it })));
-    for (const { id, it } of flagged) {
-      const name = rules.stocks.find((s) => s.id === id).name;
-      result.signals.push({ type: 'NEWS', tag: '预警', key: `${id}:news:${it.title}`, push: true, stock: id,
-        msg: `${name} 新闻命中 L1（${it.l1.map((h) => h.id).join('/')}），需人工核查：${it.title} ${it.link}` });
+    // 新闻只汇总成一条提醒（每天一次），明细在日报「新闻核查」里
+    const counts = rules.stocks.map((s) => [s.name, news[s.id].flagged.length]).filter(([, n]) => n > 0);
+    if (counts.length) {
+      const total = counts.reduce((a, [, n]) => a + n, 0);
+      result.signals.push({ type: 'NEWS', tag: '预警', key: `news:${today}`, push: true,
+        msg: `${total} 条新闻命中 L1 关键词，需人工核查（${counts.map(([n, c]) => `${n} ${c}`).join('、')}），见日报「新闻核查」` });
     }
   }
 
@@ -103,8 +104,8 @@ async function main() {
   const fired = {};
   for (const [k, v] of Object.entries(state.fired)) {
     const stockId = k.split(':')[0];
-    // 行情失败的标的保留其旧记录，避免恢复后重复推送；新闻类 key 在日报模式外不评估，盘中也保留
-    if (activeKeys.has(k) || failed.has(stockId) || (intraday && k.includes(':news:'))) fired[k] = v;
+    // 行情失败的标的保留其旧记录，避免恢复后重复推送；新闻只在日报评估，盘中保留
+    if (activeKeys.has(k) || failed.has(stockId) || (intraday && stockId === 'news')) fired[k] = v;
   }
   for (const s of active) fired[s.key] ??= today;
 

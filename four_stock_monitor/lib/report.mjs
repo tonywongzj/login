@@ -1,6 +1,6 @@
 import { pct, wan } from './engine.mjs';
 
-const ORDER = { L1_BREACH: 0, RISK: 1, SELL: 2, BUY: 3, BUY_WAIT: 4, NEAR_SELL: 5, NEAR_BUY: 6, L1_WARN: 7, L3: 8, IV_AUDIT: 9, DATA: 10, EVENT: 11 };
+const ORDER = { L1_BREACH: 0, RISK: 1, SELL: 2, BUY: 3, BUY_WAIT: 4, NEAR_SELL: 5, NEAR_BUY: 6, L1_WARN: 7, NEWS: 8, L3: 9, IV_AUDIT: 10, DATA: 11, EVENT: 12 };
 const ACTION = new Set(['L1_BREACH', 'RISK', 'SELL', 'BUY']);
 
 export function sortSignals(signals) {

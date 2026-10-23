@@ -7,23 +7,18 @@
   "fx": { "HKD": 0.91, "CNY": 1 },
   "zones": [
     { "name": "减仓区", "minDiscount": null, "maxDiscount": 0 },
-    { "name": "持有区", "minDiscount": 0, "maxDiscount": 0.30 },
-    { "name": "观察区", "minDiscount": 0.30, "maxDiscount": 0.40 },
-    { "name": "买入区", "minDiscount": 0.40, "maxDiscount": 0.45 },
-    { "name": "加仓区", "minDiscount": 0.45, "maxDiscount": 0.50 },
-    { "name": "重仓区", "minDiscount": 0.50, "maxDiscount": null }
+    { "name": "持有区", "minDiscount": 0, "maxDiscount": 0.3 },
+    { "name": "观察区", "minDiscount": 0.3, "maxDiscount": 0.4 },
+    { "name": "买入区", "minDiscount": 0.4, "maxDiscount": 0.45 },
+    { "name": "加仓区", "minDiscount": 0.45, "maxDiscount": 0.5 },
+    { "name": "重仓区", "minDiscount": 0.5, "maxDiscount": null }
   ],
   "sellLadder": [
     { "premium": 0.15, "action": "减 1/3" },
-    { "premium": 0.30, "action": "减到半仓" },
-    { "premium": 0.50, "action": "清仓" }
+    { "premium": 0.3, "action": "减到半仓" },
+    { "premium": 0.5, "action": "清仓" }
   ],
-  "alerts": {
-    "nearBuyPct": 0.03,
-    "nearSellPct": 0.03,
-    "pushDailyDigest": "signals_only",
-    "newsLookbackHours": 30
-  },
+  "alerts": { "nearBuyPct": 0.03, "nearSellPct": 0.03, "pushDailyDigest": "signals_only", "newsLookbackHours": 30 },
   "l3": { "minExcessReturn": 0.08 },
   "stocks": [
     {
@@ -39,7 +34,7 @@
       "ivHistory": [
         { "date": "2026-10-23", "iv": 650, "reason": "v1.1 初始估值：中性假设下总回报 = 8% 折现率" }
       ],
-      "lastPrice": 379.80,
+      "lastPrice": 379.8,
       "position": { "shares": 0, "avgCost": 0 },
       "buyLadder": [
         { "id": "T1", "price": 390, "shares": 4300, "filled": false },
@@ -47,28 +42,40 @@
         { "id": "T3", "price": 330, "shares": 5800, "filled": false }
       ],
       "riskLine": null,
-      "news": { "query": ["腾讯控股", "腾讯 广告", "腾讯 游戏 版号", "微信 日活", "腾讯 回购"] },
+      "news": { "query": ["腾讯控股", "腾讯 广告", "腾讯 游戏 版号", "微信 日活", "腾讯 回购"], "aliases": ["腾讯", "微信", "Tencent"] },
       "l1": [
         {
-          "id": "TC-1", "text": "营销服务（广告）收入连续 4 个季度同比负增长",
-          "kind": "series", "op": "<", "threshold": 0, "n": 4, "unit": "%",
-          "values": [], "note": "每季财报后追加广告收入同比增速（%）",
-          "keywords": ["广告收入", "营销服务", "广告业务"]
+          "id": "TC-1",
+          "text": "营销服务（广告）收入连续 4 个季度同比负增长",
+          "kind": "series",
+          "op": "<",
+          "threshold": 0,
+          "n": 4,
+          "unit": "%",
+          "values": [],
+          "note": "每季财报后追加广告收入同比增速（%）",
+          "keywords": ["广告收入 下滑", "广告收入 下降", "营销服务 下滑", "营销服务 下降", "广告 负增长"]
         },
         {
-          "id": "TC-2", "text": "游戏监管回到 2021 年力度：版号停发超 3 个月 / 抽成被强制下调 / 未成年人新规致流水 −20%",
-          "kind": "manual", "triggered": false,
-          "keywords": ["版号", "暂停", "抽成", "未成年人", "防沉迷", "游戏监管"]
+          "id": "TC-2",
+          "text": "游戏监管回到 2021 年力度：版号停发超 3 个月 / 抽成被强制下调 / 未成年人新规致流水 −20%",
+          "kind": "manual",
+          "triggered": false,
+          "keywords": ["版号 暂停", "版号 停发", "游戏 新规", "游戏 抽成", "防沉迷 新规", "未成年人 新规", "游戏监管"]
         },
         {
-          "id": "TC-3", "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
-          "kind": "manual", "triggered": false,
-          "keywords": ["微信 日活", "DAU", "视频号", "小程序", "AI 入口", "超级入口"]
+          "id": "TC-3",
+          "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
+          "kind": "manual",
+          "triggered": false,
+          "keywords": ["微信 日活 下滑", "微信 用户 下降", "DAU 下滑", "DAU 下降", "AI 入口", "超级入口"]
         },
         {
-          "id": "TC-4", "text": "回购停止或大股东再度减持超 1%",
-          "kind": "manual", "triggered": false,
-          "keywords": ["回购", "停止回购", "Prosus", "减持"]
+          "id": "TC-4",
+          "text": "回购停止或大股东再度减持超 1%",
+          "kind": "manual",
+          "triggered": false,
+          "keywords": ["停止回购", "暂停回购", "Prosus 减持", "大股东 减持"]
         }
       ]
     },
@@ -94,29 +101,49 @@
       ],
       "ladderNote": "确定性最高（4.5% 股息 + 75% 分红承诺），折价要求比另三标放宽约 4 个点。",
       "riskLine": null,
-      "news": { "query": ["贵州茅台", "飞天 批价", "茅台 分红", "茅台 经销商"] },
+      "news": { "query": ["贵州茅台", "飞天 批价", "茅台 分红", "茅台 经销商"], "aliases": ["茅台"] },
       "l1": [
         {
-          "id": "MT-1", "text": "飞天散瓶批价跌破出厂合同价 ¥1,369 并持续两个季度",
-          "kind": "series", "op": "<", "threshold": 1369, "n": 2, "unit": "元", "warnPct": 0.10,
-          "values": [1700], "note": "每季末记录一次季度平均散瓶批价；2026-10-23 约 ¥1,700（安全垫 24%）",
-          "keywords": ["批价", "飞天", "散瓶", "价格倒挂"]
+          "id": "MT-1",
+          "text": "飞天散瓶批价跌破出厂合同价 ¥1,369 并持续两个季度",
+          "kind": "series",
+          "op": "<",
+          "threshold": 1369,
+          "n": 2,
+          "unit": "元",
+          "warnPct": 0.1,
+          "values": [1700],
+          "note": "每季末记录一次季度平均散瓶批价；2026-10-23 约 ¥1,700（安全垫 24%）",
+          "keywords": ["批价 跌破", "批价 下跌", "批价 跳水", "倒挂"]
         },
         {
-          "id": "MT-2", "text": "分红率承诺从 75% 下调",
-          "kind": "threshold", "op": "<", "threshold": 75, "value": 75, "unit": "%",
-          "keywords": ["分红率", "分红承诺", "现金分红"]
+          "id": "MT-2",
+          "text": "分红率承诺从 75% 下调",
+          "kind": "threshold",
+          "op": "<",
+          "threshold": 75,
+          "value": 75,
+          "unit": "%",
+          "keywords": ["分红率 下调", "分红 下调", "降低分红"]
         },
         {
-          "id": "MT-3", "text": "合同负债连续两季同比 −30%（经销商体系崩塌）",
-          "kind": "series", "op": "<=", "threshold": -30, "n": 2, "unit": "%",
-          "values": [], "note": "每季财报后追加合同负债同比（%）",
-          "keywords": ["合同负债", "预收款", "经销商"]
+          "id": "MT-3",
+          "text": "合同负债连续两季同比 −30%（经销商体系崩塌）",
+          "kind": "series",
+          "op": "<=",
+          "threshold": -30,
+          "n": 2,
+          "unit": "%",
+          "values": [],
+          "note": "每季财报后追加合同负债同比（%）",
+          "keywords": ["合同负债 下降", "合同负债 减少", "合同负债 下滑", "经销商 退出", "经销商 亏损", "经销商 退网"]
         },
         {
-          "id": "MT-4", "text": "直销占比回退且吨价同比下滑",
-          "kind": "manual", "triggered": false,
-          "keywords": ["直销", "i茅台", "吨价"]
+          "id": "MT-4",
+          "text": "直销占比回退且吨价同比下滑",
+          "kind": "manual",
+          "triggered": false,
+          "keywords": ["直销 下滑", "直销 下降", "吨价 下滑", "吨价 下降"]
         }
       ]
     },
@@ -133,7 +160,7 @@
       "ivHistory": [
         { "date": "2026-10-23", "iv": 155, "reason": "v1.1 统一标尺重估；原 138/125/110 与 118/105/92 档位作废" }
       ],
-      "lastPrice": 130.60,
+      "lastPrice": 130.6,
       "position": { "shares": 0, "avgCost": 0 },
       "buyLadder": [
         { "id": "P1", "price": 93, "shares": 5300, "filled": false },
@@ -141,39 +168,60 @@
         { "id": "P3", "price": 78, "shares": 7400, "filled": false }
       ],
       "riskLine": null,
-      "news": { "query": ["泡泡玛特", "LABUBU", "泡泡玛特 二手 溢价", "泡泡玛特 新品"] },
+      "news": { "query": ["泡泡玛特", "LABUBU", "泡泡玛特 二手 溢价", "泡泡玛特 新品"], "aliases": ["泡泡玛特", "POP MART", "POPMART"] },
       "l1": [
         {
-          "id": "PM-1", "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-          "kind": "deadline", "op": "<", "threshold": 50, "value": null, "unit": "%", "deadline": "2027-09-30",
+          "id": "PM-1",
+          "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
+          "kind": "deadline",
+          "op": "<",
+          "threshold": 50,
+          "value": null,
+          "unit": "%",
+          "deadline": "2027-09-30",
           "note": "每次披露后填入非 LABUBU 收入占比（%）",
-          "keywords": ["LABUBU", "THE MONSTERS", "收入占比", "IP 结构"]
+          "keywords": ["IP 依赖", "单一 IP", "依赖 LABUBU", "LABUBU 降温", "LABUBU 退潮"]
         },
         {
-          "id": "PM-2", "text": "总收入连续 2 季同比负增长",
-          "kind": "series", "op": "<", "threshold": 0, "n": 2, "unit": "%",
-          "values": [], "earliestConfirm": "2027-03-31",
+          "id": "PM-2",
+          "text": "总收入连续 2 季同比负增长",
+          "kind": "series",
+          "op": "<",
+          "threshold": 0,
+          "n": 2,
+          "unit": "%",
+          "values": [],
+          "earliestConfirm": "2027-03-31",
           "note": "Q3 −35% 为渠道监测数据，不计入；只录入公司披露口径。最早 2027 年 3 月年报可确认",
-          "keywords": ["收入下滑", "营收 同比", "业绩预警"]
+          "keywords": ["收入 下滑", "收入 下降", "营收 下滑", "营收 下降", "负增长", "业绩预警"]
         },
         {
-          "id": "PM-3", "text": "存货周转天数超 220 天且存货绝对额同比 +30%",
+          "id": "PM-3",
+          "text": "存货周转天数超 220 天且存货绝对额同比 +30%",
           "kind": "and",
           "parts": [
             { "label": "存货周转天数", "op": ">", "threshold": 220, "value": null, "unit": "天" },
             { "label": "存货同比", "op": ">", "threshold": 30, "value": null, "unit": "%" }
           ],
-          "keywords": ["存货", "库存", "周转天数"]
+          "keywords": ["存货 增加", "存货 高企", "库存 积压", "库存 高企"]
         },
         {
-          "id": "PM-4", "text": "新品发售 3 个月内二手溢价为负",
-          "kind": "manual", "triggered": false,
-          "keywords": ["二手", "溢价", "破发", "跌破原价"]
+          "id": "PM-4",
+          "text": "新品发售 3 个月内二手溢价为负",
+          "kind": "manual",
+          "triggered": false,
+          "keywords": ["二手 跌破", "跌破原价", "破发", "二手价 暴跌", "溢价 消失"]
         },
         {
-          "id": "PM-5", "text": "毛利率跌破 55%",
-          "kind": "threshold", "op": "<", "threshold": 55, "value": null, "unit": "%", "warnPct": 0.05,
-          "keywords": ["毛利率"]
+          "id": "PM-5",
+          "text": "毛利率跌破 55%",
+          "kind": "threshold",
+          "op": "<",
+          "threshold": 55,
+          "value": null,
+          "unit": "%",
+          "warnPct": 0.05,
+          "keywords": ["毛利率 下滑", "毛利率 下降"]
         }
       ]
     },
@@ -193,55 +241,94 @@
       "lastPrice": 11.77,
       "position": { "shares": 20000, "avgCost": 12.88 },
       "buyLadder": [
-        { "id": "H1a", "price": 11.80, "shares": 16000, "filled": false, "note": "第一档前半笔" },
+        { "id": "H1a", "price": 11.8, "shares": 16000, "filled": false, "note": "第一档前半笔" },
         {
-          "id": "H1b", "price": 11.80, "shares": 16000, "filled": false,
-          "note": "第一档后半笔", "condition": "Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正",
+          "id": "H1b",
+          "price": 11.8,
+          "shares": 16000,
+          "filled": false,
+          "note": "第一档后半笔",
+          "condition": "Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正",
           "conditionMet": false
         },
-        { "id": "H2", "price": 10.80, "shares": 43000, "filled": false }
+        { "id": "H2", "price": 10.8, "shares": 43000, "filled": false }
       ],
       "riskLine": { "price": 9.82, "note": "可选风控线（仓位纪律，非估值依据）" },
-      "news": { "query": ["禾赛科技", "禾赛 激光雷达", "速腾聚创 份额", "激光雷达 装机"] },
+      "news": { "query": ["禾赛科技", "禾赛 激光雷达", "速腾聚创 份额", "激光雷达 装机"], "aliases": ["禾赛", "Hesai"] },
       "l1": [
         {
-          "id": "HS-1", "text": "毛利率跌破 35%（成本追不上降价）",
-          "kind": "threshold", "op": "<", "threshold": 35, "value": 39.7, "unit": "%", "warnPct": 0.05,
+          "id": "HS-1",
+          "text": "毛利率跌破 35%（成本追不上降价）",
+          "kind": "threshold",
+          "op": "<",
+          "threshold": 35,
+          "value": 39.7,
+          "unit": "%",
+          "warnPct": 0.05,
           "note": "H1 2026 为 39.7%。ASP 下滑本身不是破坏条件",
-          "keywords": ["毛利率"]
+          "keywords": ["毛利率 下滑", "毛利率 下降", "毛利率 跌"]
         },
         {
-          "id": "HS-2", "text": "出货量增速低于 30% 且低于指引下限（2026 指引 300–350 万台）",
+          "id": "HS-2",
+          "text": "出货量增速低于 30% 且低于指引下限（2026 指引 300–350 万台）",
           "kind": "and",
           "parts": [
             { "label": "出货量同比", "op": "<", "threshold": 30, "value": null, "unit": "%" },
             { "label": "全年出货（万台）", "op": "<", "threshold": 300, "value": null, "unit": "万台" }
           ],
-          "keywords": ["出货量", "交付量", "指引"]
+          "keywords": ["出货量 下滑", "出货量 下降", "不及指引", "下调 指引", "交付量 下滑"]
         },
         {
-          "id": "HS-3", "text": "经营现金流连续两年为负",
-          "kind": "series", "op": "<", "threshold": 0, "n": 2, "unit": "亿元",
-          "values": [], "note": "每年年报后追加全年经营现金流（亿元）",
-          "keywords": ["经营现金流", "现金流"]
+          "id": "HS-3",
+          "text": "经营现金流连续两年为负",
+          "kind": "series",
+          "op": "<",
+          "threshold": 0,
+          "n": 2,
+          "unit": "亿元",
+          "values": [],
+          "note": "每年年报后追加全年经营现金流（亿元）",
+          "keywords": ["现金流 为负", "现金流出", "经营现金流 下滑"]
         },
         {
-          "id": "HS-4", "text": "中国乘用车装机份额跌破 25%（被速腾实质替代）",
-          "kind": "threshold", "op": "<", "threshold": 25, "value": 33.7, "unit": "%", "warnPct": 0.10,
-          "keywords": ["装机", "市场份额", "速腾", "定点"]
+          "id": "HS-4",
+          "text": "中国乘用车装机份额跌破 25%（被速腾实质替代）",
+          "kind": "threshold",
+          "op": "<",
+          "threshold": 25,
+          "value": 33.7,
+          "unit": "%",
+          "warnPct": 0.1,
+          "keywords": ["份额 下滑", "份额 下降", "速腾 超越", "速腾 反超", "丢失 定点", "失去 定点"]
         },
         {
-          "id": "HS-5", "text": "SGI 到 2027 年底仍未盈亏平衡且累计亏损超 ¥10 亿",
-          "kind": "deadline", "op": "<", "threshold": 0, "value": null, "unit": "亿元", "deadline": "2027-12-31",
+          "id": "HS-5",
+          "text": "SGI 到 2027 年底仍未盈亏平衡且累计亏损超 ¥10 亿",
+          "kind": "deadline",
+          "op": "<",
+          "threshold": 0,
+          "value": null,
+          "unit": "亿元",
+          "deadline": "2027-12-31",
           "note": "value 填 SGI 最近一期经营利润（亿元）",
-          "keywords": ["SGI", "机器人", "盈亏平衡"]
+          "keywords": ["SGI 亏损", "机器人 亏损"]
         }
       ]
     }
   ],
   "events": [
-    { "date": "2026-11-15", "until": "2026-11-30", "stock": "hesai", "text": "禾赛 Q3 财报：看 ASP 是否止跌（H1 混合 ASP ¥1,401）、SGI 能否兑现 ¥2–3 亿、经营现金流是否转正。达标 → 把 H1b.conditionMet 改为 true" },
-    { "date": "2026-11-15", "until": "2026-11-30", "stock": "popmart", "text": "泡泡玛特三季报 / 全年指引：若确认 FY2027 净利 ≥HK$130 亿，IV 上修至 175，档位改为 105/96/88" },
+    {
+      "date": "2026-11-15",
+      "until": "2026-11-30",
+      "stock": "hesai",
+      "text": "禾赛 Q3 财报：看 ASP 是否止跌（H1 混合 ASP ¥1,401）、SGI 能否兑现 ¥2–3 亿、经营现金流是否转正。达标 → 把 H1b.conditionMet 改为 true"
+    },
+    {
+      "date": "2026-11-15",
+      "until": "2026-11-30",
+      "stock": "popmart",
+      "text": "泡泡玛特三季报 / 全年指引：若确认 FY2027 净利 ≥HK$130 亿，IV 上修至 175，档位改为 105/96/88"
+    },
     { "date": "2027-01-15", "until": "2027-02-15", "stock": "moutai", "text": "茅台春节前批价与合同负债：更新 MT-1 / MT-3" },
     { "date": "2027-03-31", "stock": "popmart", "text": "泡泡玛特年报：PM-2「连续两季收入负增长」最早确认时点" }
   ]

@@ -134,3 +134,18 @@ test('新闻解析与 L1 关键词对齐', () => {
   assert.equal(items[1].l1.length, 0);
   assert.deepEqual(matchKeywords('微信日活同比下滑', ['微信 日活']), ['微信 日活']);
 });
+
+test('新闻误报过滤：未点名本标的或只是普通提及的标题不命中', () => {
+  const mk = (title) => ({ title, link: '', pubDate: '' });
+  const [tc, mt, pm] = RULES.stocks;
+  // 2026-10-23 实际误报样本
+  assert.equal(tagItems(tc, [mk('澜起科技：完成本次A股回购方案，实际回购208.8万股耗资4.1亿元')])[0].l1.length, 0);
+  assert.equal(tagItems(tc, [mk('南向资金追踪｜短线加仓腾讯大举减持中芯国际')])[0].l1.length, 0);
+  assert.equal(tagItems(pm, [mk('陈奕恒泡泡更新，labubu开箱')])[0].l1.length, 0);
+  assert.equal(tagItems(mt, [mk('官方1639元、批价1690元：茅台把经销商推到了哪一步？')])[0].l1.length, 0);
+  assert.equal(tagItems(mt, [mk('飞天茅台价格持续企稳！白酒龙头逆市上涨')])[0].l1.length, 0);
+  // 真信号仍然命中
+  assert.deepEqual(tagItems(tc, [mk('腾讯宣布暂停回购')])[0].l1.map((h) => h.id), ['TC-4']);
+  assert.deepEqual(tagItems(mt, [mk('飞天茅台批价跌破1500元')])[0].l1.map((h) => h.id), ['MT-1']);
+  assert.deepEqual(tagItems(pm, [mk('泡泡玛特新品二手价跌破原价')])[0].l1.map((h) => h.id), ['PM-4']);
+});
