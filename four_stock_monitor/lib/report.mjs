@@ -64,7 +64,10 @@ export function renderMarkdown(r, news = {}) {
   if (Object.keys(news).length) {
     L.push('## 新闻核查（命中 L1 关键词，需人工判断）', '');
     if (!flagged.length) L.push('无命中。');
-    for (const it of flagged) L.push(`- [${it.stock} · ${it.l1.map((h) => h.id).join('/')}] [${it.title}](${it.link})`);
+    for (const it of flagged) {
+      L.push(`- **${it.stock}**｜[${it.title}](${it.link})`);
+      for (const h of it.l1) L.push(`  - ${h.id} ${h.text}（命中：${h.keywords.join('、')}）`);
+    }
     if (failed.length) L.push('', `新闻抓取失败：${failed.join('、')}`);
     L.push('');
   }
@@ -84,8 +87,22 @@ export function renderMarkdown(r, news = {}) {
   return L.join('\n') + '\n';
 }
 
+// 一条命中新闻的展开：标题 / 触发的 L1 条件原文 / 命中词 / 原文链接
+export function newsDetail(it) {
+  const conds = it.l1.map((h) => `> ${h.id} ${h.text}（命中：${h.keywords.join('、')}）`).join('\n');
+  return `**${it.stock}｜${it.title}**\n${conds}\n[原文](${it.link})`;
+}
+
+// 推送正文用 Markdown，段落之间空一行（Server 酱等单换行会被合并成一行）
 export function renderPush(r, signals) {
-  return sortSignals(signals).map((s) => `【${s.tag}】${s.msg}`).join('\n');
+  return sortSignals(signals)
+    .map((s) => {
+      // 企业微信/钉钉单条上限约 4KB，推送最多展开 10 条，其余看日报
+      const d = s.details ?? [];
+      const more = d.length > 10 ? [`……另有 ${d.length - 10} 条，见日报「新闻核查」`] : [];
+      return [`【${s.tag}】${s.msg}`, ...d.slice(0, 10).map(newsDetail), ...more].join('\n\n');
+    })
+    .join('\n\n');
 }
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

@@ -87,12 +87,12 @@ async function main() {
   const news = {};
   if (!intraday && !args['no-news'] && !args.offline) {
     for (const s of rules.stocks) news[s.id] = await fetchNews(s, { lookbackHours: rules.alerts.newsLookbackHours });
-    // 新闻只汇总成一条提醒（每天一次），明细在日报「新闻核查」里
-    const counts = rules.stocks.map((s) => [s.name, news[s.id].flagged.length]).filter(([, n]) => n > 0);
-    if (counts.length) {
-      const total = counts.reduce((a, [, n]) => a + n, 0);
-      result.signals.push({ type: 'NEWS', tag: '预警', key: `news:${today}`, push: true,
-        msg: `${total} 条新闻命中 L1 关键词，需人工核查（${counts.map(([n, c]) => `${n} ${c}`).join('、')}），见日报「新闻核查」` });
+    // 新闻汇总成一条提醒（每天一次），附每条新闻的标题、对应的 L1 条件、命中词和原文链接
+    const details = rules.stocks.flatMap((s) => news[s.id].flagged.map((it) => ({ stock: s.name, ...it })));
+    if (details.length) {
+      const counts = rules.stocks.map((s) => [s.name, news[s.id].flagged.length]).filter(([, n]) => n > 0);
+      result.signals.push({ type: 'NEWS', tag: '预警', key: `news:${today}`, push: true, details,
+        msg: `${details.length} 条新闻命中 L1 关键词，需人工核查（${counts.map(([n, c]) => `${n} ${c}`).join('、')}）` });
     }
   }
 

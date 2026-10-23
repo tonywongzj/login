@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { evaluateAll, evalL1, zoneOf, discountOf } from '../lib/engine.mjs';
 import { parseRss, tagItems, matchKeywords } from '../lib/news.mjs';
-import { renderMarkdown } from '../lib/report.mjs';
+import { renderMarkdown, renderPush } from '../lib/report.mjs';
 
 const RULES = JSON.parse(readFileSync(new URL('../rules.json', import.meta.url), 'utf8'));
 const clone = () => structuredClone(RULES);
@@ -148,4 +148,15 @@ test('新闻误报过滤：未点名本标的或只是普通提及的标题不�
   assert.deepEqual(tagItems(tc, [mk('腾讯宣布暂停回购')])[0].l1.map((h) => h.id), ['TC-4']);
   assert.deepEqual(tagItems(mt, [mk('飞天茅台批价跌破1500元')])[0].l1.map((h) => h.id), ['MT-1']);
   assert.deepEqual(tagItems(pm, [mk('泡泡玛特新品二手价跌破原价')])[0].l1.map((h) => h.id), ['PM-4']);
+});
+
+test('推送正文列出新闻标题、对应 L1 条件原文、命中词和链接', () => {
+  const pm = RULES.stocks[2];
+  const [it] = tagItems(pm, [{ title: '泡泡玛特Q3财报看点：营收预计下降三成 - 华尔街见闻', link: 'https://x/1', pubDate: '' }]);
+  const sig = { type: 'NEWS', tag: '预警', msg: '1 条新闻命中 L1 关键词', details: [{ stock: pm.name, ...it }] };
+  const body = renderPush({}, [{ type: 'BUY', tag: '买入', msg: '腾讯控股 触发 T1' }, sig]);
+  assert.match(body, /泡泡玛特｜泡泡玛特Q3财报看点：营收预计下降三成/);
+  assert.match(body, /PM-2 总收入连续 2 季同比负增长（命中：营收 下降）/);
+  assert.match(body, /\[原文\]\(https:\/\/x\/1\)/);
+  assert.match(body, /T1\n\n【预警】/);
 });
