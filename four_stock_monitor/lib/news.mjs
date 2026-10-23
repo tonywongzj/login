@@ -28,9 +28,17 @@ export function matchKeywords(title, keywords) {
   return keywords.filter((k) => k.toLowerCase().split(/\s+/).every((p) => t.includes(p)));
 }
 
+// 标题必须点名本标的（aliases），否则搜索结果里的其他公司新闻（如别家回购）会误报
+export function mentionsStock(stock, title) {
+  const aliases = stock.news?.aliases ?? [stock.name];
+  const t = title.toLowerCase();
+  return aliases.some((a) => t.includes(a.toLowerCase()));
+}
+
 export function tagItems(stock, items) {
   return items.map((it) => {
     const hits = [];
+    if (!mentionsStock(stock, it.title)) return { ...it, l1: hits };
     for (const c of stock.l1) {
       const kw = matchKeywords(it.title, c.keywords ?? []);
       if (kw.length) hits.push({ id: c.id, keywords: kw });
