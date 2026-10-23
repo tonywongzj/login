@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>四标纪律看板</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--mut:#6b6b66;--line:#e4e4df;--buy:#1f7a4d;--sell:#b5522b;--break:#b3261e;--warn:#a87400;--info:#3b5b9a;
+--z0:#e9c3b4;--z1:#e6e6e0;--z2:#d6e4d0;--z3:#a9cfb1;--z4:#6fae84}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--fg:#ecece8;--mut:#9a9a93;--line:#33332f;--buy:#5cc28d;--sell:#e58a62;--break:#f07167;--warn:#e0b04a;--info:#8aa6e0;
+--z0:#6b3a2a;--z1:#3a3a36;--z2:#33473a;--z3:#2f6045;--z4:#3f8a5d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 -apple-system,"PingFang SC","Noto Sans SC",sans-serif}
+main{max-width:1200px;margin:0 auto;padding:24px 16px}h1{font-size:22px;margin:0 0 4px}.muted{color:var(--mut)}
+.num{font-variant-numeric:tabular-nums}.sigs{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:16px 0}
+.sigs li{margin:4px 0}.tag{display:inline-block;font-size:12px;padding:0 6px;border-radius:4px;margin-right:6px;color:#fff}
+.tag.buy{background:var(--buy)}.tag.sell{background:var(--sell)}.tag.break{background:var(--break)}.tag.warn{background:var(--warn)}.tag.info{background:var(--info)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.card h2{margin:0;font-size:18px}
+.big{font-size:26px;font-weight:600}.big small{font-size:12px;color:var(--mut);margin-left:4px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.kpis div{display:flex;flex-direction:column}.kpis b{font-size:18px}.kpis small{color:var(--mut)}
+.bar{position:relative;height:10px;border-radius:5px;overflow:hidden;margin-top:4px}.z{position:absolute;top:0;bottom:0}.z0{background:var(--z0)}.z1{background:var(--z1)}.z2{background:var(--z2)}.z3{background:var(--z3)}.z4{background:var(--z4)}
+.bar i{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--fg);transform:translateX(-1px)}
+.barlbl{position:relative;height:16px;font-size:11px;color:var(--mut);margin-top:2px}.barlbl span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+h3{font-size:13px;margin:16px 0 6px;color:var(--mut);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:500}td.num,th.num{text-align:right}
+.st{font-size:12px;padding:0 6px;border-radius:4px}.st-hit{background:var(--buy);color:#fff}.st-near{background:var(--warn);color:#fff}.st-done{background:var(--info);color:#fff}.st-idle{color:var(--mut)}
+ul.l1{padding-left:0;list-style:none;margin:0}ul.l1 li{padding:6px 8px;border-left:3px solid var(--line);margin:4px 0}
+.l1-breach{border-color:var(--break)!important}.l1-warn{border-color:var(--warn)!important}.l1-ok{border-color:var(--buy)!important}
+ul.news{padding-left:18px;margin:0}a{color:var(--info)}
+@media (max-width:420px){.grid{grid-template-columns:1fr}.kpis b{font-size:16px}}
+</style></head><body><main>
+<h1>四标投资纪律看板 · 2026-10-23</h1>
+<div class="muted">框架 v1.1　已投 ¥23.4万（2.3%）　现金 ¥976.6万　计划 ¥1000.0万</div>
+<div class="sigs"><b>今日信号</b><ul><li><span class="tag buy">买入</span>腾讯控股 触发 T1：现价 379.8 ≤ 390，买 4,300 股（≈¥148.6万，折价 41.6%）</li><li><span class="tag buy">买入</span>禾赛科技-W 触发 H1a：现价 11.77 ≤ 11.8，买 16,000 股（≈¥17.1万，折价 42.0%）</li><li><span class="tag warn">预警</span>禾赛科技-W H1b @11.8 价格已到，但前置条件未确认：Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正</li></ul></div>
+<div class="grid"><section class="card">
+  <header><div><h2>腾讯控股</h2><span class="muted">0700.HK · 3R 25/30 · 预算 ¥500.0万</span></div>
+  <div class="big"><span class="num">379.8</span><small>HKD</small></div></header>
+  <div class="kpis"><div><small>内在价值</small><b class="num">650</b><small>590–720</small></div>
+  <div><small>折价率</small><b class="num">41.6%</b><small>买入区</small></div>
+  <div><small>隐含年化</small><b class="num">29.2%</b><small>L1 正常</small></div></div>
+  <div class="bar"><span class="z z0" style="left:0;width:45.45454545454545%"></span><span class="z z1" style="left:45.45454545454545%;width:27.27272727272728%"></span><span class="z z2" style="left:72.72727272727273%;width:9.09090909090908%"></span><span class="z z3" style="left:81.81818181818181%;width:9.090909090909093%"></span><span class="z z4" style="left:90.9090909090909%;right:0"></span><i style="left:83.24475524475524%"></i></div>
+  <div class="barlbl"><span style="left:22.727272727272727%">减仓</span><span style="left:59.09090909090908%">持有</span><span style="left:77.27272727272727%">观察</span><span style="left:86.36363636363636%">买入</span><span style="left:95.45454545454545%">重仓</span></div>
+  <h3>买入阶梯</h3><table><thead><tr><th>档</th><th>价格</th><th>股数</th><th>金额</th><th>折价</th><th>状态</th></tr></thead><tbody><tr><td>T1</td><td class="num">390</td><td class="num">4,300</td><td class="num">¥152.6万</td><td class="num">40.0%</td><td><span class="st st-hit">已触发</span></td></tr><tr><td>T2</td><td class="num">360</td><td class="num">5,300</td><td class="num">¥173.6万</td><td class="num">44.6%</td><td><span class="st st-idle">未到</span></td></tr><tr><td>T3</td><td class="num">330</td><td class="num">5,800</td><td class="num">¥174.2万</td><td class="num">49.2%</td><td><span class="st st-idle">未到</span></td></tr></tbody></table>
+  
+  <h3>卖出 L2</h3><table><thead><tr><th>线</th><th>价格</th><th>动作</th><th>距离</th></tr></thead><tbody><tr><td>IV+15%</td><td class="num">748</td><td>减 1/3</td><td class="num">+96.9%</td></tr><tr><td>IV+30%</td><td class="num">845</td><td>减到半仓</td><td class="num">+122.5%</td></tr><tr><td>IV+50%</td><td class="num">975</td><td>清仓</td><td class="num">+156.7%</td></tr></tbody></table>
+  <h3>L1 逻辑破坏清单</h3><ul class="l1"><li class="l1-pending"><b>TC-1</b> 营销服务（广告）收入连续 4 个季度同比负增长<br><small>待填数据</small></li><li class="l1-ok"><b>TC-2</b> 游戏监管回到 2021 年力度：版号停发超 3 个月 / 抽成被强制下调 / 未成年人新规致流水 −20%<br><small>人工核查项，未触发</small></li><li class="l1-ok"><b>TC-3</b> 微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）<br><small>人工核查项，未触发</small></li><li class="l1-ok"><b>TC-4</b> 回购停止或大股东再度减持超 1%<br><small>人工核查项，未触发</small></li></ul>
+  <h3>今日新闻核查</h3><p class="muted">无命中 L1 关键词的新闻</p>
+</section>
+<section class="card">
+  <header><div><h2>贵州茅台</h2><span class="muted">600519.SH · 3R 25/30 · 预算 ¥250.0万</span></div>
+  <div class="big"><span class="num">1336.95</span><small>CNY</small></div></header>
+  <div class="kpis"><div><small>内在价值</small><b class="num">1837</b><small>1650–2050</small></div>
+  <div><small>折价率</small><b class="num">27.2%</b><small>持有区</small></div>
+  <div><small>隐含年化</small><b class="num">20.1%</b><small>L1 正常</small></div></div>
+  <div class="bar"><span class="z z0" style="left:0;width:45.45454545454545%"></span><span class="z z1" style="left:45.45454545454545%;width:27.27272727272728%"></span><span class="z z2" style="left:72.72727272727273%;width:9.09090909090908%"></span><span class="z z3" style="left:81.81818181818181%;width:9.090909090909093%"></span><span class="z z4" style="left:90.9090909090909%;right:0"></span><i style="left:70.20092047310337%"></i></div>
+  <div class="barlbl"><span style="left:22.727272727272727%">减仓</span><span style="left:59.09090909090908%">持有</span><span style="left:77.27272727272727%">观察</span><span style="left:86.36363636363636%">买入</span><span style="left:95.45454545454545%">重仓</span></div>
+  <h3>买入阶梯</h3><table><thead><tr><th>档</th><th>价格</th><th>股数</th><th>金额</th><th>折价</th><th>状态</th></tr></thead><tbody><tr><td>M1</td><td class="num">1180</td><td class="num">800</td><td class="num">¥94.4万</td><td class="num">35.8%</td><td><span class="st st-idle">未到</span></td></tr><tr><td>M2</td><td class="num">1090</td><td class="num">800</td><td class="num">¥87.2万</td><td class="num">40.7%</td><td><span class="st st-idle">未到</span></td></tr><tr><td>M3</td><td class="num">1000</td><td class="num">600</td><td class="num">¥60.0万</td><td class="num">45.6%</td><td><span class="st st-idle">未到</span></td></tr></tbody></table>
+  
+  <h3>卖出 L2</h3><table><thead><tr><th>线</th><th>价格</th><th>动作</th><th>距离</th></tr></thead><tbody><tr><td>IV+15%</td><td class="num">2113</td><td>减 1/3</td><td class="num">+58.0%</td></tr><tr><td>IV+30%</td><td class="num">2388</td><td>减到半仓</td><td class="num">+78.6%</td></tr><tr><td>IV+50%</td><td class="num">2756</td><td>清仓</td><td class="num">+106.1%</td></tr></tbody></table>
+  <h3>L1 逻辑破坏清单</h3><ul class="l1"><li class="l1-ok"><b>MT-1</b> 飞天散瓶批价跌破出厂合同价 ¥1,369 并持续两个季度<br><small>最新 1700元，连续 0/2 期</small></li><li class="l1-ok"><b>MT-2</b> 分红率承诺从 75% 下调<br><small>当前 75%，阈值 75%，安全垫 0%</small></li><li class="l1-pending"><b>MT-3</b> 合同负债连续两季同比 −30%（经销商体系崩塌）<br><small>待填数据</small></li><li class="l1-ok"><b>MT-4</b> 直销占比回退且吨价同比下滑<br><small>人工核查项，未触发</small></li></ul>
+  <h3>今日新闻核查</h3><p class="muted">无命中 L1 关键词的新闻</p>
+</section>
+<section class="card">
+  <header><div><h2>泡泡玛特</h2><span class="muted">9992.HK · 3R 21/30 · 预算 ¥150.0万</span></div>
+  <div class="big"><span class="num">130.6</span><small>HKD</small></div></header>
+  <div class="kpis"><div><small>内在价值</small><b class="num">155</b><small>120–200</small></div>
+  <div><small>折价率</small><b class="num">15.7%</b><small>持有区</small></div>
+  <div><small>隐含年化</small><b class="num">14.3%</b><small>L1 正常</small></div></div>
+  <div class="bar"><span class="z z0" style="left:0;width:45.45454545454545%"></span><span class="z z1" style="left:45.45454545454545%;width:27.27272727272728%"></span><span class="z z2" style="left:72.72727272727273%;width:9.09090909090908%"></span><span class="z z3" style="left:81.81818181818181%;width:9.090909090909093%"></span><span class="z z4" style="left:90.9090909090909%;right:0"></span><i style="left:59.76539589442815%"></i></div>
+  <div class="barlbl"><span style="left:22.727272727272727%">减仓</span><span style="left:59.09090909090908%">持有</span><span style="left:77.27272727272727%">观察</span><span style="left:86.36363636363636%">买入</span><span style="left:95.45454545454545%">重仓</span></div>
+  <h3>买入阶梯</h3><table><thead><tr><th>档</th><th>价格</th><th>股数</th><th>金额</th><th>折价</th><th>状态</th></tr></thead><tbody><tr><td>P1</td><td class="num">93</td><td class="num">5,300</td><td class="num">¥44.9万</td><td class="num">40.0%</td><td><span class="st st-idle">未到</span></td></tr><tr><td>P2</td><td class="num">85</td><td class="num">6,800</td><td class="num">¥52.6万</td><td class="num">45.2%</td><td><span class="st st-idle">未到</span></td></tr><tr><td>P3</td><td class="num">78</td><td class="num">7,400</td><td class="num">¥52.5万</td><td class="num">49.7%</td><td><span class="st st-idle">未到</span></td></tr></tbody></table>
+  
+  <h3>卖出 L2</h3><table><thead><tr><th>线</th><th>价格</th><th>动作</th><th>距离</th></tr></thead><tbody><tr><td>IV+15%</td><td class="num">178</td><td>减 1/3</td><td class="num">+36.3%</td></tr><tr><td>IV+30%</td><td class="num">202</td><td>减到半仓</td><td class="num">+54.7%</td></tr><tr><td>IV+50%</td><td class="num">233</td><td>清仓</td><td class="num">+78.4%</td></tr></tbody></table>
+  <h3>L1 逻辑破坏清单</h3><ul class="l1"><li class="l1-pending"><b>PM-1</b> 非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）<br><small>待填数据（观察期至 2027-09-30）</small></li><li class="l1-pending"><b>PM-2</b> 总收入连续 2 季同比负增长<br><small>待填数据</small></li><li class="l1-pending"><b>PM-3</b> 存货周转天数超 220 天且存货绝对额同比 +30%<br><small>存货周转天数 待填；存货同比 待填</small></li><li class="l1-ok"><b>PM-4</b> 新品发售 3 个月内二手溢价为负<br><small>人工核查项，未触发</small></li><li class="l1-pending"><b>PM-5</b> 毛利率跌破 55%<br><small>待填数据</small></li></ul>
+  <h3>今日新闻核查</h3><p class="muted">无命中 L1 关键词的新闻</p>
+</section>
+<section class="card">
+  <header><div><h2>禾赛科技-W</h2><span class="muted">02525.HK · 3R 19/30 · 预算 ¥100.0万</span></div>
+  <div class="big"><span class="num">11.77</span><small>HKD</small></div></header>
+  <div class="kpis"><div><small>内在价值</small><b class="num">20.3</b><small>16–26</small></div>
+  <div><small>折价率</small><b class="num">42.0%</b><small>买入区</small></div>
+  <div><small>隐含年化</small><b class="num">29.5%</b><small>L1 正常</small></div></div>
+  <div class="bar"><span class="z z0" style="left:0;width:45.45454545454545%"></span><span class="z z1" style="left:45.45454545454545%;width:27.27272727272728%"></span><span class="z z2" style="left:72.72727272727273%;width:9.09090909090908%"></span><span class="z z3" style="left:81.81818181818181%;width:9.090909090909093%"></span><span class="z z4" style="left:90.9090909090909%;right:0"></span><i style="left:83.65427675772503%"></i></div>
+  <div class="barlbl"><span style="left:22.727272727272727%">减仓</span><span style="left:59.09090909090908%">持有</span><span style="left:77.27272727272727%">观察</span><span style="left:86.36363636363636%">买入</span><span style="left:95.45454545454545%">重仓</span></div>
+  <h3>买入阶梯</h3><table><thead><tr><th>档</th><th>价格</th><th>股数</th><th>金额</th><th>折价</th><th>状态</th></tr></thead><tbody><tr><td>H1a</td><td class="num">11.8</td><td class="num">16,000</td><td class="num">¥17.2万</td><td class="num">41.9%</td><td><span class="st st-hit">已触发</span></td></tr><tr><td>H1b</td><td class="num">11.8</td><td class="num">16,000</td><td class="num">¥17.2万</td><td class="num">41.9%</td><td><span class="st st-idle">价格到位，等待条件</span></td></tr><tr><td>H2</td><td class="num">10.8</td><td class="num">43,000</td><td class="num">¥42.3万</td><td class="num">46.8%</td><td><span class="st st-idle">未到</span></td></tr></tbody></table>
+  <p class="muted">可选风控线（仓位纪律，非估值依据）：9.82</p>
+  <h3>卖出 L2</h3><table><thead><tr><th>线</th><th>价格</th><th>动作</th><th>距离</th></tr></thead><tbody><tr><td>IV+15%</td><td class="num">23.3</td><td>减 1/3</td><td class="num">+98.0%</td></tr><tr><td>IV+30%</td><td class="num">26.4</td><td>减到半仓</td><td class="num">+124.3%</td></tr><tr><td>IV+50%</td><td class="num">30.5</td><td>清仓</td><td class="num">+159.1%</td></tr></tbody></table>
+  <h3>L1 逻辑破坏清单</h3><ul class="l1"><li class="l1-ok"><b>HS-1</b> 毛利率跌破 35%（成本追不上降价）<br><small>当前 39.7%，阈值 35%，安全垫 13%</small></li><li class="l1-pending"><b>HS-2</b> 出货量增速低于 30% 且低于指引下限（2026 指引 300–350 万台）<br><small>出货量同比 待填；全年出货（万台） 待填</small></li><li class="l1-pending"><b>HS-3</b> 经营现金流连续两年为负<br><small>待填数据</small></li><li class="l1-ok"><b>HS-4</b> 中国乘用车装机份额跌破 25%（被速腾实质替代）<br><small>当前 33.7%，阈值 25%，安全垫 35%</small></li><li class="l1-pending"><b>HS-5</b> SGI 到 2027 年底仍未盈亏平衡且累计亏损超 ¥10 亿<br><small>待填数据（观察期至 2027-12-31）</small></li></ul>
+  <h3>今日新闻核查</h3><p class="muted">无命中 L1 关键词的新闻</p>
+</section></div>
+<p class="muted">所有档位价格都是「到了就做什么」的条件句式，不是对价格的预测。本页为个人投资纪律记录，不构成投资建议。</p>
+</main></body></html>
