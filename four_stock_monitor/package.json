@@ -1,0 +1,13 @@
+{
+  "name": "four-stock-monitor",
+  "private": true,
+  "type": "module",
+  "description": "四标投资纪律框架：买入阶梯 / 每日信息追踪 / 卖出框架 / 提醒",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "daily": "node monitor.mjs",
+    "intraday": "node monitor.mjs --mode intraday",
+    "check": "node monitor.mjs --offline --no-notify --no-write",
+    "test": "node --test test/*.test.mjs"
+  }
+}

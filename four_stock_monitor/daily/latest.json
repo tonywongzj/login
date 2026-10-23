@@ -1,0 +1,546 @@
+{
+  "today": "2026-10-23",
+  "version": "v1.1",
+  "planCapitalCny": 10000000,
+  "investedCny": 234416.00000000003,
+  "cashCny": 9765584,
+  "stocks": [
+    {
+      "id": "tencent",
+      "name": "腾讯控股",
+      "code": "0700.HK",
+      "currency": "HKD",
+      "iv": 650,
+      "ivRange": [
+        590,
+        720
+      ],
+      "score3R": 25,
+      "budgetCny": 5000000,
+      "quote": {
+        "price": 379.8,
+        "source": "rules.json",
+        "time": "2026-10-23",
+        "stale": false
+      },
+      "price": 379.8,
+      "signals": [
+        {
+          "type": "BUY",
+          "tag": "买入",
+          "key": "tencent:buy:T1",
+          "push": true,
+          "msg": "腾讯控股 触发 T1：现价 379.8 ≤ 390，买 4,300 股（≈¥148.6万，折价 41.6%）"
+        }
+      ],
+      "l1": [
+        {
+          "id": "TC-1",
+          "text": "营销服务（广告）收入连续 4 个季度同比负增长",
+          "status": "pending",
+          "detail": "待填数据"
+        },
+        {
+          "id": "TC-2",
+          "text": "游戏监管回到 2021 年力度：版号停发超 3 个月 / 抽成被强制下调 / 未成年人新规致流水 −20%",
+          "status": "ok",
+          "detail": "人工核查项，未触发"
+        },
+        {
+          "id": "TC-3",
+          "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
+          "status": "ok",
+          "detail": "人工核查项，未触发"
+        },
+        {
+          "id": "TC-4",
+          "text": "回购停止或大股东再度减持超 1%",
+          "status": "ok",
+          "detail": "人工核查项，未触发"
+        }
+      ],
+      "logicBroken": false,
+      "position": {
+        "shares": 0,
+        "avgCost": 0,
+        "costCny": 0,
+        "valueCny": 0
+      },
+      "buyLadder": [
+        {
+          "id": "T1",
+          "price": 390,
+          "shares": 4300,
+          "filled": false,
+          "discount": 0.4,
+          "amountCny": 1526070,
+          "distance": -0.026153846153846083,
+          "status": "已触发"
+        },
+        {
+          "id": "T2",
+          "price": 360,
+          "shares": 5300,
+          "filled": false,
+          "discount": 0.4461538461538461,
+          "amountCny": 1736280,
+          "distance": 0.05499999999999994,
+          "status": "未到"
+        },
+        {
+          "id": "T3",
+          "price": 330,
+          "shares": 5800,
+          "filled": false,
+          "discount": 0.49230769230769234,
+          "amountCny": 1741740,
+          "distance": 0.15090909090909088,
+          "status": "未到"
+        }
+      ],
+      "sellLines": [
+        {
+          "premium": 0.15,
+          "action": "减 1/3",
+          "price": 748,
+          "distance": 0.9694576092680358,
+          "status": "未到"
+        },
+        {
+          "premium": 0.3,
+          "action": "减到半仓",
+          "price": 845,
+          "distance": 1.2248551869404949,
+          "status": "未到"
+        },
+        {
+          "premium": 0.5,
+          "action": "清仓",
+          "price": 975,
+          "distance": 1.5671406003159558,
+          "status": "未到"
+        }
+      ],
+      "discount": 0.4156923076923077,
+      "zone": "买入区",
+      "impliedReturn": 0.29184345002375855,
+      "discountRange": [
+        0.3562711864406779,
+        0.47250000000000003
+      ]
+    },
+    {
+      "id": "moutai",
+      "name": "贵州茅台",
+      "code": "600519.SH",
+      "currency": "CNY",
+      "iv": 1837,
+      "ivRange": [
+        1650,
+        2050
+      ],
+      "score3R": 25,
+      "budgetCny": 2500000,
+      "quote": {
+        "price": 1336.95,
+        "source": "rules.json",
+        "time": "2026-10-23",
+        "stale": false
+      },
+      "price": 1336.95,
+      "signals": [],
+      "l1": [
+        {
+          "id": "MT-1",
+          "text": "飞天散瓶批价跌破出厂合同价 ¥1,369 并持续两个季度",
+          "status": "ok",
+          "detail": "最新 1700元，连续 0/2 期"
+        },
+        {
+          "id": "MT-2",
+          "text": "分红率承诺从 75% 下调",
+          "status": "ok",
+          "detail": "当前 75%，阈值 75%，安全垫 0%"
+        },
+        {
+          "id": "MT-3",
+          "text": "合同负债连续两季同比 −30%（经销商体系崩塌）",
+          "status": "pending",
+          "detail": "待填数据"
+        },
+        {
+          "id": "MT-4",
+          "text": "直销占比回退且吨价同比下滑",
+          "status": "ok",
+          "detail": "人工核查项，未触发"
+        }
+      ],
+      "logicBroken": false,
+      "position": {
+        "shares": 0,
+        "avgCost": 0,
+        "costCny": 0,
+        "valueCny": 0
+      },
+      "buyLadder": [
+        {
+          "id": "M1",
+          "price": 1180,
+          "shares": 800,
+          "filled": false,
+          "discount": 0.3576483396842678,
+          "amountCny": 944000,
+          "distance": 0.13300847457627119,
+          "status": "未到"
+        },
+        {
+          "id": "M2",
+          "price": 1090,
+          "shares": 800,
+          "filled": false,
+          "discount": 0.4066412629286881,
+          "amountCny": 872000,
+          "distance": 0.22655963302752302,
+          "status": "未到"
+        },
+        {
+          "id": "M3",
+          "price": 1000,
+          "shares": 600,
+          "filled": false,
+          "discount": 0.45563418617310836,
+          "amountCny": 600000,
+          "distance": 0.3369500000000001,
+          "status": "未到"
+        }
+      ],
+      "sellLines": [
+        {
+          "premium": 0.15,
+          "action": "减 1/3",
+          "price": 2113,
+          "distance": 0.5804629941284265,
+          "status": "未到"
+        },
+        {
+          "premium": 0.3,
+          "action": "减到半仓",
+          "price": 2388,
+          "distance": 0.7861550544148996,
+          "status": "未到"
+        },
+        {
+          "premium": 0.5,
+          "action": "清仓",
+          "price": 2756,
+          "distance": 1.061408429634616,
+          "status": "未到"
+        }
+      ],
+      "discount": 0.2722101252041371,
+      "zone": "持有区",
+      "impliedReturn": 0.2006647276402771,
+      "discountRange": [
+        0.18972727272727274,
+        0.3478292682926829
+      ]
+    },
+    {
+      "id": "popmart",
+      "name": "泡泡玛特",
+      "code": "9992.HK",
+      "currency": "HKD",
+      "iv": 155,
+      "ivRange": [
+        120,
+        200
+      ],
+      "score3R": 21,
+      "budgetCny": 1500000,
+      "quote": {
+        "price": 130.6,
+        "source": "rules.json",
+        "time": "2026-10-23",
+        "stale": false
+      },
+      "price": 130.6,
+      "signals": [],
+      "l1": [
+        {
+          "id": "PM-1",
+          "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
+          "status": "pending",
+          "detail": "待填数据（观察期至 2027-09-30）"
+        },
+        {
+          "id": "PM-2",
+          "text": "总收入连续 2 季同比负增长",
+          "status": "pending",
+          "detail": "待填数据"
+        },
+        {
+          "id": "PM-3",
+          "text": "存货周转天数超 220 天且存货绝对额同比 +30%",
+          "status": "pending",
+          "detail": "存货周转天数 待填；存货同比 待填"
+        },
+        {
+          "id": "PM-4",
+          "text": "新品发售 3 个月内二手溢价为负",
+          "status": "ok",
+          "detail": "人工核查项，未触发"
+        },
+        {
+          "id": "PM-5",
+          "text": "毛利率跌破 55%",
+          "status": "pending",
+          "detail": "待填数据"
+        }
+      ],
+      "logicBroken": false,
+      "position": {
+        "shares": 0,
+        "avgCost": 0,
+        "costCny": 0,
+        "valueCny": 0
+      },
+      "buyLadder": [
+        {
+          "id": "P1",
+          "price": 93,
+          "shares": 5300,
+          "filled": false,
+          "discount": 0.4,
+          "amountCny": 448539,
+          "distance": 0.4043010752688172,
+          "status": "未到"
+        },
+        {
+          "id": "P2",
+          "price": 85,
+          "shares": 6800,
+          "filled": false,
+          "discount": 0.4516129032258065,
+          "amountCny": 525980,
+          "distance": 0.536470588235294,
+          "status": "未到"
+        },
+        {
+          "id": "P3",
+          "price": 78,
+          "shares": 7400,
+          "filled": false,
+          "discount": 0.49677419354838714,
+          "amountCny": 525252,
+          "distance": 0.6743589743589742,
+          "status": "未到"
+        }
+      ],
+      "sellLines": [
+        {
+          "premium": 0.15,
+          "action": "减 1/3",
+          "price": 178,
+          "distance": 0.3629402756508424,
+          "status": "未到"
+        },
+        {
+          "premium": 0.3,
+          "action": "减到半仓",
+          "price": 202,
+          "distance": 0.5467075038284841,
+          "status": "未到"
+        },
+        {
+          "premium": 0.5,
+          "action": "清仓",
+          "price": 233,
+          "distance": 0.7840735068912712,
+          "status": "未到"
+        }
+      ],
+      "discount": 0.15741935483870972,
+      "zone": "持有区",
+      "impliedReturn": 0.14345724153924677,
+      "discountRange": [
+        -0.08833333333333337,
+        0.347
+      ]
+    },
+    {
+      "id": "hesai",
+      "name": "禾赛科技-W",
+      "code": "02525.HK",
+      "currency": "HKD",
+      "iv": 20.3,
+      "ivRange": [
+        16,
+        26
+      ],
+      "score3R": 19,
+      "budgetCny": 1000000,
+      "quote": {
+        "price": 11.77,
+        "source": "rules.json",
+        "time": "2026-10-23",
+        "stale": false
+      },
+      "price": 11.77,
+      "signals": [
+        {
+          "type": "BUY",
+          "tag": "买入",
+          "key": "hesai:buy:H1a",
+          "push": true,
+          "msg": "禾赛科技-W 触发 H1a：现价 11.77 ≤ 11.8，买 16,000 股（≈¥17.1万，折价 42.0%）"
+        },
+        {
+          "type": "BUY_WAIT",
+          "tag": "预警",
+          "key": "hesai:buywait:H1b",
+          "push": true,
+          "msg": "禾赛科技-W H1b @11.8 价格已到，但前置条件未确认：Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正"
+        }
+      ],
+      "l1": [
+        {
+          "id": "HS-1",
+          "text": "毛利率跌破 35%（成本追不上降价）",
+          "status": "ok",
+          "detail": "当前 39.7%，阈值 35%，安全垫 13%"
+        },
+        {
+          "id": "HS-2",
+          "text": "出货量增速低于 30% 且低于指引下限（2026 指引 300–350 万台）",
+          "status": "pending",
+          "detail": "出货量同比 待填；全年出货（万台） 待填"
+        },
+        {
+          "id": "HS-3",
+          "text": "经营现金流连续两年为负",
+          "status": "pending",
+          "detail": "待填数据"
+        },
+        {
+          "id": "HS-4",
+          "text": "中国乘用车装机份额跌破 25%（被速腾实质替代）",
+          "status": "ok",
+          "detail": "当前 33.7%，阈值 25%，安全垫 35%"
+        },
+        {
+          "id": "HS-5",
+          "text": "SGI 到 2027 年底仍未盈亏平衡且累计亏损超 ¥10 亿",
+          "status": "pending",
+          "detail": "待填数据（观察期至 2027-12-31）"
+        }
+      ],
+      "logicBroken": false,
+      "position": {
+        "shares": 20000,
+        "avgCost": 12.88,
+        "costCny": 234416.00000000003,
+        "valueCny": 214214
+      },
+      "buyLadder": [
+        {
+          "id": "H1a",
+          "price": 11.8,
+          "shares": 16000,
+          "filled": false,
+          "note": "第一档前半笔",
+          "discount": 0.41871921182266003,
+          "amountCny": 171808,
+          "distance": -0.0025423728813560587,
+          "status": "已触发"
+        },
+        {
+          "id": "H1b",
+          "price": 11.8,
+          "shares": 16000,
+          "filled": false,
+          "note": "第一档后半笔",
+          "condition": "Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正",
+          "conditionMet": false,
+          "discount": 0.41871921182266003,
+          "amountCny": 171808,
+          "distance": -0.0025423728813560587,
+          "status": "价格到位，等待条件"
+        },
+        {
+          "id": "H2",
+          "price": 10.8,
+          "shares": 43000,
+          "filled": false,
+          "discount": 0.46798029556650245,
+          "amountCny": 422604.00000000006,
+          "distance": 0.08981481481481479,
+          "status": "未到"
+        }
+      ],
+      "sellLines": [
+        {
+          "premium": 0.15,
+          "action": "减 1/3",
+          "price": 23.3,
+          "distance": 0.9796091758708583,
+          "status": "未到"
+        },
+        {
+          "premium": 0.3,
+          "action": "减到半仓",
+          "price": 26.4,
+          "distance": 1.2429906542056073,
+          "status": "未到"
+        },
+        {
+          "premium": 0.5,
+          "action": "清仓",
+          "price": 30.5,
+          "distance": 1.591333899745115,
+          "status": "未到"
+        }
+      ],
+      "discount": 0.4201970443349754,
+      "zone": "买入区",
+      "impliedReturn": 0.2951804504160431,
+      "discountRange": [
+        0.264375,
+        0.5473076923076923
+      ],
+      "riskLine": {
+        "price": 9.82,
+        "note": "可选风控线（仓位纪律，非估值依据）",
+        "hit": false
+      }
+    }
+  ],
+  "l3": [],
+  "events": [],
+  "signals": [
+    {
+      "type": "BUY",
+      "tag": "买入",
+      "key": "tencent:buy:T1",
+      "push": true,
+      "msg": "腾讯控股 触发 T1：现价 379.8 ≤ 390，买 4,300 股（≈¥148.6万，折价 41.6%）",
+      "stock": "tencent"
+    },
+    {
+      "type": "BUY",
+      "tag": "买入",
+      "key": "hesai:buy:H1a",
+      "push": true,
+      "msg": "禾赛科技-W 触发 H1a：现价 11.77 ≤ 11.8，买 16,000 股（≈¥17.1万，折价 42.0%）",
+      "stock": "hesai"
+    },
+    {
+      "type": "BUY_WAIT",
+      "tag": "预警",
+      "key": "hesai:buywait:H1b",
+      "push": true,
+      "msg": "禾赛科技-W H1b @11.8 价格已到，但前置条件未确认：Q3 财报达标：ASP 止跌 / SGI 兑现 ¥2–3 亿指引 / 经营现金流转正",
+      "stock": "hesai"
+    }
+  ],
+  "news": {}
+}
