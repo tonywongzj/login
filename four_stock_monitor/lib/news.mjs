@@ -41,7 +41,7 @@ export function tagItems(stock, items) {
     if (!mentionsStock(stock, it.title)) return { ...it, l1: hits };
     for (const c of stock.l1) {
       const kw = matchKeywords(it.title, c.keywords ?? []);
-      if (kw.length) hits.push({ id: c.id, keywords: kw });
+      if (kw.length) hits.push({ id: c.id, text: c.text, keywords: kw });
     }
     return { ...it, l1: hits };
   });
