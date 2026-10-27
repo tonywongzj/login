@@ -36,6 +36,7 @@ const { values: args } = parseArgs({
 });
 
 const shanghaiDate = (d = new Date()) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(d);
+const shanghaiHour = (d = new Date()) => Number(new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Shanghai', hour: 'numeric', hourCycle: 'h23' }).format(d));
 
 // 行情时间 → 上海日期，用于判断是否休市/停牌（行情日期 ≠ 今天）
 function quoteDate(q) {
@@ -58,7 +59,8 @@ async function main() {
   const rules = await readJson(RULES);
   if (!rules) throw new Error(`无法读取 ${RULES}`);
   const state = await readJson(STATE, { fired: {}, lastRun: null });
-  const today = args.date ?? shanghaiDate();
+  let today = args.date ?? shanghaiDate();
+  const hour = shanghaiHour();
   if (!['daily', 'intraday', 'open'].includes(args.mode)) throw new Error(`未知 --mode ${args.mode}（daily / intraday / open）`);
   const intraday = args.mode === 'intraday';
   const open = args.mode === 'open';
@@ -76,11 +78,31 @@ async function main() {
     if (!rules.stocks.some((s) => s.id === id)) throw new Error(`--price 未知标的 ${id}（可用：${rules.stocks.map((s) => s.id).join(', ')}）`);
     quotes[id] = { price: Number(v), source: 'manual', time: today };
   }
+  // 收盘日报被调度器拖到次日凌晨（GitHub 定时任务常延迟数小时）：按最近交易日出报告，而不是当成休市跳过
+  if (args.mode === 'daily' && !args.date && !args.offline && hour < 9) {
+    const last = Object.values(quotes).map(quoteDate).filter(Boolean).sort().pop();
+    if (last && last < today) {
+      console.error(`[monitor] 次日凌晨补跑收盘日报，按 ${last} 出报告`);
+      today = last;
+    }
+  }
   for (const q of Object.values(quotes)) q.stale = !args.offline && q.source !== 'manual' && quoteDate(q) !== today;
 
   const live = Object.values(quotes).filter((q) => !q.stale);
   if (!args.force && !args.offline && live.length === 0 && Object.keys(quotes).length > 0) {
     console.error(`[monitor] ${today} 所有行情都不是今日数据（休市/非交易日），跳过。用 --force 强制运行。`);
+    return;
+  }
+
+  // 开盘/收盘提醒每天只推一次：外部定时器和 GitHub 自带定时任务可能都会触发，后到的直接跳过
+  const reminded = state.reminded ?? {};
+  if ((open || args.mode === 'daily') && !args.force && !args.offline && reminded[args.mode] === today) {
+    console.error(`[monitor] ${today} 的 ${args.mode} 提醒已推送过，跳过。`);
+    return;
+  }
+  // 开盘提醒被延迟到午后就没意义了（收盘会再推一次），不发
+  if (open && !args.force && !args.date && hour >= 12) {
+    console.error(`[monitor] 开盘提醒延迟到 ${hour} 点才运行，已过时，跳过。`);
     return;
   }
 
@@ -117,7 +139,8 @@ async function main() {
   const md = renderMarkdown(result, news);
   if (!args['no-write']) {
     await mkdir(join(ROOT, 'state'), { recursive: true });
-    await writeFile(STATE, JSON.stringify({ fired, lastRun: new Date().toISOString(), lastMode: args.mode }, null, 2) + '\n');
+    if ((open || args.mode === 'daily') && !args['no-notify']) reminded[args.mode] = today;
+    await writeFile(STATE, JSON.stringify({ fired, reminded, lastRun: new Date().toISOString(), lastMode: args.mode }, null, 2) + '\n');
     if (!quick) {
       await mkdir(DAILY, { recursive: true });
       await writeFile(join(DAILY, `${today}.md`), md);
