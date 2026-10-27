@@ -11,7 +11,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { evaluateAll } from './lib/engine.mjs';
+import { evaluateAll, addDays } from './lib/engine.mjs';
 import { fetchQuotes } from './lib/quotes.mjs';
 import { fetchNews } from './lib/news.mjs';
 import { notify } from './lib/notify.mjs';
@@ -109,18 +109,22 @@ async function main() {
   // 2. 评估
   const result = evaluateAll(rules, quotes, today);
 
-  // 3. 新闻（仅日报）
+  // 3. 新闻（开盘 + 收盘各扫一次；盘中不扫）。同一条新闻只推一次：开盘推过的，收盘不再重复
   const news = {};
-  if (!quick && !args['no-news'] && !args.offline) {
+  const newsSeen = { ...(state.newsSeen ?? {}) };
+  if (!intraday && !args['no-news'] && !args.offline) {
     for (const s of rules.stocks) news[s.id] = await fetchNews(s, { lookbackHours: rules.alerts.newsLookbackHours });
-    // 新闻汇总成一条提醒（每天一次），附每条新闻的标题、对应的 L1 条件、命中词和原文链接
-    const details = rules.stocks.flatMap((s) => news[s.id].flagged.map((it) => ({ stock: s.name, ...it })));
+    const all = rules.stocks.flatMap((s) => news[s.id].flagged.map((it) => ({ stock: s.name, ...it })));
+    const details = args.force ? all : all.filter((it) => !newsSeen[it.title]);
+    for (const it of details) newsSeen[it.title] = today;
     if (details.length) {
-      const counts = rules.stocks.map((s) => [s.name, news[s.id].flagged.length]).filter(([, n]) => n > 0);
+      const counts = [...new Set(details.map((d) => d.stock))].map((n) => `${n} ${details.filter((d) => d.stock === n).length}`);
       result.signals.push({ type: 'NEWS', tag: '预警', key: `news:${today}`, push: true, details,
-        msg: `${details.length} 条新闻命中 L1 关键词，需人工核查（${counts.map(([n, c]) => `${n} ${c}`).join('、')}）` });
+        msg: `${details.length} 条新闻命中 L1 关键词，需人工核查（${counts.join('、')}）` });
     }
   }
+  // 只保留最近 3 天的已推新闻记录
+  for (const [t, d] of Object.entries(newsSeen)) if (d < addDays(today, -3)) delete newsSeen[t];
 
   // 4. 去重：同一信号只在首次出现时推送；条件消失后清除，再次出现会重新提醒
   const active = result.signals.filter((s) => s.push);
@@ -140,7 +144,7 @@ async function main() {
   if (!args['no-write']) {
     await mkdir(join(ROOT, 'state'), { recursive: true });
     if ((open || args.mode === 'daily') && !args['no-notify']) reminded[args.mode] = today;
-    await writeFile(STATE, JSON.stringify({ fired, reminded, lastRun: new Date().toISOString(), lastMode: args.mode }, null, 2) + '\n');
+    await writeFile(STATE, JSON.stringify({ fired, reminded, newsSeen, lastRun: new Date().toISOString(), lastMode: args.mode }, null, 2) + '\n');
     if (!quick) {
       await mkdir(DAILY, { recursive: true });
       await writeFile(join(DAILY, `${today}.md`), md);
