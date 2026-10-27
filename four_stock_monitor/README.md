@@ -41,6 +41,31 @@
 
 > GitHub 的定时任务只在**默认分支**上运行：把本分支合并到 main 后才会自动跑。也可以在 Actions 页面手动 Run workflow。
 
+### 准点触发：cron-job.org
+
+GitHub 自带的定时任务只是「尽量执行」：2026-10-26 的开盘提醒晚了 5 小时，收盘日报拖到次日 00:13，盘中巡检大多被丢弃。要准点，就用 [cron-job.org](https://cron-job.org)（免费，精确到分钟）按时调用 GitHub 接口来触发工作流。GitHub 自带的定时任务保留作兜底；开盘、收盘提醒每天只推一次，两边都触发也不会重复。
+
+**1. GitHub 令牌**（只能触发本仓库的 Actions）
+头像 → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
+- Repository access：Only select repositories → `login`
+- Permissions → Repository permissions → **Actions: Read and write**
+- 有效期选最长；到期前记得换新令牌，否则准点推送会停
+
+**2. cron-job.org 建 3 个任务**（时区选 Asia/Shanghai，日期选周一到周五）
+
+| 任务 | 时间 | Request body |
+|---|---|---|
+| 四标开盘 | 09:35 | `{"ref":"main","inputs":{"mode":"open"}}` |
+| 四标收盘 | 17:30 | `{"ref":"main","inputs":{"mode":"daily"}}` |
+| 四标盘中（可选） | 10:00–16:00 每 30 分钟 | `{"ref":"main","inputs":{"mode":"intraday"}}` |
+
+三个任务共用的设置：
+- URL：`https://api.github.com/repos/tonywongzj/login/actions/workflows/four-stock-monitor.yml/dispatches`
+- Request method：`POST`
+- Headers：`Authorization: Bearer <令牌>`、`Accept: application/vnd.github+json`、`Content-Type: application/json`
+
+建好后点 Test run，返回 **204** 就是成功，GitHub 的 Actions 页面会立刻出现一次 `workflow_dispatch` 运行。
+
 ## 本地运行
 
 ```bash
