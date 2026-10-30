@@ -1,5 +1,5 @@
 {
-  "today": "2026-10-29",
+  "today": "2026-10-30",
   "version": "v1.1",
   "planCapitalCny": 10000000,
   "investedCny": 234416.00000000003,
@@ -18,22 +18,22 @@
       "score3R": 25,
       "budgetCny": 5000000,
       "quote": {
-        "price": 377.6,
-        "prevClose": 387.6,
-        "high": 386.4,
-        "low": 376.8,
-        "time": "2026/10/29 16:08:29",
+        "price": 383.6,
+        "prevClose": 377.6,
+        "high": 387.6,
+        "low": 375.2,
+        "time": "2026/10/30 16:08:14",
         "source": "tencent",
         "stale": false
       },
-      "price": 377.6,
+      "price": 383.6,
       "signals": [
         {
           "type": "BUY",
           "tag": "买入",
           "key": "tencent:buy:T1",
           "push": true,
-          "msg": "腾讯控股 触发 T1：现价 377.6 ≤ 390，买 4,300 股（≈¥147.8万，折价 41.9%）"
+          "msg": "腾讯控股 触发 T1：现价 383.6 ≤ 390，买 4,300 股（≈¥150.1万，折价 41.0%）"
         }
       ],
       "l1": [
@@ -77,7 +77,7 @@
           "filled": false,
           "discount": 0.4,
           "amountCny": 1526070,
-          "distance": -0.031794871794871726,
+          "distance": -0.016410256410256396,
           "status": "已触发"
         },
         {
@@ -87,7 +87,7 @@
           "filled": false,
           "discount": 0.4461538461538461,
           "amountCny": 1736280,
-          "distance": 0.04888888888888898,
+          "distance": 0.06555555555555559,
           "status": "未到"
         },
         {
@@ -97,7 +97,7 @@
           "filled": false,
           "discount": 0.49230769230769234,
           "amountCny": 1741740,
-          "distance": 0.14424242424242428,
+          "distance": 0.16242424242424258,
           "status": "未到"
         }
       ],
@@ -106,30 +106,30 @@
           "premium": 0.15,
           "action": "减 1/3",
           "price": 748,
-          "distance": 0.9809322033898304,
+          "distance": 0.9499478623566213,
           "status": "未到"
         },
         {
           "premium": 0.3,
           "action": "减到半仓",
           "price": 845,
-          "distance": 1.2378177966101696,
+          "distance": 1.2028154327424398,
           "status": "未到"
         },
         {
           "premium": 0.5,
           "action": "清仓",
           "price": 975,
-          "distance": 1.5820974576271185,
+          "distance": 1.5417101147028154,
           "status": "未到"
         }
       ],
-      "discount": 0.419076923076923,
+      "discount": 0.40984615384615386,
       "zone": "买入区",
-      "impliedReturn": 0.29434747002534367,
+      "impliedReturn": 0.2875635536935901,
       "discountRange": [
-        0.36,
-        0.4755555555555555
+        0.3498305084745762,
+        0.4672222222222222
       ]
     },
     {
@@ -145,15 +145,15 @@
       "score3R": 25,
       "budgetCny": 2500000,
       "quote": {
-        "price": 1354,
-        "prevClose": 1330.75,
-        "high": 1356,
-        "low": 1330.01,
-        "time": "20261029161457",
+        "price": 1392.05,
+        "prevClose": 1354,
+        "high": 1393.37,
+        "low": 1352.98,
+        "time": "20261030161455",
         "source": "tencent",
         "stale": false
       },
-      "price": 1354,
+      "price": 1392.05,
       "signals": [],
       "l1": [
         {
@@ -196,7 +196,7 @@
           "filled": false,
           "discount": 0.3576483396842678,
           "amountCny": 944000,
-          "distance": 0.14745762711864407,
+          "distance": 0.1797033898305085,
           "status": "未到"
         },
         {
@@ -206,7 +206,7 @@
           "filled": false,
           "discount": 0.4066412629286881,
           "amountCny": 872000,
-          "distance": 0.24220183486238533,
+          "distance": 0.2771100917431193,
           "status": "未到"
         },
         {
@@ -216,7 +216,7 @@
           "filled": false,
           "discount": 0.45563418617310836,
           "amountCny": 600000,
-          "distance": 0.3540000000000001,
+          "distance": 0.39205,
           "status": "未到"
         }
       ],
@@ -225,30 +225,30 @@
           "premium": 0.15,
           "action": "减 1/3",
           "price": 2113,
-          "distance": 0.5605612998522895,
+          "distance": 0.5179052476563342,
           "status": "未到"
         },
         {
           "premium": 0.3,
           "action": "减到半仓",
           "price": 2388,
-          "distance": 0.7636632200886262,
+          "distance": 0.7154556230020475,
           "status": "未到"
         },
         {
           "premium": 0.5,
           "action": "清仓",
           "price": 2756,
-          "distance": 1.0354505169867059,
+          "distance": 0.9798139434646744,
           "status": "未到"
         }
       ],
-      "discount": 0.26292868807838865,
+      "discount": 0.24221556886227547,
       "zone": "持有区",
-      "impliedReturn": 0.1956037067118137,
+      "impliedReturn": 0.18460945877333312,
       "discountRange": [
-        0.17939393939393944,
-        0.3395121951219512
+        0.15633333333333332,
+        0.3209512195121952
       ]
     },
     {
@@ -264,15 +264,15 @@
       "score3R": 21,
       "budgetCny": 1500000,
       "quote": {
-        "price": 128.7,
-        "prevClose": 130.7,
-        "high": 130.1,
-        "low": 125.4,
-        "time": "2026/10/29 16:08:29",
+        "price": 134.9,
+        "prevClose": 128.7,
+        "high": 135.3,
+        "low": 129.5,
+        "time": "2026/10/30 16:08:14",
         "source": "tencent",
         "stale": false
       },
-      "price": 128.7,
+      "price": 134.9,
       "signals": [],
       "l1": [
         {
@@ -321,7 +321,7 @@
           "filled": false,
           "discount": 0.4,
           "amountCny": 448539,
-          "distance": 0.3838709677419354,
+          "distance": 0.4505376344086023,
           "status": "未到"
         },
         {
@@ -331,7 +331,7 @@
           "filled": false,
           "discount": 0.4516129032258065,
           "amountCny": 525980,
-          "distance": 0.5141176470588233,
+          "distance": 0.5870588235294119,
           "status": "未到"
         },
         {
@@ -341,7 +341,7 @@
           "filled": false,
           "discount": 0.49677419354838714,
           "amountCny": 525252,
-          "distance": 0.6499999999999999,
+          "distance": 0.7294871794871796,
           "status": "未到"
         }
       ],
@@ -350,30 +350,30 @@
           "premium": 0.15,
           "action": "减 1/3",
           "price": 178,
-          "distance": 0.38306138306138315,
+          "distance": 0.31949592290585604,
           "status": "未到"
         },
         {
           "premium": 0.3,
           "action": "减到半仓",
           "price": 202,
-          "distance": 0.5695415695415698,
+          "distance": 0.497405485544848,
           "status": "未到"
         },
         {
           "premium": 0.5,
           "action": "清仓",
           "price": 233,
-          "distance": 0.8104118104118105,
+          "distance": 0.7272053372868792,
           "status": "未到"
         }
       ],
-      "discount": 0.16967741935483882,
+      "discount": 0.12967741935483867,
       "zone": "持有区",
-      "impliedReturn": 0.1490567348558105,
+      "impliedReturn": 0.13117640666941566,
       "discountRange": [
-        -0.07250000000000001,
-        0.35650000000000004
+        -0.12416666666666676,
+        0.3255
       ]
     },
     {
@@ -389,15 +389,15 @@
       "score3R": 19,
       "budgetCny": 1000000,
       "quote": {
-        "price": 12.77,
-        "prevClose": 13.9,
-        "high": 13.61,
-        "low": 12.65,
-        "time": "2026/10/29 16:08:25",
+        "price": 12.17,
+        "prevClose": 12.77,
+        "high": 12.61,
+        "low": 12.1,
+        "time": "2026/10/30 16:08:14",
         "source": "tencent",
         "stale": false
       },
-      "price": 12.77,
+      "price": 12.17,
       "signals": [],
       "l1": [
         {
@@ -436,7 +436,7 @@
         "shares": 20000,
         "avgCost": 12.88,
         "costCny": 234416.00000000003,
-        "valueCny": 232414
+        "valueCny": 221494
       },
       "buyLadder": [
         {
@@ -447,7 +447,7 @@
           "note": "第一档前半笔",
           "discount": 0.41871921182266003,
           "amountCny": 171808,
-          "distance": 0.08220338983050834,
+          "distance": 0.031355932203389836,
           "status": "未到"
         },
         {
@@ -460,7 +460,7 @@
           "conditionMet": false,
           "discount": 0.41871921182266003,
           "amountCny": 171808,
-          "distance": 0.08220338983050834,
+          "distance": 0.031355932203389836,
           "status": "未到"
         },
         {
@@ -470,7 +470,7 @@
           "filled": false,
           "discount": 0.46798029556650245,
           "amountCny": 422604.00000000006,
-          "distance": 0.18240740740740735,
+          "distance": 0.12685185185185177,
           "status": "未到"
         }
       ],
@@ -479,30 +479,30 @@
           "premium": 0.15,
           "action": "减 1/3",
           "price": 23.3,
-          "distance": 0.8245888801879406,
+          "distance": 0.9145439605587511,
           "status": "未到"
         },
         {
           "premium": 0.3,
           "action": "减到半仓",
           "price": 26.4,
-          "distance": 1.06734534064213,
+          "distance": 1.1692686935086276,
           "status": "未到"
         },
         {
           "premium": 0.5,
           "action": "清仓",
           "price": 30.5,
-          "distance": 1.3884103367267033,
+          "distance": 1.506162695152013,
           "status": "未到"
         }
       ],
-      "discount": 0.3709359605911331,
-      "zone": "观察区",
-      "impliedReturn": 0.26044955431801675,
+      "discount": 0.4004926108374385,
+      "zone": "买入区",
+      "impliedReturn": 0.2808322143846631,
       "discountRange": [
-        0.20187500000000003,
-        0.5088461538461538
+        0.239375,
+        0.5319230769230769
       ],
       "riskLine": {
         "price": 9.82,
@@ -519,55 +519,81 @@
       "tag": "买入",
       "key": "tencent:buy:T1",
       "push": true,
-      "msg": "腾讯控股 触发 T1：现价 377.6 ≤ 390，买 4,300 股（≈¥147.8万，折价 41.9%）",
+      "msg": "腾讯控股 触发 T1：现价 383.6 ≤ 390，买 4,300 股（≈¥150.1万，折价 41.0%）",
       "stock": "tencent"
     },
     {
       "type": "NEWS",
       "tag": "预警",
-      "key": "news:2026-10-29",
+      "key": "news:2026-10-30",
       "push": true,
       "details": [
         {
-          "stock": "泡泡玛特",
-          "title": "LABUBU降温，泡泡玛特腰斩 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1QejgxMDhpY1NwNlFacUhsSDI4a095NTRuMGhFdmx6T1M3eHdTbTBCUEN6cnYtaUFrajk2T0pPU3pjN2J0OG1iRWRJeWtKVTM3SW51SHlvYlVoZTV0RFFPeXpKTXprb2h0b05SNmdHNA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:03:17 GMT",
-          "source": "新浪网",
+          "stock": "腾讯控股",
+          "title": "腾讯AI每天烧掉1个亿，入口最多为啥没赢？微信、QQ都在手里，元宝砸了上百亿投流，月活却只排第四；几乎没打广告的WorkBuddy，反倒被网友自己晒火了。这期讲清腾讯AI一手赚钱一手花钱的账，和它真正_财富号_东方财富网 - 财富号",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBlSFNXXzFhaTBleWdpdU5KQVJYZjNCaDJMTXN5X0hnZkRRbzltbWFsNzI0Zmx2SFZLRGNYcm9BY1pRa3pJVjc2OXFLY3VqMmlTdzhqWHMtZjdlRTBLMnJQekppZ0F5VHI1czZV?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:13:00 GMT",
+          "source": "财富号",
           "l1": [
             {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
+              "id": "TC-3",
+              "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
               "keywords": [
-                "LABUBU 降温"
-              ]
-            }
-          ]
-        },
-        {
-          "stock": "泡泡玛特",
-          "title": "LABUBU热度退潮，泡泡玛特靠什么增长？ - CBNData-第一财经商业数据中心",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ZYnZnU2RvWlgxRHNWWU9IZmVrRHU5ZVlET3JrYU9LZ2ZqN1FMWnV0dFM5U05kSXBFT0VXSk9ZY2xjMU9abi1uZkk4amRfcWlBTE41Yg?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 07:44:11 GMT",
-          "source": "CBNData-第一财经商业数据中心",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 退潮"
+                "AI 入口"
               ]
             }
           ]
         }
       ],
-      "msg": "2 条新闻命中 L1 关键词，需人工核查（泡泡玛特 2）"
+      "msg": "1 条新闻命中 L1 关键词，需人工核查（腾讯控股 1）"
     }
   ],
   "news": {
     "tencent": {
       "ok": true,
       "items": [
+        {
+          "title": "中金：维持腾讯控股(00700)“跑赢行业”评级 目标价666港元 看好WorkBuddy整合办公生态-证券之星 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9MUTdYMHRWeThFZnpHOVBIOGFkMmJyMm5QT0l1cXk1UVB4eFRiUmFJVlE2c291cnZ1Rk51RjBTclh4d08xNVk2b1BKTUlKUk5xWmhCZ2RYblBrVnZieXc?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:06:50 GMT",
+          "source": "证券之星",
+          "l1": []
+        },
+        {
+          "title": "腾讯在上海成立越塔数字科技公司 - Moomoo",
+          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1uOE9yUFlwWlUxNFBBWTJ0YlZCbmZ5NzBzZjl5cFpJQW5CbVZpcl8zamlxMVZ1RVgzNFFuUDQ3VGVtMGIxRUo5YklYMTZtUmtEX2I1dDhvRHppbnFJ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:41:00 GMT",
+          "source": "Moomoo",
+          "l1": []
+        },
+        {
+          "title": "腾讯控股(00700.HK)26年数字生态大会：BuddyOne发布 以WorkBuddy为轴整合办公资产 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPa0I4QlpBYmFlNTZaR1JwdnF3dkd1VUxUOXM5a214NjNhZnJmZUJWdlJBN0RMWGR4UmRXVU1pMzIycXdaQ19HeldVbFRsMlFGQ3R4SVAxZVJDYi1LWHNmQVdJMTlGSkNBcnluSFFneVVTQlIza3RqLXA5Yl9OWmhxUVQ4UXBQemMtVUdDMWV3T1RjTWJSMEpuZXJBeTdGMUMwSUo5bi1mSWUxY1hZWXc?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:51:03 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "阅文短剧及漫剧收入突破4.3亿，接入腾讯WorkBuddy - 东方财富",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE00eElBQ3dsai02bUVtMGF5Q2lHb3lCcW5Ic0pRZDR1N1Q1MGR6aDRFT3g1Q2FpZm5Hd0JqS25BS044N2NrLVdFaGt5MDRsVVVYOEs1dmxvRW9rZUdtTnQ0SlJGSXlodw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:42:28 GMT",
+          "source": "东方财富",
+          "l1": []
+        },
+        {
+          "title": "DeepSeek千亿融资细节曝光：长鑫存储、腾讯等近30家机构参投，国资占比27% - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOQVpzZHZrWEJPbXZhNS1IeXVheU1oU1QwcDZXRmgxWXJqY0NISUFEbjVzd1V4UjhaZXJqYUlGUGNJTDNaYjV3REJpY1dYM2tOdWhzSHUwOHFPZHE4Um1sU1Y2cHFrbWdXM1gyeTNLY1RpVmZaM1V2QWF2VU9qRXN0RlZsNTJPUXFQckhCcg?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:01:00 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "佑驾创新与腾讯云达成战略合作 - 新浪网",
+          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5IT1BYbGNvMlJIODJMeG9fdlZHek1VRGpYWnBMSDFkWWhIS2RpR1VDdmhtUTYyNldXZ1gwdDBjdUJKNzFzMDZ6RThTSQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:22:27 GMT",
+          "source": "新浪网",
+          "l1": []
+        },
         {
           "title": "招商证券国际：腾讯控股(00700)推出BuddyOne会员巩固生态优势 关注全球数字生态大会旗舰模型更新催化 - 中金在线",
           "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9xTXBkU3FodjJTbEhNYjJTekZ4Nm91OW03UkV3U1pTNlNFdmxucjhoY2dabmhybWRIRTRUczRoVlpRSUk4LUhYak1tU3gyMWFLaWZXRlhha1plYnJpSUtreTU1djcyYVAtNXduQmFMaw?oc=5",
@@ -576,45 +602,73 @@
           "l1": []
         },
         {
-          "title": "腾讯控股-R (80700)讨论区- 股票评论- 股吧交流社区 - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5JWUVSVmpmQnRtX1NEakZIUmtOYWp0ZTlzM0Q4bHoxU0k2SVlMYWJhWXZZdHhZaURlRUxfdlJhR3hKTzB3Q1BCRzQycWtlSWhXTzQ5dzVodFdZMHhJSElyNDRR?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:02:14 GMT",
-          "source": "Moomoo",
+          "title": "10月29日港股成交额TOP60出炉，腾讯控股、阿里巴巴-W、中芯国际、建设银行、中国平安等居前 - 金融界",
+          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBacWdhTHQ5T0hlR083alltTHhKVDBPOUpBTllCZnpwMkNQREFmM0lXYVNxQUFYRjlVLTlCdnNUbkV1OW5PZUotS253V1lSWHlUb281cHBUS0p2MjJHTU9PVlpQMEJYSnRMeEItN0VBQ19SQ014?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 08:46:15 GMT",
+          "source": "金融界",
           "l1": []
         },
         {
-          "title": "10月28日湾创ETF工银基金份额减少100万份，重仓股腾讯控股、中国平安、招商银行_基金提醒_雷达 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBPMW85RzNRZjlhN1EtSXVOQTc4VVB1T2QtZFhDZFhHRXROakNldUxXQ1pkdUt0NXZLVUliSFE3ZkhXUXNIX0kyTC1jN09uanpzYzI2d1RJdFNnOV9EUDdBdGtn?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:14:00 GMT",
+          "title": "10月29日恒生50ETF景顺基金份额减少800万份，重仓股腾讯控股、阿里巴巴-W、建设银行_基金提醒_雷达 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8yZTR0WFZGRXJoYTZ3ZlFYTnpsaVFER0gyYlFucngzRkh3NjNwd1h2S0d1Wmp1b1pxUDVHX0FVdlNRMnFpVTg1blJ3UHQ1MEpJQVNXQWMzb0Juc2ZhMlJRWGVR?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 22:34:51 GMT",
           "source": "证券之星",
           "l1": []
         },
         {
-          "title": "招商证券国际：腾讯推出BuddyOne会员巩固生态优势 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNalU1OFBlNFU1OVZhbGFsNzd5YWo3dVVtSXVXRVdlRFpHSHVHbXBCNUtkYVloNWhwZkdudEQ4QlJDNmhzcm01b212OElmb2E4SG1sSWEtLTdjdnA2YWxoa1pHcFN5N3YtM0dIOGt5cjVQU3hMcDFFUVdDaWczQ2RiWVNjdExWcjFtVkxyMg?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 06:20:00 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "中芯国际、阿里、小米、腾讯、商汤科技、MiniMax等入选港交所人工智能指数 - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE01NENRY1hvUk5KZm9CcGd3ajh1QjJ5YWcwbDhOZlp5TVlDMGE3TDBNQy1fenNWV2ZNb1VEU0hCNUFBNVlXV1FleWViOWF5VXdIQTJDek02dEo2RnVlMXZCTFJKVmhIOWFWZ1ZMd3BpOE1tSXY4SnpBZFRuaFJsVFE?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:10:15 GMT",
-          "source": "手机新浪网",
-          "l1": []
-        },
-        {
-          "title": "腾讯(00700)发布Buddy One办公套件与腾讯网盘 打造Agent时代一体化AI办公底座 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNalJ1dXNIb3oxMHZqbXlPVGJDMTlzN3BXNnhQWHR1OVlsSlVydUZ3aGMwdlhSQ2IwdTFJMGhNVk9XLVVGbk8wWTYtRWkwTTF5N1B1cE9TUUVnWmhHcFVpLUJReVkzQ0dPbEVXTGNxbkdqUHdwZkpSeUR4YVh2d2JJcDdWUkU4N3RyZmJZT01YdFhlczNDMlI3SGI2dEU1S0hDVzZ3bWhqeFBaZw?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 02:35:50 GMT",
+          "title": "海南算力与腾讯云达成战略合作 将打造自贸港“AI+算力”一体化底座 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxON3ZKS2g1V05OUDFhRU9WZHNESWc1YkNDcW13bXNZYU04dFVhaER1R19USTdYSGJnRFEtcFRHaWg4WEVLQWtfbnNpQTZ3VGhEcmhaTERwcHdVVTFWdDYwQ2g5d3VOMVNiSVVDMTRyZEhYUUIyT2JUQ1VzeEdYUDNfeXBPaUJTR0x1dlNnNkh2bjRSckRFRk9EQm9BNFBNM2Vzb0ZfRW9JckQ3Wk1LZUNLaw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:26:38 GMT",
           "source": "富途牛牛",
           "l1": []
         },
         {
-          "title": "10月28日港股成交额TOP60出炉，腾讯控股、阿里巴巴-W、中芯国际、智谱、中际旭创等居前-电报君 - 金融界",
-          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5NZHBqNzZORE1jc2ZmNVFaYVh5eTRKZzN3VnR2amplQzBUMVdfc1JtTDVCa0Q0aXdxUGYwVXZTSmQzTTNBbFA0RGxXMGZyVkZwcTVzdDZkaTlUempLX09GY2d2aW5wRlF0WGxFZzJKcUhJU05W?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:46:15 GMT",
-          "source": "金融界",
+          "title": "Visa与腾讯控股签署全球支付合作伙伴协议 - Moomoo",
+          "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPdEtrd2Z1MzlmN1h1M09fXzZsRy1iNUszcDJtdjRoYy1rWGdHcFNDR2NwNk9QQlJRWURnYk11NW45Z2RJUzBQU1hUc0FOOGE0X2FyVzBiQ2FxR1BhMlkzbDRsYzF1VXZRS1JnMWFWU0NYN0tMX3o0NlNmM3Yyenp3MlFSQ05fbGpHX3hqVWtzTDlIeG52U05TNkVn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:01:43 GMT",
+          "source": "Moomoo",
+          "l1": []
+        },
+        {
+          "title": "DeepSeek千亿融资细节曝光：腾讯宁德时代领投，国资占比27% - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE13Q2tXR0dnY3dzNEctVFVtMTJUaVU5eFRfVmxhRDNGOGtTQWNhRjVpbk1mNW1wQWxmcXQ3OWxvVzZpY0hsa0JqcXNqeVVZM254?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:33:17 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "10月29日港股软件服务行业沽空数据盘点，腾讯控股、智谱、商汤-W沽空金额位居行业前三-证券之星 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9MY1kzenZIWlRGTWVUYzM5QmQ0NzNSREk5M3I5Rk03dEVLbWY5bWFCQXlXTFpqYS1DUzRqZUhMSFFXVWIyWmZCNGN6VzgySTMyOXdUX2VEV3FLY1ZQc0E?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:42:02 GMT",
+          "source": "证券之星",
+          "l1": []
+        },
+        {
+          "title": "英特尔与腾讯云发布至强6+新一代云实例，性能提升30%以上 - Moomoo",
+          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE53cGRGZmNkNFl2TTdIMGhUM0tsb3hELUFvaHpfVWxfejV4TDV5TmlVT3I0SXZEQXRkd3BRNzZhVm9qYkJ3UmhybEEzX0JrS0hCYkYzek5NbVdkclRm?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:36:00 GMT",
+          "source": "Moomoo",
+          "l1": []
+        },
+        {
+          "title": "从个人提效到组织生产力：腾讯的上下文解法 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4wNlo5aWdzTU9tUmFldUlnYVRtbmVBZGVjVEN3c3ROMTVVLUxkUFB5VzZOUHNBVC1vSno1OFlzTUc3QXdwNF9pLURxbmRtdk5x?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:33:02 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "SanDisk Q1 FY2027 earnings conference call - Moomoo",
+          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9GY1VSTTdvRjFPQUU5N1Zia3h3MDBDOXpGR1c3OVowNDR1T21hZ2RRY1lvcldKT0pVakZ4Nm85UEYxMXpJaEswWFM5VQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 20:35:13 GMT",
+          "source": "Moomoo",
+          "l1": []
+        },
+        {
+          "title": "国金证券与腾讯云达成战略合作 拟成立AI联合实验室 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZEJocWJDN0VSRmtqTnE1bGlfTElfYkxyLUhBekdUZEpVbTdqVkdlVWxLVkc0eG04V1pJd0s1SGphRGZSc1F6Z0hXeHdQVzhpN2ZXWXh4N2FkSnlvRmg3T2ZUR3h3NHpRam9EbUhYaWJkbFBpZU1DeWNSU1JucVNRVmRzaGwtdW1TWHNqNjFtbjJVZUtUbG9Rb2I4a3publhnUE5CcGZPNkF6c2JkVm1pYjFaejdpSmxiS3FR?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:08:34 GMT",
+          "source": "富途牛牛",
           "l1": []
         },
         {
@@ -625,16 +679,44 @@
           "l1": []
         },
         {
-          "title": "10月28日港股通科技30ETF工银基金份额减少2亿份，重仓股腾讯控股、阿里巴巴-W、小米集团-W - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1KOE5jX01adnBqdkpWUm4yVndwOXBuX01yVjVjb2prajJhNUszVS13WmJOOWJHLXBsX3lONXQ3YlZqZHpvNE5DSEdCVHh3Y1hwTjNvbVZjZm5RRjNnb3BrLV93?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:10:21 GMT",
-          "source": "证券之星",
+          "title": "曝DeepSeek再融资1055亿元：估值6155亿元，腾讯二度加码 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNUm1Fdnd5Zlo4eUhsM1R2Q0tuSmpCQ2xaOVNFMjlmMHNtaG1hTlUtd2FHbjRIUzdNam94a3NWUGdBV2JvMkIzS09rQ2tIdnNyUk85ajBsQmdiTUJWUWZiWkxCQU1HUjZnb0hER0MwaUstV0xoRmNqeDBjVC1sTVpXdm1kaHB2Zmx4RzBJVnh5UTI0NVNWZHlTN1F5Yw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:46:40 GMT",
+          "source": "富途牛牛",
           "l1": []
         },
         {
-          "title": "阅文DramaBuddy接入腾讯WorkBuddy 侯晓楠：出海正从“内容出海”走向“共建生态” - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5RWUhJMl84LTNVM3lSNXpxT0lmZU9mbEI1cDFCekN4NEpiWG1qYUlua2dnSV9jbHhxSl9ETFg2UlZnY3M0elpDSzdIcld1U0Vy?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 08:42:42 GMT",
+          "title": "能链控股与腾讯云达成战略合作，深化能源数字化AI创新 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1tUDZhX2pBVU1XVDRCZFBFM29hWWtlVU1PNktLTlo0dXlvVFJBWTZQWF9PanVHZlZGZVk3WDRxZ1VrVzhyRDhPRkdsTjJnNHNm?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:57:00 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "中芯国际、阿里、小米、腾讯、商汤科技、MiniMax等入选港交所人工智能指数 - 同花顺",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9nTFZ4YVZPbjE4SEJVbllqZVpvUHRjMXpiSU9CWDE5bFNTZTdUQWg3R0NHV3BkcmRvc1BLNkpiYzU5OWhTN2lmLUQxQVpRdVhtSE5yUlROdXJxN2VYT3c?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 03:19:10 GMT",
+          "source": "同花顺",
+          "l1": []
+        },
+        {
+          "title": "2026腾讯全球数字生态大会：从单点应用到场景协同，腾讯健康AI激发医疗全场景生产力 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQMDdJdlhMZklxYTJfVUlYTmR4WG9QQ1FkZ29iNUtOaHBoNTE1eVM0Szc0WVV3N3JJZ1VneEsyMmlYNlJ4QWJJTlFxUkd5X0ViNTVPSUk4WVU5UUh6cVBwNEFQdFZ1V1hBckdzbFRwYmhlTW45U2tkYnpWblRXQ1NSVGRoMk1ubFplSTEw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:37:02 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "中金：维持腾讯控股(00700.HK)“跑赢行业”评级 目标价666港元 看好WorkBuddy整合办公生态 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNOHg0dUJpbXB3T0hEMDhyU3VLdUswbVRzbWFzeG5UQi15c1MwbjdaNlZhUFFDb2FKMzBQQ3VTNi1GczdXOGZwNjFaM0wtS2RmZ09wN1JCVkJZZ014M2R1ZWZWWllLX2cwX2lzUjZ4YTgyVXliSWM0SDNZckkyWnRZdmIwcWpBTWdMcGRXVw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:40:21 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "恒指收涨1.46%，恒科指涨0.29%。成交额居前个股中，腾讯控股涨1.59%，阿里巴巴- - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBlZFUxSENXMXFQeUxEbk9TdW9iQm9CeDdDLUxOYzhJRkhIZVlhdExMT3daNVRZSnJVNklBNmwtek1wLWRjTUppZG9RVDY2b1pkQ1E?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 08:12:46 GMT",
           "source": "富途牛牛",
           "l1": []
         },
@@ -646,345 +728,509 @@
           "l1": []
         },
         {
-          "title": "10月28日恒生50ETF景顺基金份额减少100万份，重仓股腾讯控股、阿里巴巴-W、建设银行_基金提醒_雷达 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1HVXF0WDBMSGJjTlphSVVoWkRTMUdrd0lycmxMUTNjN1Zoa1R1XzdwRjl3V0IyZ2U4N0U1dzk3ME1lQjJKclZxdjFlcUFlMVNxbFhWTkVFZ3FTYnkxYk5YTUVR?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:04:51 GMT",
-          "source": "证券之星",
-          "l1": []
-        },
-        {
-          "title": "10月28日港股通科技ETF汇添富基金份额减少1100万份，重仓股腾讯控股、阿里巴巴-W、小米集团 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5jSEtHU2dPaWVuMFg2RmJtTUQtWTluRmduRC1UYlJuMzE0djNTY04wTFJhcGVaYXZFaUdyTmowd0NmVmJ5Ri1uUnFLWGJuZmZQRXQxWUt5enB6TWtaUU53T3JR?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 22:40:22 GMT",
-          "source": "证券之星",
-          "l1": []
-        },
-        {
-          "title": "腾讯控股(00700)讨论区- 股票评论- 股吧交流社区 - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9nYjZTVjNmN2phVkctUTdGYkw4RDZrazBKTE52SE45QjdVV1ItZllfdGU2Nk1BWXBVblJmRzRxR3VGVVg4VDRlclpTb05oNU5NR1JlaHZQUnlabVdlN3NpT3ln?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:50:49 GMT",
-          "source": "Moomoo",
-          "l1": []
-        },
-        {
-          "title": "10月28日恒生中国企业ETF平安基金份额减少100万份，重仓股阿里巴巴-W、建设银行、腾讯控股 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1OUGlpeGRXd0w3aGw1Y2ctOV9hNmpDZFBuU3NFb3pXOHlKVFh1eEtGUHRUQ3VreFZ4TUE5Uy0weEEtNTZyVFkyMVlaOWtZYjByVkliSVZOSVNlWWJxSGwxR1NB?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:13:59 GMT",
-          "source": "证券之星",
-          "l1": []
-        },
-        {
-          "title": "Alphabet Q3 2026 earnings conference call - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBzbDRYUG9ReUFFdFVkZTZjTHBXZFYwZjY2Wk5JekkwcHhnblE1WmhJT1VjRTc3cUhzekNvOUJuNjJDR2ZTMlhxYmhfNzFmM2tEM3c?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:16:18 GMT",
-          "source": "Moomoo",
-          "l1": []
-        },
-        {
-          "title": "腾讯正式发布Buddy One、腾讯网盘 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOT1dwb0xJRE1UTTBlZFc1WG1jbk4xZmgyWDdrS0ZIM0tXRFgzRE1nakdDV0NCTGpoUjlaLV9ibm9scTdkUUtMSjR3ejV6X2lZRkF5dWtkUWFLNkxjWVJPZ0VrZ2hwQXFSTFdGcE5rR2MxbTcyS3NOUmIwYjFQRXc4MUdVMnY1NEJXSUxHajVkZF9PQWdoellIZ0RRUWQzQ3g1YUI0Yg?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 02:21:42 GMT",
+          "title": "腾讯汤道生：AI下半场以场景价值替代模型参数 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQUF9xanRaVFY3QlNIQ1Q1QXBCXzZWSHhVZDdXamdaNDJ5bjFnbXZxallOeXNEMk5LU2pReGJYeGl1bE5Ua1N0eHctbjRaWldiaDlWalU3TVgwVWs0RHlQV3gtUF9zV1c5X0ZaZk8zLXpwTXl4Y2tZOUoyVm9kYWQ3X0wxcFlkaHZ1QWR3R0pNLUNZZ0ZuV1V5NG9MbDJFemNSSnM5bXlMNmVfWkpH?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 14:36:44 GMT",
           "source": "富途牛牛",
           "l1": []
         },
         {
-          "title": "腾讯汤道生：腾讯云正加快全球数据中心建设 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeEpTdFlHVVRDRE05U19YZzhIa2pWUmFWZG1Sb1Rsb3NTajgyVFoweGpaMGRPNzF0QnkyTnc2UUVOdFhHSFdKN0xUdTRoalJhdTFLVXVfTVNFSjQ1NzlyYVZCVXFLMlVNekVIQzF0d1ZZSF90MFFVMURRQkZXRTcwbUpFaldMdEc3Zkp6SE5EZTJfSjlKdXZvOWxOZUlmRkpzblNFTUx0d1YwUQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 02:17:10 GMT",
+          "title": "“字节时间”争论 抖音副总裁持续发文矛头指向腾讯 - 联合早报",
+          "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE52N0dXT3NoRmV0YWsyanl4UkVoT1BMNkhZYkUxZ0c1NEpTNE85Q3kwazYtSkoxN1dUT2o0STBkUjMtWXQ0ZkwxMUprYlpEcjUzdWNrdkRVMGQxdjFpa2Fod2hDamh4MkxXa24tZzhn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:04:03 GMT",
+          "source": "联合早报",
+          "l1": []
+        },
+        {
+          "title": "腾讯汤道生回应WorkBuddy商业化目标：生态扩张带来成本压力，需一定商业化 - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNUmdDZnJIVjBwZjVqUVlLSk1rRmlnZHpyU3h4YUZ3ZWh6TnVyRC1IYUhRRkR3bHVQeHN2T01hYmxfSHFaOVA1TTh5dGN0UjFEWk1YYndrR3luc2Noc0JNS2thSW1QWHU3aUJWcE9xSy1WeDFEcVdXZnd6STEwdVZ4Z2w3ekU1YkhLN0ZVUEtLVVF1NUpYODUzclVvQTNBX1NQdGV0RVVtSC1EdzVtTjFUZQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:24:43 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "南向资金今日净卖出33.59亿元。港股通（沪）方面，阿里巴巴-W、腾讯控股分别获净卖出3. - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPanlDQU5GRkxRUWJSdk81SXJfVXgxSmU1cjlVdTA4bHZ3U3ZJTWVtX0M1SGZITkpTN0xjTmZXVWdfUHhIU01PQ3BVRUU0clNSUzVFRWI3dUN4NVN2N3BJODRSaDc4Z3hHYnUwUmNnalVzdkdkT1JJd1g4ZlJrTjkwUU5tU2NkM3o0V2dtUXJ0VlhoSEVyUGIxTHEzdWI4Zw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:41:10 GMT",
+          "source": "富途牛牛",
+          "l1": []
+        },
+        {
+          "title": "阅文DramaBuddy接入腾讯WorkBuddy 侯晓楠：出海正从“内容出海”走向“共建生态” - 富途牛牛",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5RWUhJMl84LTNVM3lSNXpxT0lmZU9mbEI1cDFCekN4NEpiWG1qYUlua2dnSV9jbHhxSl9ETFg2UlZnY3M0elpDSzdIcld1U0Vy?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 08:42:42 GMT",
           "source": "富途牛牛",
           "l1": []
         },
         {
           "title": "腾讯发布面向个人用户的跨应用AI办公套件Buddy One - 富途牛牛",
           "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQbnlaWG5JbElTYVlucTdYV2gyaTlmbXgwNmljTjZFQjBBNl8tV2J2ZTVKZnNvQ214NXFlOGczSjU2TmF4ZTNYMnhtWUlwN3l6dVV5SEdWck0zcnhMOXU2UnVHTlM1U0JkQ3E1eVlUMkFVSE02UTlvQWNEQ00ySnlYNFhkeUFPVE1HZXBLQmJUQkVCTVFaTzAyUGxBZmtOYzFyZV9YRkI4VlMyU1dHbHc?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:48:09 GMT",
+          "pubDate": "Thu, 29 Oct 2026 03:50:49 GMT",
           "source": "富途牛牛",
           "l1": []
         },
         {
-          "title": "抖音集团副总裁：短剧为主的视频创作将得到空前发展，希望大家在阳光下竞争 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBhYXdBVmh2WnRya2FDaHFlaGVCS2psMWc0LUF1N3BZUTdKU09UY2k1dHZjNTBWWmM1a2xqeXRrRUZRei1SRWJNanNoVQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:53:27 GMT",
+          "title": "招商证券国际：腾讯控股(00700.HK)推出BuddyOne会员巩固生态优势 关注全球数字生态大会旗舰模型更新催化 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQdk9taklyMFFqNW96Z1ZCd1A4eDhERVFPOWU3RTdMcHowLU0tR0kydzAzZ2F3SXY3S0w1X2VEVVhvb0VpMnM0djhUWG9aUFZ4cG05WWtlTWpnWVdwR1JjNFR0Si1zZXBSeDBPMUFNYjd0emlKOXhhTVNrSkZXbXJCek9ISkg5NWtaT3Jydg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:14:37 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "腾讯AI每天烧掉1个亿，入口最多为啥没赢？微信、QQ都在手里，元宝砸了上百亿投流，月活却只排第四；几乎没打广告的WorkBuddy，反倒被网友自己晒火了。这期讲清腾讯AI一手赚钱一手花钱的账，和它真正_财富号_东方财富网 - 财富号",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBlSFNXXzFhaTBleWdpdU5KQVJYZjNCaDJMTXN5X0hnZkRRbzltbWFsNzI0Zmx2SFZLRGNYcm9BY1pRa3pJVjc2OXFLY3VqMmlTdzhqWHMtZjdlRTBLMnJQekppZ0F5VHI1czZV?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:13:00 GMT",
+          "source": "财富号",
+          "l1": [
+            {
+              "id": "TC-3",
+              "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
+              "keywords": [
+                "AI 入口"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "开机无广告的电视有哪些？2026实测认准这4个品牌+3步关闭法+FAQ - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPcEx5dHdTdk9rZG1EZXEtbi15Tm1idVNfQmFWMnkwSjI1Uk1MaHpjalpzVnNXYlRsNWFZR3VDbXNEczlZSEFCc0xKM0p1Nk5CTi1kbEpLdTByZ09hRHdaQU1TbnZRNmJrb0VHNEtTLUs4VXg5bVg2d0tHdDBidlg3bg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 23:59:00 GMT",
+          "source": "手机新浪网",
+          "l1": []
+        },
+        {
+          "title": "腾讯携手慕思：以AI重构家居全域营销链路 - 粤港澳都市网",
+          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5pSjRLLW1wZGxleFNLMHBCbkhpWEFSOWJPNDF3c0FtdTg0enhfTFBZSmQ0WTFYd1RPMDI4dlpCWGlXTnZtUmVLMTMtMzA3SnIxNDZLeVVGSC0xVUtm?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:29:34 GMT",
+          "source": "粤港澳都市网",
+          "l1": []
+        },
+        {
+          "title": "红网LED屏联播丨保靖黄金茶主题广告亮相星城 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE12WXNBaUw1MWVZWlJDeDc3NnZKcHc0cHQxcHA2VWVsRGNTOC1SdkpzOHFSalVwOEFRN24teTR4dTI1UHJOWnMyT1FsblNwZF9iWHFzV1pR?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 14:28:00 GMT",
+          "source": "QQ News",
+          "l1": []
+        },
+        {
+          "title": "启元机器人，接上新“大脑” - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPRk9HMGFleDlhVUFDTEptcXNlUDFVcTdvbXJLM2tOeHBEaVp2SllpY245ZkFiOGlySWUzcnNkb2JjcEpzc2lIek5KMWJRZXZMZ3RGNzlkR0Z5MUpTM28xOUVRWWhLd0hVLVdJRmFjTjVKWGh5NnZqWm1TdzFwcGxMS3BxZjF6Wi02ejU1NQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:21:03 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "红果否认年化收入近400亿元 字节高管称腾讯短剧和短视频增速更快 - 虎嗅网",
+          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE92eEU4LS04MDNCcVJ3V1hYR1l1Y1FKX240eWFXQm83aW1ORXVnOXdTSVpkbF9lNU1yNDlpU0lrOTlRM0JtamVaa3JULVhyZ1BLRmp5Nw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:50:38 GMT",
+          "source": "虎嗅网",
+          "l1": []
+        },
+        {
+          "title": "Google 母公司市值蒸发5000 亿美元创纪录；苹果高管回应新iPad mini 60Hz 刷新率；因电池问题，理想 MEGA 退一赔一｜极客早知道 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9MX2UyOUYwcGRmZnl5aGZlbVNFNWtaM2thOTNKZDJDenpmb2lhZjlUTU0wZlN2eWZuU0tXY2ZhUWh3UlJyV0wyY0stR3U2X19RNnplb3Vn?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:19:00 GMT",
+          "source": "QQ News",
+          "l1": []
+        },
+        {
+          "title": "果然调查｜付钱后电没充上，却被开通了视频会员，电动车充电桩变“广告位” - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBZUnNqcThfOHAtQndQOWxtMkJFYzRtRWdQZHdBOUFGY0t5OUF4MzhnQVZ5TGdHaWxPR1U3a0NFRUU5ZzB6UlhhUzVsd1BSVDhSZFNnQlFCUmFaX0JfczYxLXluSDVEZG52VTN3MnVNc0NUVWc?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 15:22:00 GMT",
+          "source": "手机新浪网",
+          "l1": []
+        },
+        {
+          "title": "短剧之争下半场：绿泡泡的“轻”打法，撬得动红果吗 - https://www.itopmarketing.com/",
+          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBVOW9EbzlEczl1OE5lX3Vlbl9FV2t0SmN3eXhfZEE1TDdROUp3TXhhcFZ4NzgxOVhhTDczakhSZ29SSmtfcG5ydzVzdw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 04:30:25 GMT",
+          "source": "https://www.itopmarketing.com/",
+          "l1": []
+        },
+        {
+          "title": "红果短剧日活达1.68亿，字节、腾讯、阿里、百度加码短剧市场争夺 - 虎嗅网",
+          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5Ra1BSMm1pNmJtcGc0UUtUZlE4cWxjSnVkbGd2WWFPQWdyc2E3Mlh6VFBqTk5rS1hyajZISXZ0Wk82cjYyOHhQSEYybkpQMmIxd21fVw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 06:39:40 GMT",
+          "source": "虎嗅网",
+          "l1": []
+        },
+        {
+          "title": "哈尔滨市气象台发布大风蓝色预警 - 腾讯新闻",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5heTQ2cWxXalJ0eW10eFp3S09IVWdRM2NIMVp1aXJHQTRjNWVOek12LWQ5YWs3Z0JIV182NGdlbVFZYnRvWnZGN3lCcEhGNEFsWkNEWEJn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:09:00 GMT",
+          "source": "腾讯新闻",
+          "l1": []
+        },
+        {
+          "title": "滨江集团(002244.SZ)：前三季净利润19.05亿元，同比下滑20.45% - 腾讯新闻",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5jay02M2FKdS1xc1hOS0habDJxNWZEcE1nMkg5cFpaVVNUNUNXTUVHR3FaWWd3RWFPQ2JXMENIZUxPS3hhR04tRVI1ejJwbmhOdENoMk13?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:19:00 GMT",
+          "source": "腾讯新闻",
+          "l1": []
+        },
+        {
+          "title": "大盘变现增速超20%，短剧曝光暴涨3倍，微信小游戏很稳 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBvb0tuSUNsLTlOTnVpLXFGWU9PY3MtRHM1Yy1BMG9IVDFWWEc2REF6VUJJbzNUTkRwYWZESlZIeXdmazU2OWJOYWlaR2hNbmczM2hNWFNR?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:31:00 GMT",
+          "source": "QQ News",
+          "l1": []
+        },
+        {
+          "title": "腾讯云寻找AI新增长曲线，智能体能否撑起新生意？ - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNY3JBcGlobWQwYWdJMjEtSXJtQUhfS2tkRVpVU2ItYzdSeXZJOVh3X0dWS3JNcEtoLXlKVWFQT1R2MWRDNVBZRm9KRjRhYVRUOWxfSHRBS09vQjVNZF9tMkwyZnk2c3pnYU5lTlgtZzQyZUluRWFwY3Q1MVNjdzZBWi1IZzA2dHJN?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:46:00 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "开机无广告的电视有哪些？2026实测4大品牌全系零广告+3步关闭法+FAQ - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOMXNHWnNJNTNGazVzdVV6NkMxcjVJSmdkRGh0eXJtc2lvOUhONEI0OWlzbk9sWWVUb0drM1ZJblYxMUE0WEcwbXlhRXRxeVk5amp5S0NYR0cwam9lV0hBZWZTVWtxNTRydUpTVVRqVHZvWDBXWUlBNkpNblhYZW9kOA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 18:17:00 GMT",
+          "source": "手机新浪网",
+          "l1": []
+        },
+        {
+          "title": "张凌赫两剧首日市占率超16%包揽年度前二 - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPQm9vZ3R4ZEduZEZ6bmxPa25MelRrZThheEt6U0NuWWl5R2Y3MmlwV3QwYW91RDF2am5KWm44bUI2TnNhTDB6R1VJaGo2XzdTZThpWHJ4QnNJUTNYV2I5RGhMSFp4VkVRaDY2cmZMeC1fUGw3eTFQaVZMaXFtYm5MZlMyckxZbXM0QldrOHFVdDk1X1htVkZBTDYxVzU3X1BtUzNDWHgtQ0FfRnRmOGJPaWI1QmdHV3habmI0Zmd2VlFXTU8xaThNMllJaVZfVEpsS3B3dUQ4Z2Y2dw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:50:58 GMT",
+          "source": "手机新浪网",
+          "l1": []
+        },
+        {
+          "title": "中国互联网持续验证“时长向强者集中” 野村：字节、腾讯时长份额差扩大 字节主导中国AI短剧价值链 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOaEF6WjFPSlhrUnRYWW1CbVpodFVnakswX0NGc20zUVlZdkZLV2k5R2VReUduOUNZcWlWeFdtWGV6Y0dzcDJuMkZhb2FDcW9iNmhJSFU2Z2NfMHJsUEhmVkYzdEV5YlZvbGppeXQzbHkxYXJwbGdINjY5dXdseEFoRVRYek1BczYtQTlLTUh4S0QwMGxuRmlDRXFyYTQ3amdzdWM5aWxIN3JjZ2l6a2FGRmhfQkZ0VXZVa2hsLXpfaEMzd0JpdjBwekh0aDZZT2JOVEFObkExTGhCRHdSOFZ6Q1dSNA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 07:34:41 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "微信营销生态活跃流量主首次突破千万，AI助力商业化提效与长期经营 - AIBase",
+          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBQR0NXRFh0NmlBLVFYRjBkLXNkV0xkNFU2SEhwYkk2VWRITk9hdVpSWHpZeld0alpoTWh4RTNGcFdyWkd5Ynl6djJNR3IyZw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 03:45:00 GMT",
+          "source": "AIBase",
+          "l1": []
+        },
+        {
+          "title": "首批8家互联网企业联合签署 《互联网营销宣传自律公约》 - 凤凰网",
+          "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE0zZ21HVDR0R0pHbGx5RVg3dmVTQ1pJeFFrSi1iaHU3WWEyVHN3ak5veXJ2cDZoVUhBVC1wM1BDSDE0dGFlS2Y1VVB1ak8?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:24:37 GMT",
+          "source": "凤凰网",
+          "l1": []
+        },
+        {
+          "title": "勇士伤病报告：桑托斯出战成疑，伦德博格未列入 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9RMGVVeFc3QUdxYW9mS3FWUEgwOUJydmtaR3NzU2puOE1lbHB3Qm5jQTNIR2tqeUZOWUxZcDdHM01pcnZrMVJma0h2NlB0WDRvUmFqcmlR?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:44:00 GMT",
+          "source": "QQ News",
+          "l1": []
+        },
+        {
+          "title": "安克创新：2026年前三季度净利润同比增长16.97% - 腾讯新闻",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GbE81eGdQcjcxSHZtN1U2RFpkM0pPNmZYbVZRSHNmcHRJSHRkMWo4bk53eTBXWGNockFMYkpIVTI1MGh4QUlqb21hcFJaWFhMYWNFZzNR?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:29:00 GMT",
+          "source": "腾讯新闻",
+          "l1": []
+        },
+        {
+          "title": "“张雪机车”商标，终于归“张雪”了 - 腾讯新闻",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1YTF9iRE9oMjVHd3VrWk0ycWJhUzl5YkhZOGpCeC16UlRVZlN4TklzYVlFQzBRLUdPalNYOXFGcG05WmdKQmtwZ1h0dl93cUpNYXppZzdKZnk3clFMWlh1aFR4ZlozNmItb3NXc1dFenBlQlN3dDNMbg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 15:17:00 GMT",
+          "source": "腾讯新闻",
+          "l1": []
+        },
+        {
+          "title": "斩获广告节两项大奖，敷尔佳「青春不脸红」校园大赛汇集多元创想 - www.capwhale.com",
+          "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcXJ5RjN0M1Z6RjNnSGFuUFNjaHBISGh5ODlEc0g4UlljTzBQOHdudkNJVS1ITUl4T0p4cnBFRmdfdmg5OUtOTHFlTzZOaEk1a1RFelVseVdYT29sTE5MN0dGUFA0TlJTWlc2R1ZDV2RaY3lBNENEVnl1ZjRZVXY0UGwtWF9QVzBOMVNyZzhPMDgxQQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:05:59 GMT",
+          "source": "www.capwhale.com",
+          "l1": []
+        },
+        {
+          "title": "谁是视频之王：字节与秦朔朋友圈的AI短剧之战 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOTnRsS3lUY0RmOFVXVUFNcHZWVWRKMGxxNzF4aWZEbS1zTWFqeFdoNXdSV1I4TWc2d2JhdnhianNnbXRFbDNNR0dEVFFBM2FWeWg5QWo3TWxnZjgtQVE5ZUF2RmdQc3d0VENUeUt6c2t3aHV5ckE4bThvS0IxcUtvVlFkUmdFQ25JOGNF?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 17:10:06 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "腾讯《怪物猎人：旅人》国际服双端正式开服，首发七款武器 - 17173",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9YRDhZbTBtd0E3Q0MxWi03RWlnVFBlV3ozdVJLYVRyZDR6V2FodUhXYVMyTHRzN01ZenB2Zm5iYVEtNzUybjROTjQxaFdyZmcySVVXa1IyV1daVHMwVXczdDNraFhSdw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 04:22:11 GMT",
+          "source": "17173",
+          "l1": []
+        },
+        {
+          "title": "国产抗日《烽火十四》仍在招聘多岗位，辟谣跑路传闻 - 17173",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBNTmlvR1dPZUpUbWxBV0VqWnBuek9mRWtmR0VNSjhNSG1YcklaWVRQTEdIZlV1MEM0Yi00cXdrN3dlVGo5bXhzMTg3NFFfdXFvMFhKRjl0Rl9LUkxfWUV2ZGp3Y25Cdw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:35:40 GMT",
+          "source": "17173",
+          "l1": []
+        },
+        {
+          "title": "腾讯云未来3年续投资大马 柔佛设首个云端区域 - e南洋",
+          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1RTTV4MVZ3TmUwSGFCd0hkNnQ0aVNBdmdVWEc5R2puUTJuckw2TjBjX2dyWEZLdWk5MjhYMDZXYWNITWltb1ZjMzVFc0xjMVYxTzA2UkZQRzNxQmFaT1p4OElGcw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 03:21:57 GMT",
+          "source": "e南洋",
+          "l1": []
+        },
+        {
+          "title": "腾讯扩大与 Visa 的合作并推出全新 AI 模型：0700 能否延续近期涨势？ - Traders Union",
+          "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQTVRrcVZJY2RTTmxndXZ4MXFzTUJxWkFza0l2UmpKRlhoR0RVTGt2SHBYSmZWQjlFNXFMMndYR2MwQXV5cXVBbGRxMHhjT2pCWkJiUmd2SWc3OGI0LUNwcXRUa3RxLWdtWDV2SXBGWGFFM1k4T0JDQ3Q0aGY1N0NVaEFlVmo4OVVXQ3IzcmhjNFM?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 06:15:46 GMT",
+          "source": "Traders Union",
+          "l1": []
+        },
+        {
+          "title": "腾讯、网易、散爆游戏获版号，知名IP“少女前线”新作过审 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxORDZFSlIxXzRnQUltNnVuSk8zX1M1U3lvNXd6aTFLMElNd3cwQmFyWHBTWUZNajVQRUl4eldqMkI2STd0VzhsUGZUVXJ3VGNLMHhRelRpaVk0azE5dTduN2gxTEdtT2RQaVMtREFHTHpwSWNKOVZXcWg0eGliX1NlSTJyX2REUXA2V2ww?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 14:59:44 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "10月195款游戏版号下发，腾网各一款，完美散爆乐元素灵犀在列 - 竞核",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE8tZm5yYjNUQ2JaWlY4NVNaajNTNTgxWWV0WUgwVmxPUHppbnFRLXoweEtWUlpGdGRyTG04SlZobS1CQUNIQ3BldE5YeXFHMi16Z1E?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:27:24 GMT",
+          "source": "竞核",
+          "l1": []
+        },
+        {
+          "title": "195个版号下发：多家大厂在列，腾讯《不可卷卷书店》、网易《桃花》过审 - 36氪",
+          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFB3Wk0tRnhWQmdaR21YUTJzcDdybUpXdUUwMWRIQnZTTW1LTTltakxGeDZMWkN4Y0tYei1ROHRCVmJOUjU4b0xRQjRmWkVPZw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:34:00 GMT",
+          "source": "36氪",
+          "l1": []
+        },
+        {
+          "title": "10月195款游戏过审！MMO《奥丁：神叛》拿到版号！ - 17173",
+          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5jZ2VINkZTZmNZOW1EQnBzNU9UV05CVUIwX2NsUmZveWFQelREdW1odmJSRXhCbWpoQ29lRW5lQ1cwSnVOeUJNM1Vod2lkU0p1bGYwOHhyRVZHUGlIS0dRelZLMk0?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:53:24 GMT",
+          "source": "17173",
+          "l1": []
+        },
+        {
+          "title": "10月版号：183国产版号+12进口版号，腾讯网易乐元素散爆均有收获 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNbzFnMGVCSl9DVER1eHFrbS1aaUpMNko0UTFMWHppZDNORFRoNEpwSUFPSXdaNWRWaWM3elJCTzhzYUFYWU5MTWoyM3AxWndEYVM2aUJOdWxWaDB3bGwtMHdWY2Vab3h4UGYwUS1QVDA0RXptMUZudTd6QWRoSXdQWVp0OEJXenpx?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:13:18 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "国家新闻出版署：10月195款网络游戏版号获批 - 21财经",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOMTIyQUJ6Z2prTDU1X0VlSlY3cGVGWDNBYURTVks0WndrZkJJZVlXSTFyNjQzc0QzUWNEWk0zbXIwMmlOMjhjNXJtUUN1Y3lHZkk2MzlJOXg5aW9ack1tU1RhSmVyazdCOVV1OUpuTHdfMFluWjlwMWpEVjNXOUc4SkNFR0t1RzAwU3hkM2xJVQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:31:27 GMT",
+          "source": "21财经",
+          "l1": []
+        },
+        {
+          "title": "南方财经全媒体集团 - 南方财经",
+          "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1jeXd4eWtFSGRCM3BqVGtLLU5aQ2tzOWQ1QkVKdGNDeDkwS2RZM05aeUJObXYzSUJ5WHVXZnlXWDZlUnhEanV1N296WmxlWkt6MFhTTk9GOHI0V3d0cWxQZjk4b3VNS3c?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:17:28 GMT",
+          "source": "南方财经",
+          "l1": []
+        },
+        {
+          "title": "【2026年10月】183款国产网络游戏、12款进口网络游戏版号获批 - GameRes游资网",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1UOHVRbFFmaEhMMmtqR3k0amMtN01uejRKUjVIN1ZrNHZhcjVsOEVoTVk5MkItdWNaSzZ3RlhTUmViODVGRGRXWGh5WjMyS1E?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:33:14 GMT",
+          "source": "GameRes游资网",
+          "l1": []
+        },
+        {
+          "title": "10月195款版号过审：腾讯网易灵犀散爆乐元素在列 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMikAJBVV95cUxQU0VZTXVqM3F2RjRqejRVRG1GWDgzZVR0SERpMksxNlVYaTZhYVo0NTJYTTdYTG53TFJ4MzdLbWxlcHNIdkNqbWJUODc1ZGVlQlZBMWRRUVROTXNfOWpBUmFnTUVBZ2c0QlJERllXREVlVTdGWmFWZi1yR1ZJa0txcTg2dW1YNE5GdmdJVmpBOVRQbzJhSDJfVnA2YWRMdGpUcGRYUU9SNTRhT3JYdDB5cjV0U3R4RTM4NUtoOVRqRy03eEJ2NkdnWWJRNmc1OFVHa1JlMzQ2XzJSTmxaUWx2WkhidDBFN2xoT051Nk9yZUJYR0xsZ01TY1UyZWNaV0pDQ3h3SmI0YWJPT2xjcEp1cg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:38:06 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "红果成为国内第四大App，日活超过腾讯视频、爱奇艺、优酷和芒果TV四家之和，用户总使用时长仅次于抖音、微信和抖音极速版 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQUTdFYmI3TzloZmMtaHlGaWJTYlBFaVVtdHdZb29fUDhhTE83R0lhaXR1SjFnS1V3NVIydFVpMXBYT3FwUzJMZ1F5U29FUHZfWXlBNU14dW9xUDFUekRJakhaTkFSOU5fQThpaWJlRkpjNlVsc0RKXzNhODNPMGFlMEpzWC1tWVU?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:38:00 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "新浪网· - 新浪网",
+          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1LNnhUNURsTmxQU2Y1aGNkTmx2TmstOUhqME16cFl6dXZLekwxSFlZWF9QcHpaTVdjNFlHazV0Q1ZxQVZXRS1FaTBfNlptd2RCNHMxTzNtYlJ3bEdVU3Q5Q2daQQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 17:15:00 GMT",
           "source": "新浪网",
           "l1": []
         },
         {
-          "title": "腾讯网盘内测：接入多个AI Agent，1TB空间跨产品共享 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSFUtN0s0YXBCekhVM3VzN3g1NmM0bEdtVHliR2JaZ3FFb2VLUEQzRHI4MVBzQ1VHZU5xVnRrdEV4c2UtdmJCWmdJMnVnMW5adWRReHVQZHVkenp0elFMQUpuRENoaVlpZ3I4TEt6ZzIyMWlWMzkyWVV0MnY2V0Y4d2RCUjY2WWtYMnRodzVKUFhwSG9pSS1ZdFhrYXVfRy1OejduYjZR?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 16:35:21 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "恒指收跌0.59%，恒科指跌2.84%。成交额居前个股中，腾讯控股跌2.58%，阿里巴巴- - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5SNFF4c0h2VmFuMHBCX2pGTU5RNi1WZ0c5ZW5WQmJaMVR5cXVGUHVfd25VSHhxRFdEMnRDWm5pRHdMYWd2SUZicDlQaXV6bUdsTGc?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 08:13:08 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "腾讯旗下游戏《FC足球世界》启动下架姆巴佩素材 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQQU14QnNNTzFqYWFGQmJ3SnB2djRnRG4zRkdxbnRZZE9RWWllb3FOWFpuY3MzOGtydk4zVUlGVFJUMVRDeHVSam0wb1FZNk5MUWNkbC0xcmxQZndlS1FTd0c4RTY3OEpxTEVOeC13RE5vcWlndGtmVXlWbjl1UjlJU1pIaG0wMU5ESFc0Yl9ldkNCOW9ZU3dOTjhVdHlRX3pp?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 14:33:26 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "FOMC Press Conference - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1COHR3M2NPbVVBR0hkZHRzWFFLdjlUUE5sRFRRcE9QWV9YTzNmYm9vQ2MybVA3T0RzQVlCdDdTaElYRGo1MEJqazh6cw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 18:33:49 GMT",
-          "source": "Moomoo",
-          "l1": []
-        },
-        {
-          "title": "业务动态 | 汇丰助力腾讯成功发行美元及离岸人民币双币种债券 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5MbWVKeEVxdnRPTFdNOFZDQWs3UHFPUWN3MnAwZ2JUM0F1ZE5IZFNDT0VodUZOZ2VneXRIZHRRR1hiNDVPN2VWSFhmRTEzUTNBSktfSlhFNktBNl9NdHFyZG9fTHBaemdTdFctQUs4MFBNOXYyVXJycw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:00:00 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "阿里及腾讯等中企寻求与SK海力士三星签长期记忆体供货协议 - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5BaDA4TTZqc1J5TXI1MGZtWVN6T2FCR1R4UkM2SGJJdEZCc3FHdXBTS2pjeXhST0dTSEJBTkVjZXVMQUFfMWxOX3ZqZDNqWGVUWDh4U0NsdmVzQ0ZX?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:46:47 GMT",
-          "source": "Moomoo",
-          "l1": []
-        },
-        {
-          "title": "腾讯WorkBuddy内测Skill收费功能，开发者标价1元试水 - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1jXzNpR0I0ZXN2VFpubUY4ZUhPRUppLU1FbW16N1JWaDM5SjFKSUdZb0tid2tld2dacTAyc0t4cFdJbV96akxKa3ptUW14RDg?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:49:16 GMT",
-          "source": "手机新浪网",
-          "l1": []
-        },
-        {
-          "title": "Pre Market 30 Mins | Tech Earnings and FOMC Rate Decision to Dominate Busy Week - Moomoo",
-          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5JcExkOXU1WjVDSGZpZkdHRGlFUkZsdkctN3RhTWg0ZHZWZXdGOFpQMzQ1ajQ3RmVaM2hDMFl4NUl5WGtOTDZBVVJ6aw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 13:40:46 GMT",
-          "source": "Moomoo",
-          "l1": []
-        },
-        {
-          "title": "腾讯WorkBuddy上线“远程控制” - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBEVVpxU0hjUkNRRjBha2hSYWpmemRSbUFkaEdnVkpFUzByX3BBaGpKVnZ4aGdXUTFtZGlHMTZiak90TVp4RGpDTk1OSQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:14:01 GMT",
-          "source": "手机新浪网",
-          "l1": []
-        },
-        {
-          "title": "腾讯旗下游戏下架姆巴佩相关素材 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE42azhwOGJTaU03UmVWRENqcXVVNTFZZWNXZHU1ekFOUHZURVk2UmxDNnN0SWowajdQaW9xbFJ0ZHhhWGtldVluMWhRLVk3QS0x?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:26:00 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "腾讯WorkBuddy内测收入变现功能 - 电商派",
-          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1RNWZNbFIyZUwyTmgyUWFaWk1rN21tekV4Ui0taGVaVUc5MWN0TGZKWnlndjVUaXVEdEFJSlAwdEN5alRlaDhjbzJUdFBWVTc4Rk1hSEoxNGVRVC0tVFhCVQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:41:00 GMT",
-          "source": "电商派",
-          "l1": []
-        },
-        {
-          "title": "腾讯（TCTZF.US）10月28日收盘报50.97美元/股 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUGhOMUducVVtdGtIcWJFSDJ2cmFvdHNobkkyNTR6OGNsQk96N2pSUjl5aTdNNHZIdmo3Q3V5MjhRdHdvWmlhejRGdW1DZElIanlCamFQMnhzMkJZQ0hvOWtkUERuR01WRlB4VjBLa1VyTTVVSVA3eUxKSTlRcUJSMTBNbkJIRFhNWXFXcw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 22:01:47 GMT",
+          "title": "月活跃用户升至3.56亿，日活超过腾爱优芒总和，红果成为国内第四大App ，仅次于抖音、微信和抖音极速版 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPSWdzWHZDVHpjQ2oxc0ZlZ3FSa1UxYTNhZW9BbHRCNXNjM1NISjhWVDJ1TFMta1k1LVB4d0J1UVpNNDk2YkYtT2pJMkVXUW9fSXN1aE1ZWjVRNlZyajFpWWE4eDVLNXdLSnFUN2lveFlkVFhIejB0aktmcWx5QXFNcGV3czRoMVF5clA4?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 07:45:29 GMT",
           "source": "搜狐网",
           "l1": []
         },
         {
-          "title": "腾讯、字节，在短剧赛道又撞上了 - 凤凰网财经",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1RbmdRekQ4UWZvMFpHbUdpR3NacjBUZFZtTTlGQ2FUanJsMEk4VGlwSnBlUEFhc0dIRFV2VENIaEdqQVpYZXJIRktXWVVlLVRQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:58:55 GMT",
-          "source": "凤凰网财经",
-          "l1": []
-        },
-        {
-          "title": "史上最大IPO临门，腾讯、阿里、字节抢卡：Anthropic和中国大厂一起为算力上头 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9QY3JyY1BOYnZYbVVZMEZ0S0xxT2NwYXV1cGtjZHRCaHVKS2loWFg5QUxBLThCcTFrcVJySlBDTkRIWEF5YVhOM3VxMTM5VWo3?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:11:47 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "10月28日港股通互联网ETF南方基金份额减少1050万份，重仓股阿里巴巴-W、腾讯控股、百度集团 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1GSzgyLWJnZ1lSYS1nZlAyaGladlh4cjhsRm1TYVhHc1NRR2hwaXlMaDJjenpmTVp0aVBvbUFXMjdvS0VTSWZmUWhDZ0hzdldOSHNOTVhnMThMWm1NdjVMUDlR?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 22:40:12 GMT",
-          "source": "证券之星",
-          "l1": []
-        },
-        {
-          "title": "10月28日天弘恒生科技ETF基金份额减少600万份，重仓股比亚迪股份、网易、腾讯控股_基金提醒_雷达 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9IVmtQWmpPdG8wYkI0QzVhRmpPRHJBYUczVGp2cXJ4TUNQQUxVT0ZsbWZIbmFvSWgyWUZkOXRpeUg4bTFXeHUybW5rNzJlMDhLRUdjMnlpdzNQTGJoRHBuTE13?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 22:40:28 GMT",
-          "source": "证券之星",
-          "l1": []
-        },
-        {
-          "title": "大佬们最新重仓股来了！ - TradingView",
-          "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1iYTZiR1hGWTVaSExaSWFoT3ZqaEQwcGdkTGhNWlgyYWs2TU81V0FXejhSaHA2aUtveHA4dERSREZkMTdBaW9iMXVnc0haOW5ROXUwWXJHSVBDMWM1d1FpWTFWNFc5WXl1a2c?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:37:28 GMT",
-          "source": "TradingView",
-          "l1": []
-        },
-        {
-          "title": "AI短剧“三国杀”：腾讯、快手、字节加码 未来会怎么走？ - 财联社",
-          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE0xdjV6QzlYMGZhc2NNdmxsczladE1ZZ1cyajIzczNSZW1nejdTaVhFczdmZXlZRmVwQmJhdWJscEY0bXRFTmxVUw?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:02:16 GMT",
-          "source": "财联社",
-          "l1": []
-        },
-        {
-          "title": "北京组织百度及腾讯等8间龙头互联网企业签自律公约 规管AI宣传与直播营销 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZUlQa0NVWnM1Q1oxbzNrZjFOSTZBSXRHcHlNdVhMUkNNNGVCbUlvUzllSkZKQjZlMXl0SmMxR20zYzhIT0xRRS11eFNoTE1hSnF2TDhpbHdELUx5WE5xejRFTzhFeXc2eFU1VnZUdlBwV011NE5qbHlYbDBJQW9jRXAwM0hvXzdxVnpKaA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 05:20:00 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "北京率先出手！百度、巨量引擎、腾讯、京东、美团等8家互联网企业签署自律公约 - 京报网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE85amJpYW8ybHQ4SVhYREJqUVVILUFDVXdlby1nSXdFTHBEell1YWRSR3o5TFNHM2NLZHlYWUM5ck1hQWdmYmVJZDNQeXZDc3dEckxTQUxkOE5IczJTMWthQTZtd0ZhUl9SSUhSb3NGR1R4UQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:17:00 GMT",
-          "source": "京报网",
-          "l1": []
-        },
-        {
-          "title": "广电总局新规出台，告别电视开机广告 - QQ News",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5CVFBEWTEyRDMtdDdkLXZrNXVuU3JIM2FWSG5YbDBlRkxqeU5td1VXVHdPUGhoWnJibTFSdWJuQV9wOV83M1lObmViNkgtTk5kYVhfN2x3?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:31:00 GMT",
-          "source": "QQ News",
-          "l1": []
-        },
-        {
-          "title": "温江广告传媒商会赴京研学 赋能行业AI转型升级 - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE0tOFU5bmNwcVVvcDJtX2hoMkhrX0tqekRFOHZlNFZ2eVZOWUs4MnI0UFYtd2JUTHRfU2lISFkzcTlUSjhWZTJUVXM2dlFUZVlRa3VIVTR1LWFHSzVFRmw1X0l3RE5oQ1dPckR6WER4aTc0b3FUN1R0bzFTQnpmWkU?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:10:00 GMT",
-          "source": "手机新浪网",
-          "l1": []
-        },
-        {
-          "title": "北京组织百度、巨量引擎、腾讯、快手、京东集团、美团、360、凤凰网签署《互联网营销宣传自律公约》 - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMi3gNBVV95cUxOVzVfZ3FVQUhqQnVmdE80S0c2aXpXRjQ5UUMyUHAySVFSczNyMTdPeDVtRlhkWHJuRDNWYUJaNG1kR3FZX09Bb1A0VUZ4WG5tcnM4Y09OWlhLUUNzeXI0b1R1MG9nREtwSmRTeGJLcjl1YW13MUg4UFZ5aW9OeUpka3BsMU94bzM4UXJCUlMtdmFjZmtsT0E1eHRNcWIwVHhaUTFLN0VEV0RlbUlPMTRYSUJ5d0xQYW44ZnhRVzhzRzZaVER3aHFEZDBYejNkSjhTWEhVTkRHWDJqZ25BTF9RNWpiMFVzMEVYOTdaTE93dGlMTTlsc3ZJZHhXVS01QjJXTGpkWVpfWk02MDMxeTZGVGFLUEstRUVJYjhKWWwxbDdtOHltLXB6c0xnN0NuNmVYWFJTSkhDYnRUSDE4VmNPREpXalR2RFJFUlVDYzY1UmpxaGlpSjZtaHZTLWVqR1pvUjNnZlJfRjBOcm5lRVZyczA5WDVaVEtuSHVGMV9NTVpiVjZDNVZxdUVDS08tRFJoNS1SZXFFa2x2NUV3SThDYWR0aGxFODJMX0hWLXhyLXA1VGtRcS1uMXNVd3pDZWxtZHFGSWdKNklocWhnb0kxejNFcW5hQVpNU29nSi1B?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:32:22 GMT",
-          "source": "手机新浪网",
-          "l1": []
-        },
-        {
-          "title": "绿泡泡反攻，AI办公突围，腾讯被低估了 - ThePaper.cn",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1MYnRONDZwVzg2c19UYUo1ZTdYcDlrWlQ2eUk2MFd5aEx5cE03cURWX3k1ZUFRRTAwSUVraVVxMGNLWl9IeDgzam9mSHpHN2JWMk9LTm0tQ1ZjY2Z6SGxYYUdyMzJtWVdkTkd6T0VGaTVnZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:49:00 GMT",
+          "title": "腾讯的“回马枪”：不推独立App，微信悄悄反击字节 - ThePaper.cn",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1tbWc4TTRueDJtYVk2RUE5ajVYZi1sYW9XS01peWdEcklZMjQ2Q1ZnM0JrV2hSSDFwQWpPYkEwcWdZS21ZUG5Wd3FmWE10WjFESTZNOG5lSjZwY2JFc3kxUlBRbl9KMUNPY1FiOVdjM29KUQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 04:11:00 GMT",
           "source": "ThePaper.cn",
           "l1": []
         },
         {
-          "title": "短剧之争下半场：绿泡泡的“轻”打法，撬得动红果吗 - 维科号",
-          "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1WaEtHWGNtbXdNeDZva1dBQlJVUVdJY2pvZmdldE93QXBDZmlmbnFKNW9RckpRSDBydVlUbzRndWVNb25BUThpQ0NmQU5TdVFVbWE2V1JfSQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:08:00 GMT",
-          "source": "维科号",
+          "title": "一刷起来至少两小时，全网戒不掉的红果怕“捧杀” - 36氪",
+          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5tLVRlYW1BNVptb1lxTTVXWElKYy11UEpocWVzYXR2VFZFT1dOdVVZQkg1TE1JUi1jbWYtNTYtTm5JdVFsbkJHMnRYcVZtUQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:02:00 GMT",
+          "source": "36氪",
           "l1": []
         },
         {
-          "title": "字节跳动的担心是有道理的 - 凤凰网财经",
-          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9NdG8xaU50Ym1xQjJXSUR1RUZGeDE3cXpwYkpoS04xTWJ3VzNXVmtSRG1uYVZXcUJwYl9yWkFzNHc4X2NQY1h6MXBGNTg3WUV3?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 07:43:00 GMT",
-          "source": "凤凰网财经",
+          "title": "红果日活 1.68 亿、人均每天两小时：秦朔说“字节时间”来了，程苓峰说这才刚开始 - 禁闻网",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1QZ09OMUw5MmhoVmd5S2I2dXlUdVliZmtYN3l5UmxJRWlUa3lUU21EVVlNSTh5eHFCQ1NzMzJ5ZVRKdlRldncycG9hWFI1SnhVMWhtTWpwQWFDR2lSSkthQVpMYlcycWNfNjBN0gFwQVVfeXFMTVNLbDdud2ZNSGJ4b3RJNDZRSjU1bHRPOW1uRVhIdjgzWFk1bXB1bDJHbDRaZFRqeHpEQmI4am9SX251dkVuaUEwRU4wWnNDRUZIMXJjbGNUOFJreXlpRkRlT2hadkRQZDVvN0hSam9LaQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:40:00 GMT",
+          "source": "禁闻网",
           "l1": []
         },
         {
-          "title": "中央气象台10月28日18时解除大风蓝色预警 - QQ News",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBTd0ZzUGg5aEVEc3ZZOGMxRGhGUTI3UnNHaXBDNjk2S2FGTjc2TXhuaExFMkNld21hQUFHMUJ4WG5sMjdjNVN2M2tTbHRDMVJGYkhZNnFR?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:48:00 GMT",
-          "source": "QQ News",
-          "l1": []
-        },
-        {
-          "title": "腾讯自研算力底座，让国产AI跑得又稳又省｜关注省科技奖 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQMFdwc3pwMWl4VzB0NkdoUVNNTUphVTI4cjNTdjJxMVdnd1VSdFpBNHEzaTFhVlpycUJuX2FmUFBrWlBuSi1SWkdhSlFtakt6eThUeUpldzhKYWZBTWF2ZlhOOEt6LTY2ODJRenZLYkhrc25SeFhOUmRVZUxlZ045UzhKRGNzZnNzelNiMQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:03:00 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "腾讯云未来3年续投资大马 柔佛设首个云端区域 - KLSE Screener",
-          "link": "https://news.google.com/rss/articles/CBMi0gJBVV95cUxNaWliSG9uRUE0QjA2N3ByUDh1SlRzWHkta3hRMi04MGRYb0pHY2N0cnJ4S0lfR2VoZWo1QldZSGg5V0VJWVU0TU9aRmtNTE9hTjJtS29iZTRGb19Ya3d2Qnd2TjVfZjd5UzdsSEFDVFNhWFRrNklyTVYxUVI4UXVUMG5EdHNYQlpHbUdIeU9PZDZrMjVmSTVuTXNKWDZUOHRIdEsweE9meV92cG5YbzBWOWYzQjlWaW9iTjE0VmNFSEVKYURyXzFZWHNkcDFSbW8ta013czEzMTlnVDFjclJuamhhT3o5eVB0NE0ydTUwSmszMWg4VFMwS0pCMDZ4R05aWlpsalRRMEZyVzR6U0JuUTlXTC1WbFlsakF4bDV5U01SLWJNSDJuTkEyRlZtVG4xTm5nUEg2ZEo4SGZwQlFWcnZtc0JQdWNpTnVnQXlvOHNudw?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:21:57 GMT",
-          "source": "KLSE Screener",
-          "l1": []
-        },
-        {
-          "title": "评分超《黑神话：悟空》！又一国产3A大作明天上线！游戏预购约4300万美元 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5FYmk2Qy1ZU0pyWVJFanFLQi01Z2ZZR0tCZTg0VE9xSTJHaWdkaGJDN3lMdVlCRWV1VVFNOFVQeGJEZE9CbUI3eVZZbmptdWhVVGE2TDJkQmxPc2MyZWJMQTNn?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 13:50:50 GMT",
+          "title": "【BT财报瞬析】世纪华通前三季赚近64亿：海外爆款撑起业绩拐点_公司新闻 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE13UWFPZXl6dmVBNDBXanNKd2RFa1hsWEtuUDR3YmFpMHNfOFZ2RXJPeXV4a08tdktMdDZySGRkbWVad0szdE1qV1p3NFZUYmo0bTJCQURNcWR2dEp3ZHhHQQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:54:30 GMT",
           "source": "证券之星",
           "l1": []
         },
         {
-          "title": "月活跃用户升至3.56亿，日活超过腾爱优芒总和，红果成为国内第四大App ，仅次于抖音、微信和抖音极速版 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNN1VQUGRIOXNPMXZOLVpXekNSWXN2aWNyNU1lWFdDcHRqWVVTbEtBREN5Z3FjbXZOTUFZaUx1a2l6OHF1MlU2REw0MzlQelU0bnN3R0tZUjg1ZUx5U2JyTzRfclhvUUpmSjBQRG9YMGszQW0zMnRuWDkxMEROZG9EZ1dJSk9IUUQ3?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 07:11:31 GMT",
-          "source": "搜狐网",
+          "title": "腾讯推出跨应用AI办公平台 在激烈竞争中寻求新增长点 - 联合早报",
+          "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBDd3V1TVQ3UlhIYTBLVGtaWTc5ODQ0a2VCVFVrUENhSUdwMm1lc0hOT3h4aXRpc0N0NlA4bGhYTU0wRkpkdTNsZUxHUVk5MjYwTExvb0hOV21yN0dJaXhseEM0cXpjdkEzMllOcGd3?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 15:00:29 GMT",
+          "source": "联合早报",
           "l1": []
         },
         {
-          "title": "腾讯的“回马枪”：不推独立App，微信悄悄反击字节 - 36Kr",
-          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBVSXhkRVBiVWpGQXA3Z0ZseHlvdGhZTGd0NHB0UExKTFU0U0dMZlQ3VkF2LWttekNxYkY2Z2pPQzRqX3Q3eGVqVHJQMzJHQQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:54:00 GMT",
-          "source": "36Kr",
-          "l1": []
-        },
-        {
-          "title": "港股上市公司年内回购逾1200亿港元 红利、创新药等板块配置机遇获看好 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMiwgJBVV95cUxQNWQ1TFZNMzlubWdfVEE2TFUxSC1oMkxMTm5jNEZDMXZyN2Fxc3pFaDFnV0gtdy1yaFBTVElkM28tWHFaSldMOEFIRGZNbkpDSXMwMUpfWkphU19rYmFDdFdEWFRDV3R3cHJSN2xHMkE3clByQVQ5WGV1a0k2azRxM252RjlqZFctZnA3QV9meUFwN2xLMnFuWGd6Mjlkbk5iVnZERHZmWmQzaGdlUjlIejNNRmFQM1d3UGI0ZTdpYzhRX0x0RHRVSU5jZEdUaHQ0RERwUWYzQlIxbmFndUMxZ09TcGxjQy1oZ0RfclNlVFZock80Y19ydV9mYW9TeGZHR3MzSzVyc3hfSmswZlAzWEViU2xiZExaYi1RSFNTQ194b0VFNlhtQ0JrU2tKaUlnN3RkQkx2N2laZENlNFVxUE1n?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:32:09 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "网易(09999.HK)10月27日耗资99.07万美元回购4.34万股 - QQ News",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5wQnF2M0VkRHhyWTNmWVIwNGRjZmotWkxwMDIxNS1IMTU1Umt0YTJYaW5IZTBoNmpyQ1JZMG1jeXBQUUJjRjlZS05yX0xmanBnYzBRdVZB?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:29:00 GMT",
+          "title": "雷军真开始卖房了，1.38万每平带智能，可惜只限内部员工购买 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE45R2YwNXBLbG1jNWItdk45cGNkZHp0SFBBNnJSMnowX3E4NkdXcWVIWU5nTW9IVnpJcDJfRnphelNEVXR3Mm5fS05BbDF0VVV3dUJETklB?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:50:00 GMT",
           "source": "QQ News",
           "l1": []
         },
         {
-          "title": "抖音集团李亮：腾讯公司短剧、短视频增长速度远远超过抖音和红果 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMi0gNBVV95cUxNSXp6dlN2b2lQRDRuam1vTE1SSzg2Vl93Vlg0QTFGQ1BOUkx5UnNpcng4eUZvbEhRMFl4N192SzZKdmhORzNIbEpZVHplYUxDMUF2NkFkZGxXNlBOLWt6bEUtX3M3MHVFRENTbklOem9PZDcxTnRidkNIaFkyNC1YenUxVGVvMVhCQkpVQW4yRzgwZ3dvUnBfdVdFYmo1dVV4SVU5SEcyalFkSUFGQV90Uy1ldmt0czJVSDV2VVhSVHNoSndjQ2FQUEtvWmxCVEVTUmhNM0Z6b0VTZmZBOG1memltWnExSEZMZi1PaXIzUXVaeC1YRndEOEgtMWNpdFNGUFpxaS0yVWdDVkFCb3E3MkFRQzJHbGlnd3h4RmtJdWZYb2g2RjlINFpjWWloXzl5VzF0SlZ6ci1SR1RwV3poTm9scVF6Mk80TTFOYndncWVocWdORkVtaE9aeEVONmpncG1VV2JDV2Z0d002UXN1b20tcE1HZkxIWFpOSHRZbEE1cjFmUDkxU3JobkRBR3VhaFBvQTl5akljMktKUUxkZExQQ1JYOW1iVDNhZEpKTmsyREtxVWZ1aTAwZFNjSEhHWDZjZC1WYVBldkt6Mm9PSmxB?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:07:37 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "港股IPO聚焦存量项目推进；豪威集团预计第四季度营业收入同比增长9.71%至17.71%｜港交所早参 - https://www.mrjjxw.com/",
-          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFB3UXlHTmRNZ05IVEFyZkRUbjhrX2QxRnprQUNJYnZRSHBUN3RmOXdYZ01MdEJzdExFQW1pbEtReUhwdUZCeVFGV0FiU0txaTZrbURtTFNzdUtjbEtRN0ZLZHktb19VUQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 23:00:05 GMT",
-          "source": "https://www.mrjjxw.com/",
-          "l1": []
-        },
-        {
-          "title": "A股全线大反弹！能抄底了吗？ - QQ News",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBtbEdBa1czVml5a2prRGM2TXh0MFNQdFp0RUg4TnlVQnU5MWRYdG5YVVBrcVFxRG12dV9pUVhfUUxPbTlUZENUOEhXa2ltNWpvVlA1N2Z3?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:18:00 GMT",
+          "title": "半两财经｜净利润下降超四成，格力电器创上市以来单季最大降幅 - QQ News",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBXNk5nLVpzTVRIWExzaEFJWF9YSkQxS2pIR2YyZUVaa3dTNlhFSFZjTFU2LXNhM016U2I4Ml9LU09Ma0hNTWVqNEpKbVc1WVJpWEdETDN3?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:24:00 GMT",
           "source": "QQ News",
           "l1": []
         },
         {
-          "title": "云豹智能创业板IPO完成两轮问询，募资近六成用于补流和薪资_公司新闻 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1MTzE0R3VTNVZ6X014S1ZkLXdYSGZLc2VMLTR0eTZFOG1FWGlxNHQ1dWVWcDdXQ3lOZ0N3cVFvSG80eVd4R2R6TmhMbVFacEFncDMwVGRvemFyRXVETVBYdkVxWWY?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:12:50 GMT",
-          "source": "证券之星",
+          "title": "中国新晋女首富的另一面：年薪500万，今年中期分红约3亿元 - view.inews.qq.com",
+          "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE9PSnlUV0NRcERaU2tLOW5SSnJOUklBbjZySmJsNmtLbGFnU0lYd3pEMWFJVm1BUzk2dGhTSW9RbnBOZG9TQmc5NUJ6V3lXR0x4Z0dVMlRyVQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:45:00 GMT",
+          "source": "view.inews.qq.com",
           "l1": []
         }
       ],
-      "flagged": []
+      "flagged": [
+        {
+          "title": "腾讯AI每天烧掉1个亿，入口最多为啥没赢？微信、QQ都在手里，元宝砸了上百亿投流，月活却只排第四；几乎没打广告的WorkBuddy，反倒被网友自己晒火了。这期讲清腾讯AI一手赚钱一手花钱的账，和它真正_财富号_东方财富网 - 财富号",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBlSFNXXzFhaTBleWdpdU5KQVJYZjNCaDJMTXN5X0hnZkRRbzltbWFsNzI0Zmx2SFZLRGNYcm9BY1pRa3pJVjc2OXFLY3VqMmlTdzhqWHMtZjdlRTBLMnJQekppZ0F5VHI1czZV?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:13:00 GMT",
+          "source": "财富号",
+          "l1": [
+            {
+              "id": "TC-3",
+              "text": "微信 DAU 同比 −5% 且视频号+小程序使用时长份额连续 4 季度下滑（AI 原生入口替代）",
+              "keywords": [
+                "AI 入口"
+              ]
+            }
+          ]
+        }
+      ]
     },
     "moutai": {
       "ok": true,
       "items": [
         {
+          "title": "贵州茅台涨超2%，股价创近半年新高 - 同花顺",
+          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1oT01TZ3VvWEVRdVp1MHhUVGVxOEVNcnJibGEzbVEzQmotSjh5NG1jMFRaMG1zUmV0TkMtck5MYm1JUUpFUWlSY0g1c0UwSlJVSWw3X1RhVXlFUGpWSDVRYVBB?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:16:17 GMT",
+          "source": "同花顺",
+          "l1": []
+        },
+        {
+          "title": "A股“一哥”，新信号 - 凤凰网财经",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFB6S1lLWU1VRFBEbER3d3EzNHBMRFdmaDN4eGF3a0dVM1l2cGtzUFplWTdndXBUUktXYWh5c2Z0YUxXTTJpcTNOY3pLb0lZTFIt?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:20:00 GMT",
+          "source": "凤凰网财经",
+          "l1": []
+        },
+        {
+          "title": "北京网信办账号发文：红军“茅台酒池洗脚”是污名谣言 - 联合早报",
+          "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1RWm9PWHlYTW9LQmtzbkYxM1F0N2ZLTVVYTUFCMllYZEU0eGs5VkFwNFkzV2o5ZGN4b2tmU1Vhc2gyaEx4enNSdGhLS3JvbG5TYU01WTBVWm9XQWdWYlZBS2UxaFJrVnBBNkE?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:36:00 GMT",
+          "source": "联合早报",
+          "l1": []
+        },
+        {
+          "title": "茅台、药明康德重回公募十大重仓！公募重仓格局生变 - 财联社",
+          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9GVmlDMmpvSHlfYWk2Zmd2N2xZMDR4VWl3WG5meko4WHItNXBscWdqbGtISWVjSmgtbjd6aUNqcGszY3BveUJhMw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 03:09:08 GMT",
+          "source": "财联社",
+          "l1": []
+        },
+        {
+          "title": "看财报论硬核科技的疯癫与贵州茅台的稳健 - 财富号",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE01dE85VXBVbF95NlRCbVdRbHBfSmwycGF1V0I1U0Q5ZXhnNmM3WHJBeER2bkNVMmE0UDNmNjN1NDJFbk9aMm9xM0RqakhlOVVhYll6Z2dQdmpNcDFTRnB6Q09XcERTTXc4c1Bj?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:11:00 GMT",
+          "source": "财富号",
+          "l1": []
+        },
+        {
+          "title": "白酒股大爆发！泸州老窖、古井贡酒涨停，贵州茅台涨超2%！消费ETF汇添富(159928)标的指数逆市涨超2%冲击两连阳，资金涌入！ - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5ZeEdQRHlwMk11b18yYklaVXY3REtqREE1Q1hheG80WURtVEkxOGVPRXdTNGRoMjZudHNPNXphWGZORC1aQ3g4ZnFfTWV6MHRZUTdXNDBfR0JldFVLaWh1aWo0d0ItWHRVM290d2tuR3RsSmotSHp5dg?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 07:04:41 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "贵州茅台大宗交易成交1.38万股 成交额1868.52万元 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1vUTFfT1RaZVFNMHQ0czdIbmMtdVZhMUVRRzBqblNxRWQ4QW45aHZyYjF1R0c4eHlEdG1NYnNubzhkRkVaZ0szVlZBcnpQR1VMaGN6Q1lfcS13U19IT3BDemFR?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:56:27 GMT",
+          "source": "证券之星",
+          "l1": []
+        },
+        {
+          "title": "千元A股只剩茅台 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5lcjNCSVZRZFN1M21Ua05ha2VoNDFCVFpacWtmX1FnZ0VGczFLdkR3LXBKRmRTbWR0VWJCTU5lZGtNV1kyeFE1U1lPNTRpX3JNQVhoRnFoOFU3bGo3RFQ3bTU4MVFQbFZSZ2xoSFRPUVI5Q3RXVlE?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 16:03:00 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "茅台集团加码贵州银行：拟认购不超过6.19亿股内资股，持股比例有望升至13.54% - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQQXJYdWw3ZGpybGdacVRySTNoaE9kWnMwRXFzNXpITG1ucl9UYzRuZWdpcEVhRzlHejhiQUdwYUMwbnRjMko3c2l5Y1czendTT21SV2ZTUkFkYTJCNnlLZUtmOTJfbWM1QnBPeFAwZjBibmdGZEkzclVvbUNzSzk2UWt6QUozeFo5a2lFbkFybDdKUVRsYnUtMmRlNHkwcW5PUlZsMHZXZ2M4M0VCOU1Zb2JBV3RCSDM0dGszOA?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:24:47 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
           "title": "A股千元股，又仅剩贵州茅台 - 凤凰网财经",
           "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE02VDVHTlFKaS1IV1U5TEhKalVHR2I1RWNOSW8wZTVXVmE0YWtTcHEtS3JSTzB2SXJreFZZLUtpWXBJU2hUU0dBbVM5VEhwVGNk?oc=5",
           "pubDate": "Thu, 29 Oct 2026 03:51:27 GMT",
           "source": "凤凰网财经",
+          "l1": []
+        },
+        {
+          "title": "沪深300ETF鹏华（159673）开盘跌1.06%，重仓股中际旭创跌6.25%，贵州茅台涨0.66% - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQblNZSG5ELVhCM1ZCcUM1aHJOSDZLR2t1UmJGYzNta1VaUTFCSkt6RDFYQndUSUdaY0Jfc0RIQktVZGFGVEhobFIzU0hFSTIzdWdWUTBBWG9VSFhFc0lLdlRHVDEyMEd5RnZObnVINlVlYkZfNGtmUTlfR3c5VFYwd29YbkZEem1NUmFWRGlUUE1EMzRCUkk5Yg?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:42:58 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "股市必读：10月29日贵州茅台发生1笔大宗交易 成交金额1868.52万元 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSVV6Q1Q4WU9HcnpFemVfeGhWUXVHaHVobVNQUGh4SWwtNk5FU2p6LVNBLS1qS3ZpUHJ3eGRrdVRrWHBRRXNyZURBbGRxQXl2Mm15YUtCVk5xVUlQZjRYMDBXNm8zc3ZSeno5QmljbjdFQmpEVmdyQzdBX19BMDFQcklERmNZNkdi?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 21:56:57 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "贵州茅台10月29日现1笔大宗交易 总成交金额1868.52万元 溢价率为0.00% - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPZGpERkpzRVZUNDZWdDhGc0xpNHBSVF9MUEZEMTc5dllFZ0YxVTNyVU5IempBQUl4YnNVVVFhTHVEd0lHNDBrb09xN1J5MVRkTW5vVzlwS2ZLYmNGZVNuZXF6MzBJRFUwQlBwU1hFYWhhQ2JHdm5ERGF6eGZrSjRMYw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:40:37 GMT",
+          "source": "新浪财经",
           "l1": []
         },
         {
@@ -995,129 +1241,136 @@
           "l1": []
         },
         {
-          "title": "贵州茅台大宗交易成交0.20万股 成交额266.15万元 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBuQmpVMnB0ZXpsTkZ4b09UaWJTNGJSNGpIWW9MRnlmb1lMbWZJMkFiSHY5V0NfSVJvbGFpdEZOekZQUTZmdHRLakRKWVMwdktmcEVjcktxaWt2bnJKMm42bQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 13:59:05 GMT",
-          "source": "证券之星",
+          "title": "A股“一哥”，新信号！ - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOckNod1ktX2xXS2x0S1VqVjFjdXdMc1RKay1VZTBvNHdQV25CX3hQYWFKb3Q4eE1hMFRhMjh3U2o3TUxtYVhjVkUzNVlfX1BMVkhPNm9uYnAyZ1huczRtRmRjb0NnN2wxVFQwNWZSZkdzeXB3dC1aV04wbU1aWUlTTTNPaW9OWm1QLUItU25rMG9wM0h0UG91RFNINFJkQ282ZjJyQ2hxaDJtbWRGVUw0NTNvTG9hVVR2Q21FaHNld1RqS3lMVHJWSU9sR3I1VVpRN2M1VFJvYw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:17:04 GMT",
+          "source": "新浪财经",
           "l1": []
         },
         {
-          "title": "19只白酒股下跌 贵州茅台1330.75元/股收盘 - 东方财富",
-          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5oQUxvdkpRbFpyZUZINHhtWHhoN19iRUh2aHEyYlRXdzBfSDFVLUVlX2FGRmNkdGV3OExFbDNfMHpZQWdOYmcwQ3lkdXRENHBIeERkdnhTTjlHR2xqZ21YcGZqSDNJUQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 11:37:11 GMT",
-          "source": "东方财富",
-          "l1": []
-        },
-        {
-          "title": "茅台、药明康德重回公募十大重仓！公募重仓格局生变 - 财联社",
-          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9GVmlDMmpvSHlfYWk2Zmd2N2xZMDR4VWl3WG5meko4WHItNXBscWdqbGtISWVjSmgtbjd6aUNqcGszY3BveUJhMw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:12:26 GMT",
-          "source": "财联社",
-          "l1": []
-        },
-        {
-          "title": "公募“顶流”三季度调仓：朱少醒重仓中际旭创，刘彦春减持贵州茅台 - 金融界",
-          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1FTDdKRUdhQy1seVEzeDlQQ1l5VXQzTHgxWlQ2Sm9na0dHanFtUUNsQ21RaU5zeGNIcWtVSWgydExiRktORV9hVGthakJsMEt2THdFalQwcGVrT2w2X0dQNzZpVQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:00:46 GMT",
+          "title": "白酒股爆发！多股涨停，行情能否延续？等待双重最终确认 - 金融界",
+          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1BYWNib1pITDgxYXhoQklHcW9VWkJwdXFEREhReG8xUmFkdlBpMUcyOVBjYkdNS2VNYVIwc2M3b3phejhvLUp2OWYtNjhjWmJhb0JMcTJNRXBKSXFHSUFXZWJHdw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:42:00 GMT",
           "source": "金融界",
           "l1": []
         },
         {
-          "title": "10月28日消费50ETF国联安基金份额增加600万份，重仓股贵州茅台、美的集团、伊利股份_基金提醒_雷达 - 证券之星",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9ULWRMNm04UGVzQVRuakRXYnB1Y3JfR0tyVFl0aUpZdTAya2J3Nm1JY01MTmxCQTB6RHp3d0VMNXFabnVPYUk1em01ZHJpZGNZUmRjaGt5UjJ1Y0JYRWJIOG5R?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:10:41 GMT",
-          "source": "证券之星",
+          "title": "A股千元股，只剩茅台了 - 财联社",
+          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE9OcGJxQVFhajVXb3FJNmZRSHNVUDJpVXZMZmMxZDJERS02U0dKTXF6cFJMSXREQnRwS2lSckRtZ1Myc2pTLVZtRg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 06:25:55 GMT",
+          "source": "财联社",
           "l1": []
         },
         {
-          "title": "中证A50增强ETF易方达（512030）开盘涨0.00%，重仓股药明康德涨1.45%，贵州茅台涨1.45% - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOczJDcXhWb2VaX1B0elhsME15OXVGclpNZFNFYzhnM3pCT1NpaWdPTmpFeEVjTUJsM1UtbjgteG5ZZHBKeVFwS0hVdnhMUW9kbl9rYlVJTWdtcG1jS1ZscnYxbWpWSDAyQXAta1c1SlNFODlOWkF3M1BhcXN4T2Zqak9CSmwzZ3JLUGRFSzhCZlEwNUVtT2lyMA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:34:42 GMT",
-          "source": "新浪财经",
+          "title": "从赤水河论坛到重阳祭酒，看茅台的全球影响力与文化护城河 - Jiemian.com",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0xVFY2eU9LWUNBZzJ2RUlZSGdPdHoyRDV0em40dXFHWkQzN0MzYWVGNmExakVuRlFsUDVZLTdWMDBsOC0xX3R2WERSS1BiT0VjVDVtakt3?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 17:27:10 GMT",
+          "source": "Jiemian.com",
           "l1": []
         },
         {
-          "title": "上证180ETF华夏（510670）开盘跌0.22%，重仓股药明康德涨1.45%，贵州茅台涨1.45% - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNaU5IWXFtR1l3TTZ1aVhabVlPX19KaVlpOGFlUW16aHNhN1hUbWlFMGRsTUdPRDN5cjk0ZTZJeVZDWng1NGpieVJEbWwzby1KSWF6UUZmSHNYNmxmQ3BQc3otTWQ1a2oxXzFuSWtpY1ZFWG1oOWl4OHJhVEY0RUVaQ2VjU0NIUHk4REE1RWd0MFlwZGdZX1R6cQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:34:56 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "长鑫科技成上证综指第一大权重股，超工商银行、贵州茅台 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1GY1lMLUFKejN0MnB3YUNfQTFra3M1UzFvUnFwbmhva0xLSjd6OXlFU3lFRU5YR2d4ZHpacXJFeUdMTDI2ZFN5UHhGenk5aEFYYS1ZNDV1WVZPcTJGdVV4TFcyRElFZlhTMWt6Yzhsek9QQ0RqMk1Udw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:23:08 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "“茅台之夜”落地首尔 - 华夏酒报",
-          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9kc1B2YVcyb3dIckppbEx1Zjc1UzBRMWJCcHRvWF9NU0wzNlJPeDdrYVFCRURUbjZFY29CUW4xQWRXbFdLQVRzbmdxclU4eEtCNndTajVaWml4ZnJfbDIxVUY4Y0tMSUVZOXBv?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:22:00 GMT",
+          "title": "A股千元段，为何只剩茅台？ - 华夏酒报",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4bTFsSHlhSVJxNUstb0NYVHJWUTdEVWpkbEdIdXQ2RGpqNG1uUHlwMF93WWc2ei1Kc2luanlvbXU0bVI4QVNnTEo0VUZnYWtQYW13bm43S25iUEMxTUtBOTRneTRuRFI5cFNj?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 08:54:00 GMT",
           "source": "华夏酒报",
           "l1": []
         },
         {
-          "title": "贵州茅台：10月27日融资买入1.27亿元，融资融券余额162.35亿元 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQYnR5TmpTN3NaZ2d1V0tTbEtLamhURldlZkNleHdWZkhha0hyczA5MFdneDFFQk85R25yUHlCd3JNcW5qWkFKZjA0OEJYZjE3Ynp2WXROVWxfT19UUHAyQzM2MGZ4SHVUNWd0NFp6QUtEV0o1bWsxUGRpUVJCWlVBOS1WSXNybUxM?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:09:07 GMT",
-          "source": "搜狐网",
+          "title": "食品饮料概念表现活跃 青岛食品5连板 - 东方财富",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5wMkd2VnRTMzNwUjZTZzlqcnNhR2wwNldTcWwyQlZhdE1ld0huSkRuU2VvcVY1cHc1cERhbnptbmZVY09MY3l4TVVScWhVcmoxdHBYVHgxQkI2WEdfWjlDSlBRbW9jdw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:17:19 GMT",
+          "source": "东方财富",
           "l1": []
         },
         {
-          "title": "贵州茅台招标结果：股份公司2026年度制酒3、5、6、7、8车间设备维保服务项目 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNdXV2Z2VQQTlkTjI5VXRCRnRVNENNQXRadnZwSXNDSHhoTFlrMFBxdjlCMWoySzBCUHZlS053UDBoS2hKbXFjX1Z2cXVZNGNyRXY1YmdpUl9jcGtQMkttYUhJY0piclVOLWxoeFBkb1RlN01zektfcGRHeHozTGN5dU1WZlFQeVJWeDA2Tw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:56:32 GMT",
-          "source": "搜狐网",
+          "title": "政策预期提振消费板块，机构：白酒板块价格、库存、预期等底部信号已现 - www.caiwennews.com",
+          "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE94TEQxR1BDdnpwMDJXdUVGN0pvLXdacEliLXBFd3B6bEdWaFJoSlJmTWQ2U0hyclZyWkp6WFZ1Z2dyRlRhRUxacERPcU1lRFBhVmE3aGJBRmU0cXhE?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:10:45 GMT",
+          "source": "www.caiwennews.com",
           "l1": []
         },
         {
-          "title": "中期分红33.35亿元落地 杭州银行以持续稳定的股东回报夯实长期投资价值 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9oUmdFdVpwbFJHQjBaYkd5LVMzMFZfSjVVeFJxU1VwbEpQbjJkeUVWRTNYN0JLRXZ0RGhucW03M3pvZzBGOGVqOTRXb2xZMXBCZzhIbjdsTkd2S0pWdmtScnlkcDN5MXRpdk9iQ0tIM19TejltYnM2Ug?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:15:29 GMT",
+          "title": "从三季报看白酒 “底部” 之争：库存去化是真的，但离反转甚远 - 新浪网",
+          "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQd29XekFza2RlSWNISEFUdU9ZVkw2bFFwRm05LXZyclMxX1NWYko0S2lCX3JwMXhkbXhBYm1jc2ZTV0tHUlg5dFhmdG1CWS0tdVhKZnN0VzNSY3ZwajZvTThWYTRQQ0hyU0FJQXRJWXNnTF83Y3JLY0VqdlFfVmcyLW5JdzBDMFVWQ2c?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 07:58:56 GMT",
+          "source": "新浪网",
+          "l1": []
+        },
+        {
+          "title": "白酒股爆发！多股涨停 - 金融界",
+          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE82NERIYUZqT0kyQkhsT2RiQThGaklzQTJUbzhoMEM1bTlldk9fd3hPeE1USS1RZDZfSnJMVHhMcXUzWGp2Z29PYlc5N2ctNGI1eTRENS1jY0ticE0yeHo3c1d0Yw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:12:32 GMT",
+          "source": "金融界",
+          "l1": []
+        },
+        {
+          "title": "白酒板块发力，“茅五泸”齐涨 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9hcHRhN3ZaVmhXUTBsNnZncWREc19idU5FVjFfaVIzWWp3NEZVQ3AzNVBVeU9xX0w0dFJ2QktBUnpEMWgwU1g1ckVNOXJYbHEtOFhUbUxjYWhSOU5yMTE3MVJ3VUNHaHg5elhpTk93YXBFYnM2X3pvZA?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:26:59 GMT",
           "source": "新浪财经",
           "l1": []
         },
         {
-          "title": "盘后观察：工行建行再创新高，千元股仅剩茅台，缩量市中的“抱团”与“出清” - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQNDhmdGhLb2lYekxkMVJfRDJGb0VXSHNVTjBNdzlaR21xRnd4ZzhHbkNSQW04WkZWV2lLbHFjUjFQOHpOaU1CTll4WS1QYWdwbFNiZmUzQmNSc3pYNVVwWFZwV25MSHUxYmVYMVJkTUFWVHE0cjFGM2NubGQ1LUt2R2c1QQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:43:00 GMT",
-          "source": "手机新浪网",
+          "title": "食品饮料板块表现活跃 机构称板块迎来左侧布局窗口 - zqrb.cn",
+          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBqYUJpTzE0aVR3LUwtTzdveWVndGtNWnFoN20xdkx0UzNHSkUtWXg2R0pVZmlud2tTYUd4WjVKb0o4T1lPVGg5WFZMZ0gteTRGZDhvTzQ4Rml4V0tpSWFBUk93UGpHZ1JvakExN3NLWHZJLVphQnc?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:29:00 GMT",
+          "source": "zqrb.cn",
           "l1": []
         },
         {
-          "title": "黄酒黑马会稽山开盘大跌 Q3收入利润罕见双倒退 - 21财经",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOUmtvQ0U0UEI4cnVEZDF6a3IwMzVSUWo1QWFjc0pGWmF0NWJEQTJNTEt2R05HX21vbkZ3WEVWaGdOWC1ITGtFRS01d19QUWZZY2pDSmE1NE5nYjdoUEdmODdxRE8zNnBOZC1lZ21ESnVkT2NPRG9BVUhJb0NmVXZZS1hvY3BmRjJoZU1nQTRJRQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 02:50:00 GMT",
+          "title": "迎驾贡酒涨停！三季报营收48.29亿，归母净利15.75亿，单季净利增8.58% - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQVGp1MTRrbG1URzUxN2NqeDJTbF8zQkpXeXc3VS1IRkNOZWFrbVZrejhiOTNMNWVtZm8xR25wWnJ2V1FsNWstWU1TZzQwNmZaaGllcC1ZWnR1N2NfWWJSVGVhckwzUkxLbHdHMEFyUlA3bTUyQm16Y3A0aFNxZjNhbFk2OWFfOXph?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:48:03 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "白酒股逆势走强 茅台创半年新高 板块出清已渐近尾声？ - 21财经",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZ1ZWaXdFV0pDa1pIcjY4YkxvekY1bGN2bmdHU3FUclhQdm9kZk9ydzllWk5ybldDeVd1emhVTEsxc3BjeVJkU1JEdEpIdS15cHJWc3NSYklHM2FFaEdjemR3ZWRYSElwaDUyS0p6T3Fwc3NUd25jSHlQU3E3MF9KSjFqTkh2VktDOURGZlNJSQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:34:27 GMT",
           "source": "21财经",
           "l1": []
         },
         {
-          "title": "精品茅台维持2448元不变 多日下跌后转入横盘 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQc2ZFdEdBbkJTcGFxWVlqSVBMVEhVYXZfNTJiM1NXR05yYVllTXpwdW5VM0FwT041Unhvb2d1S3VLNjVyVE9xZDlYZVh2R2VlajEwejd5NUUzTlp2aHpvTHlEaHpTNXR6UjZkaGg2ZmkySFFmTFQtS1lSWWJyUkRLWV9SVHBjMWgwUmRz?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:36:18 GMT",
+          "title": "飞天茅台零售均价下跌2元 二连阴继续回探 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQSXkwSFRzc0lLQnlLajBpWmFjX0ZfcWxWamNSOTg2ZzFIQnlrN0d1eG04Z0pITHhVRzRFOTZta3Q3b1ZqWkcwOU5xUjBCWGtJUldRZXQ4WVlYM25WWnh1a1RQb3lNVUdOTlZPalJQT2JmZ183dExyeHpWRmZKQVg4NlpCU0o5aC01YUJr?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 01:24:33 GMT",
           "source": "新浪财经",
           "l1": []
         },
         {
-          "title": "全国工商联汽车经销商商会：三季度返利账期优化 但渠道压力仍存 - 第一财经",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFAtWnBwR1hseGl1SnlYWWpKaW1NYnFqMnpXX1F0UWYyUDd4YjFBclptdlVILWpmWXgzMzJKVWlfOF9tYjF6eXYzMGdYUDcwdl9MTEpCOQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:47:26 GMT",
-          "source": "第一财经",
+          "title": "茅台老酒4年跌50%，这家囤酒巨头凉了 - 凤凰网财经",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9SXzAyWVg5RS11NUVPVE5GVUJCd3RtWGg4ckFha0xvQ25DX1pDRU9mLUNZR2M5eDU0U1BaQ3U1YVRpV0RZWnJEUzJ3bXo5LTU1?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 05:14:10 GMT",
+          "source": "凤凰网财经",
+          "l1": []
+        },
+        {
+          "title": "黄酒黑马会稽山开盘大跌Q3收入利润罕见双倒退- 21世纪经济报道 - ZAKER新闻",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1scnhSaHY3QWRKQ0ZxVFFOdDFkQ3ljLUdDaW55NHhhR1BCV1kwNmV3LUlSVEl0ZjUySzJlZVB4T2VTZWZrSzcxTWVvYjdQWmhFQUx0bjRPU0xsRkh3MjlzZlBWVkk1VldUaUptWk1RWjlIZzRpcDBB?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 03:30:43 GMT",
+          "source": "ZAKER新闻",
           "l1": []
         },
         {
           "title": "【早报】高达100%，美国将对进口无人机及零部件征收关税；美存储股集体走强；原油、黄金双双下行 - 财联社",
           "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFB1czJfRUxlbU1SY1JHeTV2eHVuc0RIVnZOejZ2VkFIOGtEYmIybUt3dDdoLUVOM2g0VjdVb0ZTZGRnX2JSSU9zQQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:05:33 GMT",
+          "pubDate": "Thu, 29 Oct 2026 05:34:51 GMT",
           "source": "财联社",
           "l1": []
         },
         {
-          "title": "国台龍标酒上市发布暨2027年国台质量誓师大会圆满召开 - 文轩新闻",
-          "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1hTGs0QVVzNDJpOUMteEtoS1pzTHotX09vRHpVV241aFB5UHNrZWlZRHM1WGxuX3pldHBBc2laLUlpRWdyUFZxTkRDMzZHTlpDU01FSjRma2M?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:29:25 GMT",
-          "source": "文轩新闻",
+          "title": "酱酒代理品牌选择：天安门铁盖五项核验与渠道扶持招商清单 - 衡阳新闻网",
+          "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5ieGNZc1hIcjdqTHdCX28wMDdsejFWSFZZczl6ekpxck5yRGdfTHJuWHRsLW9EX2ZJckdsaTNGbm01WnJ6U1h5U1FpS1F4TjZ3YnhBRTc0SXFraVhrSG9MTmVZYnM?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:23:53 GMT",
+          "source": "衡阳新闻网",
+          "l1": []
+        },
+        {
+          "title": "茅台、康师傅、五粮液、公牛、TCL、创维、海尔等近20家消费企业跨界光伏！选对赛道才有第二曲线 - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE91WGdiODZBN3B3Y3VaUHpSdmdodk1oM204R1pocGxIYlp6Vm12dG1yTWJHbWZqU2pfOTktOWpWS3JPNHJvazhvSUhWMGxrTHZWSy03RDdSaV9UOW50dkZqWVNsWkJmQjU2bncwVzhvTl9jZw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:03:00 GMT",
+          "source": "手机新浪网",
           "l1": []
         }
       ],
@@ -1127,10 +1380,66 @@
       "ok": true,
       "items": [
         {
-          "title": "泡泡玛特，股价已跌去六成！浮亏18亿港元，段永平还要买 - 上观新闻",
-          "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBHeU81bXE5TWc1U0w1amtZeWZ6TDJmSGNVMjZxWlRMcExMMHVUSHQ0QWt4VkJlYi1KVnlMRDBPQ3lpdHkwZ2NZUW9xSldhczBsOVR6cDdtWVBLQQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 07:02:00 GMT",
-          "source": "上观新闻",
+          "title": "泡泡玛特“腰斩”，情绪消费崩了？ - ThePaper.cn",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFA2TFI1RVpEOGFrZmxENjIzQTlJVVJrLWgxRkF0OEFDUmlSaDd6SEpwN2RNSHNfMnV3c2ZSd1ZoTHplR0Y2d18xd0p4aFBHcUZkQUoydmxiVXhranpibTdTaA?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 03:50:35 GMT",
+          "source": "ThePaper.cn",
+          "l1": []
+        },
+        {
+          "title": "别把LABUBU卖爆，算成文化出海 - 投资界",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE82eXVYcmJ3OGEzRkk2blViSm5fRTdBZHlyZ1lKTUd1bnJjbTY5a1BWWjNqZmU4bU8tTThSV0loSGZhbDM3aUk4QXBvZGN1QVA2ZmwwbExR?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:33:00 GMT",
+          "source": "投资界",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特三季度收入腰斩，王宁坦言全年目标大概率落空 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9vX3JkLUdFeFJub2VMSndyb2tkN3dCMDMtdzhWZnV3WXpsc2VseXp1LWVEN3pvdTBXVlJTbjlJc1NXQVVmQ19kekp4Ni1ucFZHQTg5YWVBLU15RHVkYXo4eGlxcndqTXQ0U1dDMEQ1aVltWDVpRjZ0WQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 23:47:10 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "投机退潮，泡泡玛特收益高位速降 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOZ2VkcVM0NE5JS1IxNnVrQzdiYWRpN3phZndvdFNTLV9QTTViblFkQWM2UDVMUXhnV0JHWXZOT2toVVJQd0ZSNjBJcWU3YVdvaTFQeDVRR3RVYlVCZVcwbkRldjc5V1RFUG5ROGJjdzMzbDVfN3ZnTWtJRHd5TkZKcE1iSEYxQ0d4QWtDZVkydw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 07:46:53 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "低开高走！泡泡玛特Q3营收近乎腰斩 大摩与主流机构多空激辩估值锚 - 财联社",
+          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE53U1Zqak5VS3hhYUFXMzB6TXdvV0xBaHVGTnktVG81ZE9vRHJRTFJOMUlQeFVydWVFNHI5T3JUbUNJWS10UGZHMw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 21:49:29 GMT",
+          "source": "财联社",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特收入近腰斩：百亿IP退潮、海外市场大跌- 零售 - 亿邦动力网",
+          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE12ekpYSFRhN0hfTVdia1U4ZmdrdGNTUnBudmJmMWNHV0lsaWxJMmE3c0psRTZITWgwNEY5bEdRSTlQYWd2SXNZUERwMGdOUk1MNFM3MEZn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:20:49 GMT",
+          "source": "亿邦动力网",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特三季度收益腰斩，王宁身家一年缩水近千亿 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1Sa3ZiXzhJSV8ySmZTcDhiVFdoemptcTFMWmJfMU1VRGg0WDBqZzJtS0d6V3JjR0pLZ0M4V3BUZkY3cXRRMFkwX3FJeXhNY205ZkNBRmI1M3NoaXRESnpUU2h1eHd4czdlVEM1REFCX0QxdzNEcmZSazJTUDg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:04:24 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特三季度整体收益同比下降45%~50% 管理层：LABUBU电影仍处于剧本开发阶段 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE95Nk1jRUdVellUOExkVVlwbGcxTmxQV3R4RnBpcExyMkpOOGdCVmJJdjJCY2xYWEVsTEJRR1lsNFZmaUE3TmJVd3lCR0pVVTRWSWFuMlY1a1lDRzNZajNySlI2VkpxbFZCV1RwU0NXMDhleXBwcGw3VA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:16:18 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特收入近腰斩：百亿IP退潮、海外市场大跌 - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1NYXNtSEFaOVJQVmQzRkZjN2c4NmwwTHpZWk5XWWpIT29KQnZvbXBDb0xPemNDZTBmMmY4RjRmanJfMFZacUNLOU00RnlpUmtoTlV4SmlLT1l0eFd1Nl9ZMkk4NXE0eUZGeXY5Yl9NOXlvTW9DdnlwaHJRemNpbHM?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:32:04 GMT",
+          "source": "新浪财经",
           "l1": []
         },
         {
@@ -1141,10 +1450,10 @@
           "l1": []
         },
         {
-          "title": "泡泡玛特收益腰斩，摩根大通给出“减持” - 21财经",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNLVM3N3RyZlBmeHl2LUl1bzBPd3J0RGdXX2JCUFFLLWxEZDItRFJFdFNfSXgzd3pXdzFaMzc0ZnNfWE1yYmVrc3B3dHZ4N2lab2ZlbTJCeHpHMDVzU0tDVzZraGs5eTFQOHdSM3NDeVkxcFFxSHh2Vjg5clM5aFg3akJhMVE1NDQtS1pJTWJSOA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 07:42:00 GMT",
-          "source": "21财经",
+          "title": "1400℃的窑火，烧进泡泡玛特 - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1oNjNuWFNIVWxXOVBFcGlmN0RJRHZLR3dkMWl4bXhCR295azB2NjBvallFTThHMzJCajdOUUtUZWY3clE5UXhKYWRGdU1tSHBmVVRObEVZRGZzVUQ0c0xOTjY2VDlXMlpNenMtVmVFaHJKRmxiWXVidzR6aVpPQQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 18:45:00 GMT",
+          "source": "手机新浪网",
           "l1": []
         },
         {
@@ -1155,39 +1464,38 @@
           "l1": []
         },
         {
-          "title": "中银国际降泡泡玛特目标价14.1%至145.3港元 下调盈测 - 观点网",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE4xemNNS2g2RnhJZ3VWd0htTjNyY1djQjE0dlFPNG1JRHFib2RJdW0ydUNmcEQwOHVpbDdPdE9PUjh0ejVpVy1aUGc3b0x4TEVoLVg0ZWFNU2UtZ3ZZOXBJd1VR?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 05:42:41 GMT",
-          "source": "观点网",
+          "title": "泡泡玛特(09992.HK)10月29日回购1.65亿港元，年内累计回购19.10亿港元 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE90dE5ESTc0X2pMV1Y1NHkyZUl3RElNNjVwX3N1a0NOMk8wWHVFeklsSGhKbWdPMHFYaUx1ZW9ZdTg2RFAwdDQ0VHdJWC1nQUNwQzI4YmUwMEw2UmRNRU1Xdg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 13:54:45 GMT",
+          "source": "证券之星",
           "l1": []
         },
         {
-          "title": "LABUBU降温，泡泡玛特腰斩 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1QejgxMDhpY1NwNlFacUhsSDI4a095NTRuMGhFdmx6T1M3eHdTbTBCUEN6cnYtaUFrajk2T0pPU3pjN2J0OG1iRWRJeWtKVTM3SW51SHlvYlVoZTV0RFFPeXpKTXprb2h0b05SNmdHNA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:03:17 GMT",
-          "source": "新浪网",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 降温"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "（视频号送审，不发布）泡泡玛特：Q3整体收益同比下降45%-50%_热点 - 湖南红网",
-          "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5rWFB0ckpHWGM4dEQ4OFRpaE1aYnllTEo1VFdqVEViZnJTWEZtQ3I4RVZmMmhVQVF2UDZzRG9oVVZFbkxRVFF3cV81cGtDUWlncjZrYk5tOXh3ZmMtWktka3VHUlBQX0sx?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 06:58:26 GMT",
-          "source": "湖南红网",
+          "title": "别急着笑段永平 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPUjljYzgwbnFyV25KOTFOOFE5eEs1d0dYSEp5ejBUUGk1WU04Tkl6cDdpM0FOT0ZpOUV2NDVrNzBtbHhPV1VHQ2lia2YtZDgzSXZRU21UUnQtbjVEYnQ5SE9sR1QtRGUyb1NxTlB0QUFBdXFRa2RNV2IteUxpejVOWEJjeTdUb09vY1NyVA?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:35:22 GMT",
+          "source": "搜狐网",
           "l1": []
         },
         {
-          "title": "第三季度业绩腰斩 泡泡玛特难续高增长？ - ZAKER新闻",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE52RXR0Mm9FV0lFWm10cjZRTzlkcHhEcU16TDFxRThranFudnQ1ZTJrTzVXYTJOcER0ZXk4enVCbzQxNERjTkp0LTFNNWVMOTVBUHNDZWxlaVZ4aEFCWmVRYV9lZ0k3bFNiRW0xbWVudXkxMzZ1SUVv?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 04:36:35 GMT",
-          "source": "ZAKER新闻",
+          "title": "大消费崛起，古井贡酒盘中涨停！美的集团绩后涨近5%，泡泡玛特年内回购超19亿港元！港股通消费ETF汇添富(159268)标的指数涨超3% - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5pY1V6aG1YQjJTTExxMWxEOVgwTnN1ODdZSVdMbjd0eVRwR1MtdmdYeENJWF94ejFzLWw5eC1iRmVFVVRfbjd4Yk9GODRYM3J0RElCZ0cwcnJsbktyUHRWYUFmc3ZzOWlGYV9nNGtDWnBqaXpQVDRtaQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:35:29 GMT",
+          "source": "新浪财经",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特(09992)10月29日斥资1.65亿港元回购128万股_经济时评_财经 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBzNTdnTXFMRmFlRUpKSXAxeWhraWczYVRUbmtLcWUtQ1otQ2tIbE43SU9iN3dkRkx4ZS02WFc5cGY5S1BSWjZKa01ScTdfNEc2NER1eElwUkZiVlM1b2VGNQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:28:28 GMT",
+          "source": "证券之星",
+          "l1": []
+        },
+        {
+          "title": "ETF午评：酒ETF领涨3.65%，创业板人工智能ETF领跌3.92% - 同花顺财经",
+          "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5Id01OdGpiRTFUQlprcVgzdElDdzVPVEJFUjNIVkFTNTBISXlQLWJaa2VkOG1LWWhueWtKQlJ6S0VSbms0aDFIeWRwRTFsOTVtYkZOUFV0SE1KS1pHRVI2Yg?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 03:32:51 GMT",
+          "source": "同花顺财经",
           "l1": []
         },
         {
@@ -1198,195 +1506,32 @@
           "l1": []
         },
         {
-          "title": "泡泡玛特与蜜雪冰城：优势还在，为什么海外增长变难了？ - 36Kr",
-          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5PLWpUb0pkTWxyUkNvTGttYVc2NW9Gc1g1QzVlMW41VEFfeFhHeUJmRGR5elJhZkVZM0dHaUtuVUtCa21oTzlieWx2Rm1wZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 17:16:00 GMT",
-          "source": "36Kr",
+          "title": "（视频号送审，不发布）泡泡玛特：Q3整体收益同比下降45%-50%_热点 - 湖南红网",
+          "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5rWFB0ckpHWGM4dEQ4OFRpaE1aYnllTEo1VFdqVEViZnJTWEZtQ3I4RVZmMmhVQVF2UDZzRG9oVVZFbkxRVFF3cV81cGtDUWlncjZrYk5tOXh3ZmMtWktka3VHUlBQX0sx?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 06:58:26 GMT",
+          "source": "湖南红网",
           "l1": []
         },
         {
-          "title": "低开高走！泡泡玛特Q3营收近乎腰斩 大摩与主流机构多空激辩估值锚 - 财联社",
-          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE53U1Zqak5VS3hhYUFXMzB6TXdvV0xBaHVGTnktVG81ZE9vRHJRTFJOMUlQeFVydWVFNHI5T3JUbUNJWS10UGZHMw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:09:00 GMT",
-          "source": "财联社",
+          "title": "柯达的黄色，比胶卷更值钱-36氪 - www.36kr.com",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE96enR2cnhNYnVvdVhKRWpnd3MtQTBoSWRrMXBQd3Q1Rm96UG5ZLU1Td29jTVlBOS0wYWJlYXgyV2tnblYxQTM4NG8xcTdaWWQ5?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:37:03 GMT",
+          "source": "www.36kr.com",
           "l1": []
         },
         {
-          "title": "泡泡玛特三季度营收降45%高位失速 股价连跌段永平投资浮亏20亿港元 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQZk1ELW16V0VWWVEtWk5xUU1aQWxNVEhGZFRpdnNKN1NCWU8ydE12OFprOEVuVTFkc0pzN1V0TWJtQ294TFZQcUdkdTYzNkNXbUNaUVdTbmg1U3pReHdYeXVDZzN6MEp1eDdLY3M5ci1obTFrSTZaX1Vhalk4cTMyeWFxZW9KZlBBTXc?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 01:17:05 GMT",
-          "source": "新浪财经",
+          "title": "国产肿瘤消融设备出海，大杀四方-36氪 - 36kr",
+          "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9LajVLVlRvSkZyc0xTLXdxV3dhNnM1ZU1uNDhSd1U4MFJSaUdsT3hXNU1idW00TnJZVnhHN2lhQ245Q0RLQ1hQOThVTVRvaW0t?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 00:32:11 GMT",
+          "source": "36kr",
           "l1": []
         },
         {
-          "title": "一轮超常规增长退潮：泡泡玛特重回“慢生意” - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9RRFp1WVBnSm55clpoT2F4VTBibk5ZWldaMDNDNndCdGNtX2x5U3VxUGhveTVqTnplMDNpR0tTbXBQUUhSVHpZWWpHTWtzM3NCa2x2U3JRSEZrV0kwZEkzLW92aEphdXo0aHFsVjRwOGpkam1CNFJuUA?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 14:08:39 GMT",
-          "source": "新浪财经",
+          "title": "泡泡玛特，股价已跌去六成！浮亏18亿港元，段永平还要买 - 新西兰中文先驱网",
+          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE4wVUpxeW81czFhQWZDLWh3SWtrSU15TXl6TmZ0S0g5R0NvN05iZS1ob2wyd3hKakFUTTE4WUZwOXdJcU9zVVBvWi1hUEtERUotbEFqaGhXci1RcnpYWGItMDgtV1U3LWNIbUN0YTl2dTlJQ2ZNWmZn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 22:34:49 GMT",
+          "source": "新西兰中文先驱网",
           "l1": []
-        },
-        {
-          "title": "泡泡玛特Q3承压中见韧性：中国市场全年正增长可期，海外旺季在第四季度 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5HeGpUaVpGeUt5dzBiYnllSTJIRVZ3QnpUbVRSU0xNYXhzTDFQdEozbWtrdmxwWlhYdHY2blZ0UThpVmZtWUI1NmV2U3BVS0o0Wk1wMTVCcHdfd1NUa2N4OWxfZE5FREx4cmxPQVl0Zw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 11:50:05 GMT",
-          "source": "新浪网",
-          "l1": []
-        },
-        {
-          "title": "收益腰斩、海外暴跌，挤掉水分的泡泡玛特还剩什么？ - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE53aTJyOFJzNGxsVG9rSHZQcENnSEU3cWROaU9fRWxXWGYxNS1IN0NuV3pyNWZ2Vl9fbEY0NlpzMFVfTGtUSDVYUW9kMWprQjNfeTEybUxvTkJycVlhWE04WFNUVExOczBZanY4QXI3S0RvUE5uZ2tKcA?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 14:00:51 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "中国蓝观察丨泡泡玛特业绩暴跌 LABUBU不香了？ - 新蓝网",
-          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBkcXRXLUVuS3YzbTRLVXJEczlOOWZjYUVLZWlZcjRMcFRISHNBck9sekZ4SldELUtrNkxCQ09NNFQxRmRlNDhycVI2d29fd0U?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 11:03:00 GMT",
-          "source": "新蓝网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特：正探索LABUBU动画可能性，下个乐园在选址阶段 - 新浪财经",
-          "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1sajYxLTZrM21mVnBaZGIzTHdjc1FNT3NLR241ZEJwY2YtZHhLb1Q3OXlZZUo5Zmh4c290ckdwbUp6b3FqUnhzbEFLVWI5dnh3ek9vQ2N1a1hlaWNVRzRSX3B5aElUMXRhN0Vmd1ljVklJRjZ2S0E?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:58:11 GMT",
-          "source": "新浪财经",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特，段永平已经浮亏超18亿港元 - 21财经",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQTE2OU85RDhhRmxsR09XX3FVcHd2ZlpHZk1lQU1JaDhOaUdpRUREX0RjQ3U5TzFNUENpQUgzcVZwOEdIOWh5Y01TNHEwZVNtYUxTU1lHQVcwQWZHTjE4QWhJRVhleEpKUlVLNWVRWHQxWG1YTUxuNEZRLW9nYXlpNm54MnhON3V5eTdyeUN2bw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:41:00 GMT",
-          "source": "21财经",
-          "l1": []
-        },
-        {
-          "title": "乐高2026年上半年营收417亿元，同比增长21% 泡泡玛特和美泰也卖起积木，玩具巨头为何盯上成年人市场？ - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNaFhQNHNiX0pkMFI1QWRwM2sxZHNTdXhQdFBkUkZtZ1JyMHdtWTFyeHF3YXZGWEVVLWNmX2pxNEhRN0NXS0lBQ3JHdi0xb3hPTmQxTHh0aDZMeml0c1h4VjhEcUQ2TGwxNFZNQ2R2c0t4Z3hXNy1OZXRWb0dHRzI4aTZyQURTdmVC?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 06:44:50 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "1400℃的窑火，烧进泡泡玛特 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNMTdjeFF5elNWSmNjYldvSUxPYWJ4VlNBWDFrM0MwUlc0NEMzZ1pQQkNNZ09WdXJGOE13NnJ2WER0ZXl3M2kwazEtV3BxWG1XQjZ3cEhrZy14QS1lU3ItcGtaOXZRZmJjUWQ5LTFwUjlqQmdWZ21MLWJFeFFZT094aWs0eHlPaXhiaHhnczJwWQ?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:04:25 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特三季报“暗淡”，段永平持股浮亏逾10% - finance.sina.com.cn",
-          "link": "https://news.google.com/rss/articles/CBMi9gJBVV95cUxQNGRHZGI5OUJMbTZCUHZIVVppemdqSzZxcGJFTm5wY01TX2lkN1lmLUlGRlh0QTFMWjYtZGJfanNVdVdrUnJPamE4X3k5MWxKN3pLZnRFYS1zenRYMUhIemQ0WVVMc2MxZjRZV0I3eDNBeTVRbzcxdWIwV3ZiRHZqbmt1WUdKbUtXNXlqTUJqVTFWdmE5RmU3MDJ0MmJZNUJDWXh0cGlJUmRqdXdrLWlMS19XM2ZreWFBdXNyOFlFLVhTbnh5WXM3MmI0VHNacjNBdEl1eVlRSEhJbE9jTlFLZ3ZZZVM0SkN2UG5UX25yeFNWdUhpT1pjWUZXeVNXUHN6a2NCMWZuUkFSUWtaRVRFUkdlUHFCc212X0IwM2ZfQ3cxbzZ5MXVKUXVURXpfOUFDRWNkUmlyUk1DZzBKSGFSRS0yWndMejN3a0pnNERCc1BQYTVxeGlLVUVUbG9yVUdaWjYxRkNxNWF3N0tkdjY3dnJLYUEwUQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:22:19 GMT",
-          "source": "finance.sina.com.cn",
-          "l1": []
-        },
-        {
-          "title": "刚火一年就凉透？泡泡玛特，业绩塌了 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxORm92QzY2LTZMOWtRS2hmVW94S3AzWGxjNFQ5b05oRXI4RjVHc3ZTZXFZVVVEOVVuQ3J2VDg1VmdtTFR5NWNUbjUxLUtfSXREcjZ3R3VFS0h1UmtCRHJEQTZCeTVGeTBfSXJCN01kM3RCcW8zUW9UXzc5d3E4WTZxS29EOHd6bGRvcG80Sw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 21:32:00 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "股价累计跌超13%！泡泡玛特三季度营收失速，海外市场承压 - 东方财富",
-          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5SSU5Db19pM0NSYUpoaVlra0x6bVNoV1RnVkxhOUlTNjE4X3FGZnNJYUNTMWpxRk5zOW5SUGE3U2Ixcm12ZHBFYUJEcDd0NGRCaVhWTHExQzNndHhVZmRzZG8xQ05pQQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 05:15:52 GMT",
-          "source": "东方财富",
-          "l1": []
-        },
-        {
-          "title": "跌光360亿，段永平亏惨了 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FQmpidzJCMERUNnNPN0F4YUwzMXlmRUJvMXZzUktUQThGMmNnMTBELUdGdFp5bEthYWdReUNnSzJER3lrTkdiY3dCMjJwdW1qcm5LOWlfQ0Rtd2Y2Nm1tenhMNE5tUFRlNjVLX25R?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 22:58:00 GMT",
-          "source": "新浪网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特预计全年中国市场正增长，泡泡玛特未来何在？ - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBaRDVmdlB3NVpSZWlHLTNKdDNEci1hXzBxemZ3Wl8taXJSQmVmamN5a2xxYmxIc1RNSmhheG5QRERXLVkwNHFCWGFiMkFWZTRoUlVoM0dRcUpFOU13VVpfTFNCbF9RQ0NHYTVDTVFn?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:06:31 GMT",
-          "source": "新浪网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特：中国市场的表现依然稳健健康，全年维持正增长「没有太大压力」 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQT3p3V3VUM0RxN09GS2Z6UUxNalowZXZJRVdMamFNU1NyR0dWczRXSXB6c28tWW5RWWtub3FjLVV0Si1oQ2Y1UGs2cHJTSUpMek9jNTkwZlo0ZkF4RkRPRmVsa2xxRklSZXZvQ190NWV6VWNhUHYySTc5SXUxWEplTjh5TFpnOU9Bb056eg?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 05:21:36 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "业绩近乎腰斩！泡泡玛特卖不动了？ - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOYUJ2Qlg2dWJPWWlKazRzVW8yamstX2Vyb3FJRUV2NVkwSkJ5WGdjbWhWbjYzZ3M5eTBZbXhlMklsYnhzaVhfbnd5emhWbnBZR0JNYm1rOGlMT245cDd6SzVFNjlweFpESF9PRTgwLVM0NXpBQ0ZqMERVMjV2QVVxVU9RZm0zWE01aG1iaG1uYnJLZWZtbjV5MkVVQ2VlQmV5TFVvRQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 12:11:46 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "南向资金追踪｜净卖出约8亿港元 回流智谱及中际旭创流出泡泡玛特 - 财联社",
-          "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBqLWJsNGpXZmJDOC1jMWUzRXFtOU01NUJpdEFFRzRVd0ptRERQTnJ0RWJtUDdPYU5pa3BnYkQxUF9lc2lRRF9fXw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 11:06:00 GMT",
-          "source": "财联社",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特今年第三季度整体收益同比下降45%-50% - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNSWVzdmVrOFp2OHZGWU5lY25MM3N6OW1FLXRPSTJENGFiZUlGYkg4ZTBkaXRwSVdLcnFPaHd0TDRucTgweGVKVWppLVh0STNXdTl2bG9iYk5uQUpfbE12bzF5cjJ5VzdaelFBWDFVN0NadFFGa3JaZXZ0bWtNUGtZRWFpb3lzczFYOVVKVw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 11:33:13 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "Labubu卖不动了？泡泡玛特第三季度业绩回落整体收益同比下降约50%段永平浮亏超18亿港元 - 财富号",
-          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE0wWFpTWTRoRkU5MWNrTl9rZkZYS1RiX1FQaElBTFdHYmV0dUxrTm1PV0c3UktfXy1QODV3R1RpRlNoX0lERWpFdm5MX0pBUDF6S2tyX054V2d5R09jZmNnOG9SdFR5SlpQbEVZ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:24:00 GMT",
-          "source": "财富号",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特Q3国内渠道同比负增长 海外区域收益整体下滑超50% - 中国经济网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFAxUHFMeW0zTGxLZ3JwTGJXUW9obkFfU3BGWWd4a1dCcVJrLUd5NzhjdkZXSnBuZmFyTDRJbVZwYldQQ1ZwdGw1RUhtSG84RjFiRWdhRWhXRUVEOFExQkdpSm5vMEJ4eGE0WHRTYU5MRldhZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:36:00 GMT",
-          "source": "中国经济网",
-          "l1": [
-            {
-              "id": "PM-2",
-              "text": "总收入连续 2 季同比负增长",
-              "keywords": [
-                "负增长"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "泡泡玛特三季度收益降近半，美洲市场下滑超七成 | 大鱼财经 - 中国经济网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFBCZ0VtQkdKbkNlbVFpS2ZLaVJ1YVMwRnBRRjlkZXJEeUYxTEJ2b2prNGRlelJ0WkhfckFVa1RQZnFSX195QnNRWnJZUkRQV3hSSzlFMlROVWZfUUVLenF5MUNQckpMNmdFcmx6V2p1am1LZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:13:00 GMT",
-          "source": "中国经济网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特Q3营收近腰斩，海外跌超65%，潮玩神话正在挤泡沫？ - 母婴行业观察",
-          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9OMEpCWWljekQ0RVE1SUtPTnpRdExCT25uMWFzNGJxN2I5N080X2NON2NBenZsdUhFcEQ2TXB3RjJMMGxSenp4Qm8xeVhRaGp2T3c?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:31:00 GMT",
-          "source": "母婴行业观察",
-          "l1": []
-        },
-        {
-          "title": "海量财经丨LABUBU退潮、泡泡玛特换挡，段永平却仍想加仓 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUkQ0OThIMlhsbHItdDF3OVJ2Szc3NnByRERjOEJzeUQ0Y3J2ZmdZZW5za1ItWEV5YnJ3M1JMYUpvX2JoaUdubXg0OU9tRFNVT3VhZ200dEJrS1RHVWxNQUFnV2I2VVkxOGc4a2ZsU18xbG5QbXl6UHpXVERaaDE5Tm9pbFJWSkl0YzhuOQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:50:00 GMT",
-          "source": "搜狐网",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 退潮"
-              ]
-            }
-          ]
         },
         {
           "title": "招商证券国际：下调泡泡玛特目标价7% 维持“增持”评级 - 富途牛牛",
@@ -1396,68 +1541,24 @@
           "l1": []
         },
         {
-          "title": "Jellycat年销42亿 LABUBU创收141亿 Fuggler揽66亿 毛绒玩具赛道谁是真正赚钱王者 - 36Kr",
-          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9uSThxcGZ4ZUdLWkdIZEhjdEV3aU9fc2FuTVhLYUFzQXFuemg4U2Z2NjhrODN2bnc2anJycmE4V3BBVkZ6UkZYUEs1ckVjY0t6ejRR?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 12:46:00 GMT",
-          "source": "36Kr",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特股价下跌6%，Labubu热潮降温致第三季度销售额大幅下滑 提供者 Investing.com - 英为财情 Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9KSnNEbTVSMlYtU3RhZEtWeUxqRFVUdzBKUjBvZlg5RU1Fdmk3SjJ6V3NwLXhFekJxbEE1ZVplZjJoTXNxTC0xUWNfMGxlVlZBRnBDWnE5Qm1jcUNJV0VnTUpaYnVnNncyYlhiako5OWw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:33:00 GMT",
-          "source": "英为财情 Investing.com",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 降温"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "中信证券：下调泡泡玛特(09992)目标价14% 维持“买入”评级 - 富途牛牛",
-          "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPQzQ5aE55NGNINVNTa2FGZnhxU3huRlhsdVlfS1BsQzZZYm5RQ1dScERPQXJDZ1RqS3JzakJ5NWZpY2J6VjlocEJZYkxGdGlOYXhVVEhNY2ZycTN3d3hiMTJVa3FZcWRmRUlmMzNoSUJjMGV4bDc0RzZ6WEwzMENUUEU1ZldrZHR5b3RiMFJxX1JsZTJNUWRJdmZxM2N0c3M?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 03:17:15 GMT",
-          "source": "富途牛牛",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特美洲收入第三季度下滑逾七成 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVDlDRDVpWWlMM1dJUnlOb0xQY3lENXl5S3dUcF9SaV9EZjAxZ2NGM0x3SklFb2tsYy1RZTExSEdMczV2X1ZJNThKcW80OWZrdHpBdEQtRG1fVl9ZYnJlbS11VXAxMFZBYVBlaWNkRUxWSldMNGtmbnExWW9jYk1kMC1fbTd0Vkg5?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:29:24 GMT",
+          "title": "泡泡玛特(09992.HK)发布公告，于2026年10月29日，该公司斥资1.65亿港元回购128万股 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQWE1HaUFNT1NvUFVRUHNVbmtES01lVl9tWk1aY2hkdWpFdFphYV9OOGRvT2p5YzJkUnNhdjFLU0NYd1AzV0V4bmFkeFJ4Nk5TSzdLMm1lU1lHX3ZQUmRVOFZCUDdyZFAxQU1CUjBWQjVkNWpoSU1OVzZkS3NJeHB6MWhLajlGY1FvcW1FLQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:28:09 GMT",
           "source": "搜狐网",
-          "l1": [
-            {
-              "id": "PM-2",
-              "text": "总收入连续 2 季同比负增长",
-              "keywords": [
-                "收入 下滑"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "泡泡瑪特第三季收益腰斬 海外市場重挫七成 - 大紀元",
-          "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBXUTlOV0JwM0tEZGZQbWgtVVVHeUNob3VoOE5YT3p2dk1qUDJ1MHYzYVV5VE1qMWtadVFTMi00dVBROUUwZkF2WnlhbzVJVVBWc2J1d1U4YWkzZXRGVXM3aUNR0gFnQVVfeXFMUDYzY1puZTNydTVqVHVTQ3JXNnZHdXZBc2FUNWlGSHFoUThPOEFqcG9VMEFyMXkweDFzMU9wUnMyZXVWSnozLVA2a29yakF4Vl9kSTJSTHg4RVl2eTNxYmpqbHNoMlNHaw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 13:55:00 GMT",
-          "source": "大紀元",
           "l1": []
         },
         {
-          "title": "泡泡玛特低开超6%，盘中触及52周低点！三季度收益同比降近半 | 大鱼财经 - 新黄河",
-          "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5EeUNtOFZOMVRnYmZUZjVwYjhkSjNZeUtiNDZCYTVkbFc5WFp2OVlhODJJZk5DMXpodVc2MjBIamRjUFIwVkxiRXhPM0NQS0ZLeUZ1bWZ3RDBpeVRqVmZ3?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:19:36 GMT",
-          "source": "新黄河",
+          "title": "LABUBU 出拓麻歌子了？ - SocialBeta",
+          "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBReHo1SFZyamlFV2I2QmYyQ2IzZEFRcXNFb3pOQVUtZDdBQ1h4QTg1eGFRSndFaVk5dE03b29jNGROd2tDMzlzWWtVb0xuQQ?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:33:18 GMT",
+          "source": "SocialBeta",
           "l1": []
         },
         {
-          "title": "泡泡玛特（09992.HK）：10月28日南向资金减持30.54万股 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPVTdvRlVpMUVJbVpSVFN4THVGV2p4eUNYUUlab19YemZTTUFjYm9CaHowU3l0N2xKVUdZSEFraF81emJUVVROWFNkY1FuNlRLUVIzbVF6c0VSNW9HNTRmZTlhVFVMWS1KejU4T1otanV0Z1J3di15NHhwcGhENHJ5cVhVb2dub3o3cDJDbw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 20:25:32 GMT",
-          "source": "搜狐网",
+          "title": "泡泡玛特三季度收入近乎腰斩！LABUBU热度消退，星星人热度爆发#泡泡玛特#LABUBU#星星人 - 财富号",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1HVlNweDV4YTBPU252TzU0SlozSWowbU94c3Vob01vUExONE9XLTVZejRPSUx1cl94eXlsZGhTaktReVRRcGlXOENfM3NmQWRkSmRUVkxvSS1lVkxxdW5LRlB4RmRESENObzVV?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 08:04:00 GMT",
+          "source": "财富号",
           "l1": []
         },
         {
@@ -1468,57 +1569,22 @@
           "l1": []
         },
         {
-          "title": "泡泡玛特最新营收近乎腰斩，LABUBU还卖得动吗？ - 21财经",
-          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPX1dfdS1iUHZaYUY1ejJoRVpOS1hWbndmWFZ0cldUVzY1RkVhYmpVd3QwOFduYzhHWGNHMDRHM1oyTnB6T21Fb19aX0N1bnJaNGprNW1Wa2dDZExxTko5RGlFVVBvNXZrZFN2RjBWQkdWMGRZSDBONkZQcWlSRXE3WWZ4WG5vOElJSXozVXhNVQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:50:00 GMT",
+          "title": "泡泡玛特收益腰斩，摩根大通给出“减持” - 21财经",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNLVM3N3RyZlBmeHl2LUl1bzBPd3J0RGdXX2JCUFFLLWxEZDItRFJFdFNfSXgzd3pXdzFaMzc0ZnNfWE1yYmVrc3B3dHZ4N2lab2ZlbTJCeHpHMDVzU0tDVzZraGs5eTFQOHdSM3NDeVkxcFFxSHh2Vjg5clM5aFg3akJhMVE1NDQtS1pJTWJSOA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 07:42:00 GMT",
           "source": "21财经",
           "l1": []
         },
         {
-          "title": "段永平浮亏18亿还要买！“塑料茅台”labubu暴跌，泡泡玛特Q3营收腰斩 | 消费锐见 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNUVBWSnNIVTdvUkQ1Z2FEczN6clJZYk4yWGx6YkU2VFlvbkQ5dDZISzNhOU83VnBxdnp2aTZ3OHNzd1hKN3pnVlZIb1h5eVFwQVRnTjdsNVhzcGVwcXk0ZnBaTlFoLUJrUC00MlZfSFpnekNTRkdXNUljdUxzVmNXM1pGMEkwTGJwYU5OMlVQS0lTTGNhNzY4QXNweUlod0w5WGotRUlTdEVuYk5jNmtTM2RhaXZLRXFaX2pTSzdnbXE?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:17:12 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "Labubu热潮已退？泡泡玛特第三季度整体收益同比下降45%至50%，海外市场全面承压 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNcDVBOENCUVExRlVCUzI0SF9uR3hBNlJ4V0VVS3hITGRyWFEtMG9jVko4R0VmaUlDM0hBc0Fiek1XVllZZlFrbmJ5RVFoZ2k5Nm9EaTVZbjVIVUxWQ0trWjhKNFotUDZYLU15LXpoTGE1LVNlWmR1ZnlNb1BIbDdMYnZDQnR3cGlIZVpWMQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:33:17 GMT",
-          "source": "搜狐网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特2026年三季度收益同比降45%至50%，LABUBU热潮退去后遭遇上市以来最大单季下滑 - 虎嗅",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBkNHZTUVN0cVlmSGd2VGhFVk9PWG9uM24tZDBOZGdKV1lsUkREZWxpRm9IMTJUUWFvMlc3R3NMYldycEF6X05zUEpteEZ2ZFdkUTltOA?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 06:39:17 GMT",
+          "title": "泡泡玛特2026年第三季度收益同比下滑45%-50% 海外市场跌幅显著 - 虎嗅",
+          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9qRUZQTzR0UHZPd0dSVUFHRVVZbHNFd2s4WGxac1NCNktQa1JucmxLM2tyNi0tUzVOOWpMNTlzS1liaG9jNUlOUzBPUXJ2Q29fbl9HVw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 11:20:38 GMT",
           "source": "虎嗅",
           "l1": []
         },
         {
-          "title": "Labubu退烧拖累！泡泡玛特第三季营收腰斩、中国以外市场跌逾5成 - VOCO News",
-          "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBRNmFHeU9zaEJtN3d5elZnMGRTNktJVGZWS0l1VmlOeVVfcURXY2JEQXdSb2RCMnE1X2xmaVA3X2hzUmZnZEJPR3k1NzFDcFdDc1JuYVFqLU9mby1tNEUwTVlnVXRPNHFWbFBaUHFwOXdVcUFJZi11SFI1T215NGs?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:18:11 GMT",
-          "source": "VOCO News",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特业绩回落：第三季度整体收益同比下降45%-50% - 中国经济网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFB1UHdsM3BGdWI1Y3JrNkQwV2N0NkRNRFJVZ2Z1VGNyS0VsbUxOTEtVMnNxMktxbTdGeHlENE5yZm9yOTBEX21qd3RXZkljMnhtNGI4SFl3NWxtOFFzZEI5Vm5sWHBZRjJnVnBYMHpIbTlwZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:55:00 GMT",
-          "source": "中国经济网",
-          "l1": []
-        },
-        {
-          "title": "泡泡玛特收入近腰斩：百亿IP退潮、海外市场大跌 - QQ News",
-          "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE50MnUyTHdKREt3OUNzRVpjNlQ5djRtVTBaNHV3Q1ZISGpSdXhBclhvU2pVaDRtNVdIVXQ0Z1pCT1Q2UlhqOWstTnBqb2R1LXk4VTAyZTJB?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:38:00 GMT",
-          "source": "QQ News",
-          "l1": []
-        },
-        {
           "title": "LABUBU热度退潮，泡泡玛特靠什么增长？ - CBNData-第一财经商业数据中心",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ZYnZnU2RvWlgxRHNWWU9IZmVrRHU5ZVlET3JrYU9LZ2ZqN1FMWnV0dFM5U05kSXBFT0VXSk9ZY2xjMU9abi1uZkk4amRfcWlBTE41Yg?oc=5",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB1S29ZUFV0TU5xMEZZODRnakQ4dGFyLVZDNUtCMGs2bjYwMm1sallsNHZWTzRmU3hGR3dqV1dnd0JvTlJXTllJWDJ4YkNUQVhWY2c?oc=5",
           "pubDate": "Thu, 29 Oct 2026 07:44:11 GMT",
           "source": "CBNData-第一财经商业数据中心",
           "l1": [
@@ -1530,87 +1596,33 @@
               ]
             }
           ]
+        },
+        {
+          "title": "【券商聚焦】国海证券维持泡泡玛特买入评级 指高基数致业绩承压-证券之星 - 证券之星",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5TMmwzem9fVHNQb2VEZ0lFZlRib2VXR3lrMnVZMnN2dTdqbzJjZnZGS0ZIVVJUSWd0eHJFX2JKUnFMOWpVbjR3ZHY3Um0tTGI2UERwMnhza1BfR2RNbHc?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 02:47:26 GMT",
+          "source": "证券之星",
+          "l1": []
+        },
+        {
+          "title": "泡泡玛特：中国市场的表现依然稳健健康，全年维持正增长「没有太大压力」 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQT3p3V3VUM0RxN09GS2Z6UUxNalowZXZJRVdMamFNU1NyR0dWczRXSXB6c28tWW5RWWtub3FjLVV0Si1oQ2Y1UGs2cHJTSUpMek9jNTkwZlo0ZkF4RkRPRmVsa2xxRklSZXZvQ190NWV6VWNhUHYySTc5SXUxWEplTjh5TFpnOU9Bb056eg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 05:21:36 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "图解安克创新三季报：第三季度单季净利润同比下降27.04% - 新浪财经",
+          "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOd3ZqTGRmSFhHVUFwZW12aWJDV04yWUQ4Z0ZrTDR6Tjg0bjdIYk52Y1p1WE5tekJ2WlkyTHZTdHpzTHFYcUZydFZDVl9HRDB5SENXTXFESTlNZ2g1UXJCdUd0cDFZYzJ2T0tjQTVrQ3RsZnRDRGRteXpBeEdvbGU4QjR3?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 21:21:38 GMT",
+          "source": "新浪财经",
+          "l1": []
         }
       ],
       "flagged": [
         {
-          "title": "LABUBU降温，泡泡玛特腰斩 - 新浪网",
-          "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1QejgxMDhpY1NwNlFacUhsSDI4a095NTRuMGhFdmx6T1M3eHdTbTBCUEN6cnYtaUFrajk2T0pPU3pjN2J0OG1iRWRJeWtKVTM3SW51SHlvYlVoZTV0RFFPeXpKTXprb2h0b05SNmdHNA?oc=5",
-          "pubDate": "Thu, 29 Oct 2026 00:03:17 GMT",
-          "source": "新浪网",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 降温"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "泡泡玛特Q3国内渠道同比负增长 海外区域收益整体下滑超50% - 中国经济网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFAxUHFMeW0zTGxLZ3JwTGJXUW9obkFfU3BGWWd4a1dCcVJrLUd5NzhjdkZXSnBuZmFyTDRJbVZwYldQQ1ZwdGw1RUhtSG84RjFiRWdhRWhXRUVEOFExQkdpSm5vMEJ4eGE0WHRTYU5MRldhZw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:36:00 GMT",
-          "source": "中国经济网",
-          "l1": [
-            {
-              "id": "PM-2",
-              "text": "总收入连续 2 季同比负增长",
-              "keywords": [
-                "负增长"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "海量财经丨LABUBU退潮、泡泡玛特换挡，段永平却仍想加仓 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUkQ0OThIMlhsbHItdDF3OVJ2Szc3NnByRERjOEJzeUQ0Y3J2ZmdZZW5za1ItWEV5YnJ3M1JMYUpvX2JoaUdubXg0OU9tRFNVT3VhZ200dEJrS1RHVWxNQUFnV2I2VVkxOGc4a2ZsU18xbG5QbXl6UHpXVERaaDE5Tm9pbFJWSkl0YzhuOQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 03:50:00 GMT",
-          "source": "搜狐网",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 退潮"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "泡泡玛特股价下跌6%，Labubu热潮降温致第三季度销售额大幅下滑 提供者 Investing.com - 英为财情 Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9KSnNEbTVSMlYtU3RhZEtWeUxqRFVUdzBKUjBvZlg5RU1Fdmk3SjJ6V3NwLXhFekJxbEE1ZVplZjJoTXNxTC0xUWNfMGxlVlZBRnBDWnE5Qm1jcUNJV0VnTUpaYnVnNncyYlhiako5OWw?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:33:00 GMT",
-          "source": "英为财情 Investing.com",
-          "l1": [
-            {
-              "id": "PM-1",
-              "text": "非 LABUBU 系列收入占比未能在 4 个季度内回到 50% 以上（THE MONSTERS 现占 26%）",
-              "keywords": [
-                "LABUBU 降温"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "泡泡玛特美洲收入第三季度下滑逾七成 - 搜狐网",
-          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVDlDRDVpWWlMM1dJUnlOb0xQY3lENXl5S3dUcF9SaV9EZjAxZ2NGM0x3SklFb2tsYy1RZTExSEdMczV2X1ZJNThKcW80OWZrdHpBdEQtRG1fVl9ZYnJlbS11VXAxMFZBYVBlaWNkRUxWSldMNGtmbnExWW9jYk1kMC1fbTd0Vkg5?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 08:29:24 GMT",
-          "source": "搜狐网",
-          "l1": [
-            {
-              "id": "PM-2",
-              "text": "总收入连续 2 季同比负增长",
-              "keywords": [
-                "收入 下滑"
-              ]
-            }
-          ]
-        },
-        {
           "title": "LABUBU热度退潮，泡泡玛特靠什么增长？ - CBNData-第一财经商业数据中心",
-          "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ZYnZnU2RvWlgxRHNWWU9IZmVrRHU5ZVlET3JrYU9LZ2ZqN1FMWnV0dFM5U05kSXBFT0VXSk9ZY2xjMU9abi1uZkk4amRfcWlBTE41Yg?oc=5",
+          "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB1S29ZUFV0TU5xMEZZODRnakQ4dGFyLVZDNUtCMGs2bjYwMm1sallsNHZWTzRmU3hGR3dqV1dnd0JvTlJXTllJWDJ4YkNUQVhWY2c?oc=5",
           "pubDate": "Thu, 29 Oct 2026 07:44:11 GMT",
           "source": "CBNData-第一财经商业数据中心",
           "l1": [
@@ -1629,31 +1641,87 @@
       "ok": true,
       "items": [
         {
-          "title": "禾赛科技布局机器人运动与三维世界数据引擎 - www.gasgoo.com",
-          "link": "https://news.google.com/rss/articles/CBMixwJBVV95cUxQYll0WWdid1Q3MG5PLUxUbzJ0cy04bzBENkFHWkxNeVhkcVdQaUZGQWxfQ2tNaURCbzY0RWdGTzFxUE9HRjdnNnJyd2pJZllPaUdvbF9pQTdlSENIaDMzLU5MWUx5YnZlb0NsWlF5WXNQbzFjYV9fallIOTRnbEpMN2tXUGwtaVViZ0s0eHh3WFNvVFR1UTQ2T2pXTWpPNzVXbEhvbEgyYlVHUngyUTB0SHVQRExqOFE0TDZqaXp3RDg3UjlpUUFiYmdURkREd05Pajk2LUxZdkkybmhNcS1XS0ZVa2ptVHM2blVtZDJFbHB6QUNIZlR5M20zRjZBOWpJaEcyTnh1c0tIOVh6UkhJN1Vtdkw3TUlCZ2h3QXJha3JIa3RBdzZFYUVrdnYybElJbjRpSlRrVjdjM2VjRDhpNjJjcEpPVnM?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:18:10 GMT",
-          "source": "www.gasgoo.com",
+          "title": "Yole《Robotaxi 2026》报告：禾赛62%断层领先，持续领跑全球激光雷达市场 - Hesai Technology",
+          "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1FZGhLOTZzYTNrMFlMNUhiWmw3aXgwalZYdVdVNTAxeTFUMVVKTURiU1lfNFVUeWxUWHdzQldoVUN4M2RYRS1jalBUOFZFczg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 18:36:58 GMT",
+          "source": "Hesai Technology",
           "l1": []
         },
         {
-          "title": "南方财经全媒体集团 - 南方财经",
-          "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFB4elFKblJTVDhJVi16WVFxVmRMU3FoZ2dDRG1ZVXR1WXhKaDYzZjhYd0VBWU5oYnFEUGZzRTgtWkRzdXBCSlJQQzFJQ3hIX2haRnJzVXNxcjU5UEhFOEs1VXZrSk5MX3pJMGc?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 09:42:34 GMT",
-          "source": "南方财经",
+          "title": "禾赛的具身二胎 - 潮起网",
+          "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5wbXpkbklPRTUyNTJSbW1kWkhXcHZ4YjVKcU0tdFVnX1BsVGZDT0lETHRweDczTm94alNtZVpERVZqNWhCR21nVnE4azJzUUJrWExDRlZoNldiRkpUY3N0TnV0NA?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:30:22 GMT",
+          "source": "潮起网",
           "l1": []
         },
         {
-          "title": "【视频】全新长安马自达EZ-60激光版,除了增配激光雷达还有啥? - 汽车之家",
-          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE55b3p2VTFzbjMxZ0hBMFdqR0xIV3Rkc0JnTDR1UV9UbVI4bWVJc0dieFFYQnh0eWtnTG1xa3B1QXhLWlk5cFItd2R1UDNHYk5BalJ3LS1HSThSZXc?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:17:47 GMT",
+          "title": "美股芯片股全线下跌，迈威尔科技跌超12%，中概股多数下跌 - 手机新浪网",
+          "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOblpuenNoUEhoVlk3TTJONkt5RndQaE93MUxzUEZaNXRxMlpqYmNlc0EzTl9kTDNKQllWQUZ2YWdGaGpQNmdxNDcxT2tlUmpDcVA4dVRqOFFsTmZxRE9lV0FHMlZJeXpaZ0M3UGV3alQzc2VQMTFzeHhWNl96SDk4VFVn?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 17:20:00 GMT",
+          "source": "手机新浪网",
+          "l1": []
+        },
+        {
+          "title": "美股医药巨头创历史新高，迈威尔科技、谷歌深夜重挫，国际油价下跌 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdGMwM281LTZsSS0ySUpWRmRFejFzWG1xTkMteHRLT2x1TzRCVklGMVIyaDBmNmV2WmNDamhkakxiQjJsa19BYWNZa0FISXVYQ0FKTWxJSklXUXVlaVJ1OXR4V2UyQUhXNER4TFFHcU12UzZnVGpUcmZPeEtkTkF6aVZkbkdCT2p4aUFsLUVTNA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 18:50:22 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "美军向特朗普汇报对伊朗军事选项；纳指跌超1%，谷歌跌12%，英特尔盘后跌20%；天津出台新房购置新规；张雪机车，有大动作丨每经早参 - 每日经济新闻",
+          "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBfOTB3Z0xvTldRYWVwMXFQdExxNlAwZE9wT21LczZGd2JFZmJ5Yk0zYzIxZW85OU1zTk5SLXFxX3NRcTJvUDBIdHJqNl9EZkppLXQ2Q19Jam14OHFmMkxnX3Q5b2VRUQ?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 21:58:00 GMT",
+          "source": "每日经济新闻",
+          "l1": []
+        },
+        {
+          "title": "10月28日热门中概股涨跌不一，台积电涨近3%，网易跌超3% - 新浪网",
+          "link": "https://news.google.com/rss/articles/CBMihAVBVV95cUxQZWxicFFxOGdhaXBrN2dvQ2x3cDJYNDFtaHdpZjJXWGMxYl9mc29aLVZmRHdybWQ2b2hwWUxfYmZ3cGZtTUhZQTRtLVpNbDhnRE1tVDNNQ1l6WThETkpuUzVRb1p5cGRyc0pxR01SSThvcUZ1aks1bDE0YkhoLVBOUGdmUkpOSnF2UERlY1d5Z1pHRHNNWndpYVBDTnozcUN3WGpiazNmS0RVR2dBaUMyLUdaSU9HNlpKV2xRSFNVNW5VRGdRQzZpaXpNUk45NklleVprNUVtUktIUVI1dWEzZ0dKQzJNMVY3UFUwaU1sNWRjOHdPWHZuZS1CR0ZEMzA1cjE2dWxvX05XcXc3NEV1VEM3alM3ZUpYUDNCWFdydU1Mb2NoVXNQTnZWOGV2RVY4RGcwTHFvMHRTNWhWYmZQM0Q4Z1YxWlpWQlR6b0lHVmhZZkVhM0I4WFhJa1hPWjdIOEtNb1F5cktSLVQ1NENUQTBiUU9pZlc2OWVkc1RvODNtQTF0RGdCV25PekJiSU1ickhyMEtjRU5zdFNDTkFleEViamhNVk9vMEt3UE9ZRDM0dk1WaVJmZng0eFJEZnFnZ09uZnRwVEJmR0hoTXA0SVBmYjA2bkxpYVdMTE05cGtpdjZKVFBvU2VYZHJmRDhtVTNYaDJZSFEzTjk3SHAwajgyWFFybV9iRkxWcmdrUjZzalhDdVpoQ3Bod2RKYzRNamwxLS16aWVSOXJjVGZHdVRFbm1raDlDN3JxeUZEMW5UZmc3WVlDZnF4TXpHXy16RFBqMEhSd2J1eE5yWDl4VGxiZksxSHhkSHdOSzdZTWdSbEFaSFNQYnlBTTVYSVN5OEVDOA?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 04:53:05 GMT",
+          "source": "新浪网",
+          "l1": []
+        },
+        {
+          "title": "2027款东风奕派007上市 73.5度电池 支持城市NOA 10.9万起 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaUdiYmVvcWIzWl9fMjNTcjVBRmIxakxkLXZNRlk5YlM3NzhUQUtLVjBsT0JsM1ROS2xfZUFHOTJNN0R4bzhPa2RtRFFyLXRUX3JhaWtWd0l3UWV1RXNOMVBTUEtoa2V6amZ1emEyZnIzUUZPMEw5WVRTOFY5NG9CdmJvdzRTa0tO?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:00:00 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "这次能有市场吗？2027款东风奕派007上市，限时补贴价10.99万元起 - 搜狐网",
+          "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNdUJaa1lfTUR5LS10SVpENWRwMlJiYkRtbU1OQXNBWHNSMFdweEpoTTZpclFOMFM5U0ZpcTJmRHhPZWJ2RVRhOVhrd0t3RHlGTUhpYjJXYUt1eXdJTlFUTE8xdTFCbzMxMHFqZ2VrbU1lZTlDR1dsR0pTNEREeXdtaTgwR292R28wcEZibw?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 06:57:30 GMT",
+          "source": "搜狐网",
+          "l1": []
+        },
+        {
+          "title": "聊聊2026款铂智3X的优缺点，以及购买建议 - 汽车之家",
+          "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE40RHV4ekRQUHlIclRIS3pSREhhTl9JSG1BUjAzaDVVdTZzXzEzQlhTUGdFa3ZDdXE2aGlvQktxYmM4eXVta0FsTm41WlJiVzYtbU1ZWDNZV2UxTUUwbkE?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 10:01:36 GMT",
           "source": "汽车之家",
           "l1": []
         },
         {
-          "title": "铂智3X配置参数详细介绍：15万内带激光雷达的丰田纯电SUV值吗？3个维度说透+FAQ - 手机新浪网",
-          "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1tNXZlVndjcGtlNWxfakhtZ0duTHpPNmNyMUVWb09xLS1jLWhFT05FYmNSalZOVXJGYkhjSjJDSHFiTl9WSFMyTGU0SXNNdXI1ZEhmYm5BcC05VmVPektDa2tuUXlCMW5kVnhTUFBnQU9iUQ?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 07:42:00 GMT",
-          "source": "手机新浪网",
+          "title": "东风风神L8+，12.99万买700TOPS算力 - 汽车之家",
+          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9zZk5DUVF4SmRGZ0dDYU5WbVlhbUdlNGZORjlobHJRM05aWVNtTkplQ1dyVGRoSGZ6UEJDVFpfb1g4ZXFnMDVwUmhVSG1wYWJ4VU1FTjhGWkt1Vjg?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 09:30:37 GMT",
+          "source": "汽车之家",
+          "l1": []
+        },
+        {
+          "title": "10.99万买激光雷达轿跑！2027款东风奕派007猛发力：纯电续航直达675km - 新浪网",
+          "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5kVTNDTGZEYUFQSEM4RzcxVTRZSHc0LUJCOHQxRzdMbTZCTE9HU1hQelIyLVdXcmN4cW1qeHV0QzJDdENaT2xnVHJGUTFtRHVXVU8xRU95a1lJeHozLXRoZXhWeHpMMXVsakdUWndXX3ZCV0FG?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 04:38:15 GMT",
+          "source": "新浪网",
+          "l1": []
+        },
+        {
+          "title": "2027款奕派007正式上市 - 汽车之家",
+          "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA2UzJ0czVFWUNpaGo5SEpYSUE5NE1WejFTNm1yM1BPaTZlQUpHWWZQQUQwOGxPVlJzYzJOSzB0Vk5WeW45dFlJMExTS0xmNlY0bzUzYlBlbzdsVmxfdDRpRXZ5RGpUM0VKb2k4?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 08:07:55 GMT",
+          "source": "汽车之家",
           "l1": []
         },
         {
@@ -1671,17 +1739,17 @@
           "l1": []
         },
         {
-          "title": "【视频】马自达EZ-60激光雷达版：还是那个味儿吗？ - 汽车之家",
-          "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1WcUFvUHdHRE5LQWJjU2k1NXVpNUJkWlMxS3dfUEc3c20zNW5ITWJDTkgzRUQ2ckNKM3YtaWhsRDFKb2EtcTd3bU5SbEdqbGZTNl9jRGQyTURGVkE?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 04:40:35 GMT",
-          "source": "汽车之家",
+          "title": "榜单出炉！速腾聚创、华为稳居前二，高性能激光雷达头部格局确立 - 电子工程专辑",
+          "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBFcGxlUE5wLXFSX1hRVk1WWWpxMVNteG9YWHh3ZGZBQThGSkxNUjBUU1gtUERMMnVyM0tOSHpSZWJaX2hTaEJ1X3B5UDhtVjBMVzRr?oc=5",
+          "pubDate": "Fri, 30 Oct 2026 08:01:00 GMT",
+          "source": "电子工程专辑",
           "l1": []
         },
         {
-          "title": "杰富瑞：中国ADAS激光雷达9月装机量同比增长74% 提供者 Investing.com - 英为财情 Investing.com",
-          "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9FZ2FSeHFJME1hamcwb0g4UGZueGhGWW5xU0JrTHBxT2YxMlJraTVCbnVNb1FnT2kyUW5JN0pWTEJZa1Jsc21UUzRUOXhIYmlCTVFBcFp5M3JOMkd0UkJwb1U0U2JDN1JjRDV6Y3AwRmp1WnVMekVB?oc=5",
-          "pubDate": "Wed, 28 Oct 2026 10:00:00 GMT",
-          "source": "英为财情 Investing.com",
+          "title": "2026年1-8月电气化供应商装机量排行榜：车企自制占据电池PACK市场份额过半 - 电子工程世界（EEWorld）",
+          "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wTVowVkJ3eE9LMUtGM3k5QnNIZDExWVZ5UG5sQWRLX1pqR1ZpYkxIbjdhallMSUNRQ0J6QUZtcGhGX1ZxLVZ5MGgxY05CanlnRWNZbEdGV1U3Zw?oc=5",
+          "pubDate": "Thu, 29 Oct 2026 12:33:24 GMT",
+          "source": "电子工程世界（EEWorld）",
           "l1": []
         }
       ],
