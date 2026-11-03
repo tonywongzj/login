@@ -2,7 +2,9 @@
   "fired": {
     "event:hesai:2026-11-15": "2026-11-02",
     "event:popmart:2026-11-15": "2026-11-02",
-    "tencent:nearbuy:T1": "2026-11-02"
+    "tencent:nearbuy:T1": "2026-11-02",
+    "hesai:buy:H1a": "2026-11-03",
+    "hesai:buywait:H1b": "2026-11-03"
   },
   "reminded": {
     "open": "2026-11-03",
@@ -11,6 +13,6 @@
   "newsSeen": {
     "沪上阿姨发布“全时茶咖食”战略；Labubu热度退潮影响泡泡玛特业绩；全球奢侈品高度依赖中国市场复苏……｜一周核心 - 腾讯新闻": "2026-11-02"
   },
-  "lastRun": "2026-11-03T02:30:30.798Z",
+  "lastRun": "2026-11-03T03:30:33.152Z",
   "lastMode": "intraday"
 }
