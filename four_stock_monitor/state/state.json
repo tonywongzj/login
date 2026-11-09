@@ -4,12 +4,10 @@
     "event:popmart:2026-11-15": "2026-11-02"
   },
   "reminded": {
-    "open": "2026-11-06",
+    "open": "2026-11-09",
     "daily": "2026-11-06"
   },
-  "newsSeen": {
-    "泡泡玛特的“调整年”：LABUBU退潮之后，重新校准增长预期 - 中国经济网": "2026-11-03"
-  },
-  "lastRun": "2026-11-06T15:17:28.343Z",
-  "lastMode": "intraday"
+  "newsSeen": {},
+  "lastRun": "2026-11-09T01:35:18.250Z",
+  "lastMode": "open"
 }
