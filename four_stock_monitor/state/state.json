@@ -4,10 +4,10 @@
     "event:popmart:2026-11-15": "2026-11-02"
   },
   "reminded": {
-    "open": "2026-11-10",
+    "open": "2026-11-11",
     "daily": "2026-11-10"
   },
   "newsSeen": {},
-  "lastRun": "2026-11-10T15:55:20.695Z",
-  "lastMode": "intraday"
+  "lastRun": "2026-11-11T01:35:18.023Z",
+  "lastMode": "open"
 }
