@@ -5,12 +5,10 @@
     "tencent:buy:T1": "2026-11-13"
   },
   "reminded": {
-    "open": "2026-11-13",
+    "open": "2026-11-16",
     "daily": "2026-11-13"
   },
-  "newsSeen": {
-    "净利靠利息，新业务亏损1.97亿元，禾赛2027年7亿元SGI收入如何实现？ - Sohu": "2026-11-12"
-  },
-  "lastRun": "2026-11-13T15:34:30.724Z",
-  "lastMode": "intraday"
+  "newsSeen": {},
+  "lastRun": "2026-11-16T01:35:21.336Z",
+  "lastMode": "open"
 }
