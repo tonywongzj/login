@@ -2,13 +2,13 @@
   "fired": {
     "event:hesai:2026-11-15": "2026-11-02",
     "event:popmart:2026-11-15": "2026-11-02",
-    "tencent:nearbuy:T1": "2026-11-16"
+    "tencent:buy:T1": "2026-11-16"
   },
   "reminded": {
     "open": "2026-11-16",
     "daily": "2026-11-13"
   },
   "newsSeen": {},
-  "lastRun": "2026-11-16T06:30:29.030Z",
+  "lastRun": "2026-11-16T07:27:19.116Z",
   "lastMode": "intraday"
 }
