@@ -2,13 +2,16 @@
   "fired": {
     "event:hesai:2026-11-15": "2026-11-02",
     "event:popmart:2026-11-15": "2026-11-02",
-    "tencent:buy:T1": "2026-11-17"
+    "tencent:buy:T1": "2026-11-17",
+    "news:2026-11-18": "2026-11-18"
   },
   "reminded": {
-    "open": "2026-11-17",
+    "open": "2026-11-18",
     "daily": "2026-11-17"
   },
-  "newsSeen": {},
-  "lastRun": "2026-11-17T09:00:43.006Z",
-  "lastMode": "daily"
+  "newsSeen": {
+    "“LABUBU”降温 泡泡玛特“调整年”怎么过 - Sohu": "2026-11-18"
+  },
+  "lastRun": "2026-11-18T01:35:28.727Z",
+  "lastMode": "open"
 }
