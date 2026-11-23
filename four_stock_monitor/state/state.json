@@ -4,16 +4,18 @@
     "event:popmart:2026-11-15": "2026-11-02",
     "tencent:buy:T1": "2026-11-17",
     "tencent:buy:T2": "2026-11-19",
-    "news:2026-11-20": "2026-11-20"
+    "news:2026-11-20": "2026-11-20",
+    "tencent:nearbuy:T3": "2026-11-23",
+    "hesai:nearbuy:H1a": "2026-11-23",
+    "hesai:nearbuy:H1b": "2026-11-23"
   },
   "reminded": {
-    "open": "2026-11-20",
+    "open": "2026-11-23",
     "daily": "2026-11-20"
   },
   "newsSeen": {
-    "“LABUBU”降温 泡泡玛特“调整年”怎么过 - Sohu": "2026-11-18",
     "YOYO狂飙、LABUBU降温，名创优品和泡泡玛特的IP路线谁更持久？ - 风闻": "2026-11-20"
   },
-  "lastRun": "2026-11-20T09:00:42.167Z",
-  "lastMode": "daily"
+  "lastRun": "2026-11-23T01:35:29.955Z",
+  "lastMode": "open"
 }
