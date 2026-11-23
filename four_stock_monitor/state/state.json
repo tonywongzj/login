@@ -3,16 +3,15 @@
     "event:hesai:2026-11-15": "2026-11-02",
     "event:popmart:2026-11-15": "2026-11-02",
     "tencent:buy:T1": "2026-11-17",
-    "tencent:buy:T2": "2026-11-19",
-    "news:2026-11-20": "2026-11-20"
+    "tencent:buy:T2": "2026-11-19"
   },
   "reminded": {
     "open": "2026-11-23",
-    "daily": "2026-11-20"
+    "daily": "2026-11-23"
   },
   "newsSeen": {
     "YOYO狂飙、LABUBU降温，名创优品和泡泡玛特的IP路线谁更持久？ - 风闻": "2026-11-20"
   },
-  "lastRun": "2026-11-23T08:30:33.177Z",
-  "lastMode": "intraday"
+  "lastRun": "2026-11-23T09:00:46.780Z",
+  "lastMode": "daily"
 }
